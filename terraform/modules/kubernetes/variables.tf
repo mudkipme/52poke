@@ -1,21 +1,11 @@
-variable "linode_token" {
-  type        = string
-  description = "Linode API token"
-}
-
-variable "aws_access_key" {
-  type        = string
-  description = "AWS API access key"
-}
-
-variable "aws_secret_key" {
-  type        = string
-  description = "AWS API secret key"
-}
-
 variable "cf_zone_id" {
   type        = string
   description = "Cloudflare Zone ID"
+}
+
+variable "malasada_api_id" {
+  type        = string
+  description = "API Gateway API ID of malasada"
 }
 
 variable "wiki_ban_user_agents" {

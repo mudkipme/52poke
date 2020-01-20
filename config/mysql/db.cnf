@@ -1,0 +1,28 @@
+[mysqld]
+skip-external-locking
+key_buffer_size = 128M
+max_allowed_packet = 1M
+table_open_cache = 135
+sort_buffer_size = 512K
+net_buffer_length = 8K
+read_buffer_size = 128K
+read_rnd_buffer_size = 512K
+myisam_sort_buffer_size = 8M
+binlog_format = mixed
+server-id = 1
+innodb_buffer_pool_size = 64M
+innodb_additional_mem_pool_size = 8M
+query_cache_size = 32M
+query_cache_limit = 8M
+[mysqldump]
+quick
+max_allowed_packet = 16M
+[mysql]
+no-auto-rehash
+[myisamchk]
+key_buffer_size = 20M
+sort_buffer_size = 20M
+read_buffer = 2M
+write_buffer = 2M
+[mysqlhotcopy]
+interactive-timeout

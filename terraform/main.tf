@@ -20,3 +20,13 @@ module "s3" {
   source    = "./modules/s3"
   allow_ips = module.linodes.instance_ips
 }
+
+module "kubenetes" {
+  source                    = "./modules/kubernetes"
+  cf_zone_id                = var.cf_zone_id
+  malasada_api_id           = module.lambda.malasada_prod_id
+  wiki_ban_user_agents      = var.wiki_ban_user_agents
+  wiki_ban_uri              = var.wiki_ban_uri
+  media_ban_user_agent      = var.media_ban_user_agent
+  media_ban_empty_refer_uri = var.media_ban_empty_refer_uri
+}

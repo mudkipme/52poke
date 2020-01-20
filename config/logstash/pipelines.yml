@@ -1,0 +1,2 @@
+- pipeline.id: mediawiki
+  path.config: "pipelines/pipeline_mediawiki.conf"
