@@ -5,25 +5,18 @@ resource "linode_instance" "lke-meltan-linodes" {
   private_ip = true
 
   config {
-    label       = "My Kubernetes 1.16.2 on Debian 9 Profile"
+    label       = "Boot Config"
     kernel      = "linode/grub2"
     root_device = "/dev/sda"
     devices {
       sda {
-        disk_label = "Kubernetes 1.16.2 on Debian 9 Disk"
-      }
-      sdb {
-        disk_label = "512 MB Swap Image"
+        disk_label = "Boot Disk"
       }
     }
   }
 
   disk {
-    label = "Kubernetes 1.16.2 on Debian 9 Disk"
-    size  = "81408"
-  }
-  disk {
-    label = "512 MB Swap Image"
-    size  = "512"
+    label = "Boot Disk"
+    size  = "81920"
   }
 }

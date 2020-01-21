@@ -21,16 +21,6 @@ resource "kubernetes_config_map" "wiki-52poke" {
   }
 }
 
-resource "kubernetes_config_map" "mysql" {
-  metadata {
-    name = "mysql"
-  }
-
-  data = {
-    "db.cnf" = file("${path.root}/../config/mysql/db.cnf")
-  }
-}
-
 resource "kubernetes_config_map" "logstash" {
   metadata {
     name = "logstash"

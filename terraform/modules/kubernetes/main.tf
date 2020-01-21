@@ -1,3 +1,3 @@
 provider "kubernetes" {
-  config_context_cluster = "dallas"
+  config_context_cluster = "kubernetes"
 }

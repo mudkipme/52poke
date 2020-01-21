@@ -31,3 +31,8 @@ variable "media_ban_empty_refer_uri" {
   description = "Denied URIs for media.52poke.com when the referrer is empty"
   default     = []
 }
+
+variable "mysql_root_password" {
+  type        = string
+  description = "MySQL root password"
+}
