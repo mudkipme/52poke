@@ -104,7 +104,7 @@ $wgParserCacheType = 'mysql-pc';
 ## To enable image uploads, make sure the 'images' directory
 ## is writable, then set this to true:
 $wgEnableUploads = true;
-$wgUseImageMagick = false;
+$wgUseImageMagick = true;
 $wgImageMagickConvertCommand = "/usr/bin/convert";
 
 ## If you use ImageMagick (or any other shell command) on a
@@ -452,3 +452,6 @@ $wgMaxSquidPurgeTitles = 5;
 $wgJobRunRate = 0;
 $wgJobTypeConf['default'] = [ 'class' => 'JobQueueEventBus', 'readOnlyReason' => false ];
 $wgMiserMode = true;
+
+# ImageMap Extension
+wfLoadExtension( 'ImageMap' );
