@@ -52,6 +52,7 @@ resource "kubernetes_config_map" "nginx-media" {
 
   data = {
     "nginx.conf" = templatefile("${path.root}/../config/nginx-media/nginx.conf", {
+      media_valid_referrers     = var.media_valid_referrers
       media_ban_user_agent      = var.media_ban_user_agent
       media_ban_empty_refer_uri = var.media_ban_empty_refer_uri
       malasada_api_id           = var.malasada_api_id

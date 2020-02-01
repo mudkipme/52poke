@@ -36,3 +36,9 @@ variable "mysql_root_password" {
   type        = string
   description = "MySQL root password"
 }
+
+variable "media_valid_referrers" {
+  type        = string
+  description = "Valid referrers for media.52poke.com"
+  default     = "52poke.com *.52poke.com 52poke.wiki *.52poke.wiki 52poke.net *.52poke.net"
+}

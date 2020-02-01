@@ -42,6 +42,12 @@ variable "media_ban_empty_refer_uri" {
   default     = []
 }
 
+variable "media_valid_referrers" {
+  type        = string
+  description = "Valid referrers for media.52poke.com"
+  default     = "52poke.com *.52poke.com 52poke.wiki *.52poke.wiki 52poke.net *.52poke.net"
+}
+
 variable "s3_additional_allow_ips" {
   type        = list(string)
   description = "Additional IP addresses allowed to access S3"
