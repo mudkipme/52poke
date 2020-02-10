@@ -456,3 +456,22 @@ $wgMiserMode = true;
 
 # ImageMap Extension
 wfLoadExtension( 'ImageMap' );
+
+# TemplateStyles Extension
+wfLoadExtension( 'TemplateStyles' );
+$wgTemplateStylesAllowedUrls = [
+    "audio" => [
+        "<^https://media\\.52poke\\.com/>"
+    ],
+    "image" => [
+        "<^https://media\\.52poke\\.com/>"
+    ],
+    "svg" => [
+        "<^https://media\\.52poke\\.com/[^?#]*\\.svg(?:[?#]|$)>"
+    ],
+    "font" => [],
+    "namespace" => [
+        "<.>"
+    ],
+    "css" => []
+];
