@@ -278,7 +278,8 @@ $wgGroupPermissions['bot']['replacetext'] = true;
 # MobileFrontend Extension
 wfLoadExtension( "MobileFrontend" );
 $wgMFDefaultSkinClass = 'SkinMinerva';
-$wgMFAutodetectMobileView = false;
+$wgMFAutodetectMobileView = true;
+$wgMFMobileHeader = 'X-Mobile';
 $wgMFLazyLoadImages = [ 'base' => false ];
 
 # Renameuser Extension
