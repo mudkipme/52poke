@@ -1,0 +1,135 @@
+resource "kubernetes_ingress" "oauth2-proxy" {
+  metadata {
+    name      = "oauth2-proxy"
+    namespace = "kube-system"
+    annotations = {
+      "cert-manager.io/cluster-issuer" = "le-http-issuer"
+    }
+  }
+
+  spec {
+    tls {
+      hosts       = ["internal.52poke.com"]
+      secret_name = "oauth2-proxy-tls"
+    }
+
+    rule {
+      host = "internal.52poke.com"
+
+      http {
+        path {
+          path = "/oauth2"
+
+          backend {
+            service_name = "oauth2-proxy"
+            service_port = "4180"
+          }
+        }
+      }
+    }
+  }
+}
+
+resource "kubernetes_deployment" "oauth2-proxy" {
+  metadata {
+    name      = "oauth2-proxy"
+    namespace = "kube-system"
+
+    labels = {
+      k8s-app = "oauth2-proxy"
+    }
+  }
+
+  spec {
+    replicas = 1
+
+    selector {
+      match_labels = {
+        k8s-app = "oauth2-proxy"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          k8s-app = "oauth2-proxy"
+        }
+      }
+
+      spec {
+        container {
+          name  = "oauth2-proxy"
+          image = "quay.io/oauth2-proxy/oauth2-proxy:latest"
+          args  = ["--provider=github", "--email-domain=${var.internal_github_domain}", "--upstream=file:///dev/null", "--http-address=0.0.0.0:4180"]
+
+          port {
+            container_port = 4180
+            protocol       = "TCP"
+          }
+
+          env {
+            name = "OAUTH2_PROXY_CLIENT_ID"
+            value_from {
+              secret_key_ref {
+                name = "internal-github-oauth"
+                key  = "client-id"
+              }
+            }
+          }
+
+          env {
+            name = "OAUTH2_PROXY_CLIENT_SECRET"
+            value_from {
+              secret_key_ref {
+                name = "internal-github-oauth"
+                key  = "client-secret"
+              }
+            }
+          }
+
+          env {
+            name = "OAUTH2_PROXY_COOKIE_SECRET"
+            value_from {
+              secret_key_ref {
+                name = "internal-github-oauth"
+                key  = "cookie-secret"
+              }
+            }
+          }
+
+          env {
+            name  = "OAUTH2_PROXY_COOKIE_DOMAIN"
+            value = "internal.52poke.com"
+          }
+
+          image_pull_policy = "Always"
+        }
+      }
+    }
+  }
+}
+
+resource "kubernetes_service" "oauth2-proxy" {
+  metadata {
+    name      = "oauth2-proxy"
+    namespace = "kube-system"
+
+    labels = {
+      k8s-app = "oauth2-proxy"
+    }
+  }
+
+  spec {
+    port {
+      name        = "http"
+      protocol    = "TCP"
+      port        = 4180
+      target_port = "4180"
+    }
+
+    selector = {
+      k8s-app = "oauth2-proxy"
+    }
+  }
+}
+

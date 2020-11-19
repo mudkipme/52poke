@@ -1,0 +1,16 @@
+ingress:
+  enabled: true
+  hosts:
+  - dashboard.internal.52opke.com
+  annotations:
+    cert-manager.io/cluster-issuer: le-http-issuer
+  tls:
+  - hosts:
+    - "dashboard.internal.52opke.com"
+    secretName: dashboard-tls
+metricsScraper:
+  enabled: true
+metrics-server:
+  enabled: true
+  args:
+    - --kubelet-insecure-tls

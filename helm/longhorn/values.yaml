@@ -1,0 +1,12 @@
+ingress:
+  enabled: true
+  host: longhorn.internal.52poke.com
+  tls: true
+  tlsSecret: longhorn-tls
+  annotations:
+    cert-manager.io/cluster-issuer: le-http-issuer
+    nginx.ingress.kubernetes.io/auth-url: "https://internal.52poke.com/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://internal.52poke.com/oauth2/start?rd=$escaped_request_uri"
+
+persistence:
+  defaultClassReplicaCount: 2

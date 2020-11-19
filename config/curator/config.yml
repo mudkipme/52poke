@@ -1,0 +1,4 @@
+client:
+  hosts:
+    - elasticsearch-logging.default.svc.cluster.local
+  port: 9200

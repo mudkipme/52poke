@@ -328,7 +328,7 @@ $wgGroupPermissions['sysop']['mwoauthviewprivate'] = true;
 
 # Elasticsearch Extension
 wfLoadExtension( 'Elastica' );
-require_once "$IP/extensions/CirrusSearch/CirrusSearch.php";
+wfLoadExtension( 'CirrusSearch' );
 
 $wgCirrusSearchServers = [
     'default' => 'es-mediawiki',
@@ -337,55 +337,49 @@ $wgCirrusSearchServers = [
 $wgSearchType = 'CirrusSearch';
 
 # PoolCounter
+wfLoadExtension( 'PoolCounter' );
 $wgPoolCounterConf = [
     'ArticleView' => [
-        'class' => 'PoolCounterRedis',
+        'class' => 'PoolCounter_Client',
         'timeout' => 15,
         'workers' => 2,
-        'maxqueue' => 100,
-        'servers' => ['redis']
+        'maxqueue' => 100
     ],
     'CirrusSearch-Search' => [
-        'class' => 'PoolCounterRedis',
+        'class' => 'PoolCounter_Client',
         'timeout' => 15,
         'workers' => 50,
-        'maxqueue' => 150,
-        'servers' => ['redis']
+        'maxqueue' => 150
     ],
     'CirrusSearch-Prefix' => [
-        'class' => 'PoolCounterRedis',
+        'class' => 'PoolCounter_Client',
         'timeout' => 15,
         'workers' => 8,
-        'maxqueue' => 15,
-        'servers' => ['redis']
+        'maxqueue' => 15
     ],
     'CirrusSearch-Completion' => [
-        'class' => 'PoolCounterRedis',
+        'class' => 'PoolCounter_Client',
         'timeout' => 15,
         'workers' => 108,
-        'maxqueue' => 150,
-        'servers' => ['redis']
+        'maxqueue' => 150
     ],
     'CirrusSearch-Regex' => [
-        'class' => 'PoolCounterRedis',
+        'class' => 'PoolCounter_Client',
         'timeout' => 60,
         'workers' => 2,
-        'maxqueue' => 5,
-        'servers' => ['redis']
+        'maxqueue' => 5
     ],
     'CirrusSearch-NamespaceLookup' => [
-        'class' => 'PoolCounterRedis',
+        'class' => 'PoolCounter_Client',
         'timeout' => 5,
         'workers' => 12,
-        'maxqueue' => 50,
-        'servers' => ['redis']
+        'maxqueue' => 50
     ],
     'CirrusSearch-MoreLike' => [
-        'class' => 'PoolCounterRedis',
+        'class' => 'PoolCounter_Client',
         'timeout' => 5,
         'workers' => 12,
-        'maxqueue' => 50,
-        'servers' => ['redis']
+        'maxqueue' => 50
     ]
 ];
 
@@ -444,15 +438,18 @@ $wgEventServices = [
     'eventbus' => [ 'url' => 'http://logstash:5001', 'timeout' => 10 ],
 ];
 $wgEventRelayerConfig = [
+    'cdn-url-purges' => [
+        'class' => \MediaWiki\Extension\EventBus\Adapters\EventRelayer\CdnPurgeEventRelayer::class,
+        'stream' => 'cdn-url-purges'
+    ],
     'default' => [
-        'class' => EventRelayerKafka::class,
-        'KafkaEventHost' => 'kafka:9092'
-    ]
+        'class' => EventRelayerNull::class,
+    ],
 ];
 $wgUpdateRowsPerJob = 5;
 $wgMaxSquidPurgeTitles = 5;
 $wgJobRunRate = 0;
-$wgJobTypeConf['default'] = [ 'class' => 'JobQueueEventBus', 'readOnlyReason' => false ];
+$wgJobTypeConf['default'] = [ 'class' => '\\MediaWiki\\Extension\\EventBus\\Adapters\\JobQueue\\JobQueueEventBus', 'readOnlyReason' => false ];
 $wgMiserMode = true;
 
 # ImageMap Extension
