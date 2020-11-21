@@ -52,3 +52,8 @@ variable "internal_github_client_secret" {
   type        = string
   description = "GitHub OAuth Client Secret"
 }
+
+variable "pool_ids" {
+  type        = list(string)
+  description = "LKE Cluster Pool IDs"
+}

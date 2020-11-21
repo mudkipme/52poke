@@ -10,7 +10,7 @@ resource "linode_lke_cluster" "lke-meltan-cluster" {
 
   pool {
     type  = "g6-standard-2"
-    count = 2
+    count = 3
   }
 }
 

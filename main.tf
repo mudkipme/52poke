@@ -26,6 +26,7 @@ module "lambda" {
 module "kubernetes-base" {
   source     = "./modules/kubernetes-base"
   depends_on = [module.linode]
+  pool_ids   = module.linode.pool_ids
 }
 
 module "kubernetes-apps" {
@@ -41,6 +42,7 @@ module "kubernetes-apps" {
   media_valid_referrers         = var.media_valid_referrers
   media_ban_user_agent          = var.media_ban_user_agent
   media_ban_empty_refer_uri     = var.media_ban_empty_refer_uri
+  pool_ids                      = module.linode.pool_ids
 }
 
 module "s3" {

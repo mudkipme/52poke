@@ -4,6 +4,8 @@ resource "helm_release" "nfs-server-provisioner" {
   chart      = "nfs-server-provisioner"
 
   values = [
-    file("${path.root}/helm/nfs-server-provisioner/values.yaml")
+    templatefile("${path.root}/helm/nfs-server-provisioner/values.yaml", {
+      pool_id = var.pool_ids[0]
+    })
   ]
 }

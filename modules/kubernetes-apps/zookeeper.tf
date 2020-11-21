@@ -34,6 +34,10 @@ resource "kubernetes_deployment" "zookeeper" {
       }
 
       spec {
+        node_selector = {
+          "lke.linode.com/pool-id" = var.pool_ids[0]
+        }
+
         volume {
           name = "zookeeper-persistent-storage"
 

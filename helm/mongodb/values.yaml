@@ -9,3 +9,5 @@ resources:
     memory: 256Mi
   limits:
     memory: 1Gi
+nodeSelector:
+  lke.linode.com/pool-id: "${pool_id}"

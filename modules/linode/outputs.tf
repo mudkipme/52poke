@@ -1,5 +1,5 @@
 output "instance_ids" {
-  value = linode_lke_cluster.lke-meltan-cluster.pool[0].nodes.*.instance_id
+  value = local.instance_ids
 }
 
 output "kubeconfig" {
@@ -12,4 +12,8 @@ output "instance_ipv4" {
 
 output "instance_ipv6" {
   value = split(",", data.external.instance-ips.result.ipv6)
+}
+
+output "pool_ids" {
+  value = linode_lke_cluster.lke-meltan-cluster.pool.*.id
 }

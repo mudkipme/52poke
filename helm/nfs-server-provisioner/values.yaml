@@ -2,3 +2,5 @@ persistence:
   enabled: true
   storageClass: "linode-block-storage-retain"
   size: 20Gi
+nodeSelector:
+  lke.linode.com/pool-id: "${pool_id}"

@@ -34,6 +34,10 @@ resource "kubernetes_deployment" "memcached" {
       }
 
       spec {
+        node_selector = {
+          "lke.linode.com/pool-id" = var.pool_ids[0]
+        }
+
         container {
           name  = "memcached"
           image = "memcached"

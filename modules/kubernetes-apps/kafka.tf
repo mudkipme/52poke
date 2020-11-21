@@ -34,6 +34,10 @@ resource "kubernetes_deployment" "kafka" {
       }
 
       spec {
+        node_selector = {
+          "lke.linode.com/pool-id" = var.pool_ids[0]
+        }
+
         volume {
           name = "kafka-persistent-storage"
 

@@ -11,7 +11,9 @@ resource "helm_release" "ingress-nginx" {
   namespace  = "ingress-nginx"
 
   values = [
-    file("${path.root}/helm/ingress-nginx/values.yaml")
+    templatefile("${path.root}/helm/ingress-nginx/values.yaml", {
+      pool_id = var.pool_ids[0]
+    })
   ]
 }
 

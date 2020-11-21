@@ -35,6 +35,10 @@ resource "kubernetes_deployment" "fluentd" {
       }
 
       spec {
+        node_selector = {
+          "lke.linode.com/pool-id" = var.pool_ids[0]
+        }
+
         volume {
           name = "fluentd-config"
 

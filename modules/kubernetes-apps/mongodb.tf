@@ -5,7 +5,8 @@ resource "helm_release" "mongodb" {
 
   values = [
     templatefile("${path.root}/helm/mongodb/values.yaml", {
-      mongodb_password = random_password.mongodb_password.result
+      mongodb_password = random_password.mongodb_password.result,
+      pool_id          = var.pool_ids[0]
     })
   ]
 }
