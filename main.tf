@@ -43,6 +43,9 @@ module "kubernetes-apps" {
   media_ban_user_agent          = var.media_ban_user_agent
   media_ban_empty_refer_uri     = var.media_ban_empty_refer_uri
   pool_ids                      = module.linode.pool_ids
+  b2_account_id                 = var.b2_account_id
+  b2_account_key                = var.b2_account_key
+  restic_password               = var.restic_password
 }
 
 module "s3" {
@@ -52,4 +55,9 @@ module "s3" {
     module.linode.instance_ipv6,
     var.s3_additional_allow_ips
   )
+}
+
+module "migration" {
+  source     = "./modules/migration"
+  depends_on = [module.kubernetes-apps]
 }

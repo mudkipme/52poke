@@ -15,6 +15,57 @@ resource "kubernetes_secret" "mysql-root" {
   }
 }
 
+resource "random_password" "mysql-wiki-password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}
+
+resource "kubernetes_secret" "mysql-wiki" {
+  metadata {
+    name = "mysql-wiki"
+  }
+
+  data = {
+    username = "wiki"
+    password = random_password.mysql-wiki-password.result
+  }
+}
+
+resource "random_password" "mysql-www-password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}
+
+resource "kubernetes_secret" "mysql-www" {
+  metadata {
+    name = "mysql-www"
+  }
+
+  data = {
+    username = "www"
+    password = random_password.mysql-www-password.result
+  }
+}
+
+resource "random_password" "mysql-legacyforums-password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}
+
+resource "kubernetes_secret" "mysql-legacyforums" {
+  metadata {
+    name = "mysql-legacyforums"
+  }
+
+  data = {
+    username = "legacyforums"
+    password = random_password.mysql-legacyforums-password.result
+  }
+}
+
 resource "random_password" "oauth2-proxy-secret" {
   length           = 16
   special          = true
@@ -55,4 +106,25 @@ resource "random_password" "mongodb_password" {
   length           = 16
   special          = true
   override_special = "_%@"
+}
+
+resource "kubernetes_secret" "backblaze_b2" {
+  metadata {
+    name = "backblaze-b2"
+  }
+
+  data = {
+    b2-account-id  = var.b2_account_id
+    b2-account-key = var.b2_account_key
+  }
+}
+
+resource "kubernetes_secret" "restic" {
+  metadata {
+    name = "restic"
+  }
+
+  data = {
+    password = var.restic_password
+  }
 }

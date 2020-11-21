@@ -57,3 +57,18 @@ variable "pool_ids" {
   type        = list(string)
   description = "LKE Cluster Pool IDs"
 }
+
+variable "b2_account_id" {
+  type        = string
+  description = "B2 Account ID"
+}
+
+variable "b2_account_key" {
+  type        = string
+  description = "B2 Account Key"
+}
+
+variable "restic_password" {
+  type        = string
+  description = "Restic Backup Password"
+}
