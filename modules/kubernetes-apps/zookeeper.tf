@@ -94,10 +94,10 @@ resource "kubernetes_persistent_volume_claim" "zookeeper_pvc" {
 
     resources {
       requests = {
-        storage = "1Gi"
+        storage = "10Gi"
       }
     }
 
-    storage_class_name = "longhorn"
+    storage_class_name = "linode-block-storage"
   }
 }

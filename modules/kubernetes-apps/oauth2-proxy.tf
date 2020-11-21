@@ -9,12 +9,12 @@ resource "kubernetes_ingress" "oauth2-proxy" {
 
   spec {
     tls {
-      hosts       = ["internal.52poke.com"]
+      hosts       = ["auth.internal.52poke.com"]
       secret_name = "oauth2-proxy-tls"
     }
 
     rule {
-      host = "internal.52poke.com"
+      host = "auth.internal.52poke.com"
 
       http {
         path {
@@ -60,7 +60,7 @@ resource "kubernetes_deployment" "oauth2-proxy" {
         container {
           name  = "oauth2-proxy"
           image = "quay.io/oauth2-proxy/oauth2-proxy:latest"
-          args  = ["--provider=github", "--email-domain=${var.internal_github_domain}", "--upstream=file:///dev/null", "--http-address=0.0.0.0:4180"]
+          args  = ["--provider=github", "--whitelist-domain=.internal.52poke.com", "--email-domain=${var.internal_github_domain}", "--upstream=file:///dev/null", "--http-address=0.0.0.0:4180"]
 
           port {
             container_port = 4180
@@ -98,7 +98,7 @@ resource "kubernetes_deployment" "oauth2-proxy" {
           }
 
           env {
-            name  = "OAUTH2_PROXY_COOKIE_DOMAIN"
+            name  = "OAUTH2_PROXY_COOKIE_DOMAINS"
             value = "internal.52poke.com"
           }
 

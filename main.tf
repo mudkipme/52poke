@@ -19,20 +19,21 @@ module "linode" {
   linode_token = var.linode_token
 }
 
-module "bootstrap" {
-  source        = "./modules/bootstrap"
-  depends_on    = [module.linode]
-  instance_ids  = module.linode.instance_ids
-  instance_ipv4 = module.linode.instance_ipv4
-}
-
 module "lambda" {
   source = "./modules/lambda"
 }
 
-module "kubenetes" {
-  source                        = "./modules/kubernetes"
-  depends_on                    = [module.linode]
+module "kubernetes-base" {
+  source     = "./modules/kubernetes-base"
+  depends_on = [module.linode]
+}
+
+module "kubernetes-apps" {
+  source                        = "./modules/kubernetes-apps"
+  depends_on                    = [module.kubernetes-base]
+  internal_github_domain        = var.internal_github_domain
+  internal_github_client_id     = var.internal_github_client_id
+  internal_github_client_secret = var.internal_github_client_secret
   cf_zone_id                    = var.cf_zone_id
   malasada_api_id               = module.lambda.malasada_prod_id
   wiki_ban_user_agents          = var.wiki_ban_user_agents
@@ -40,11 +41,6 @@ module "kubenetes" {
   media_valid_referrers         = var.media_valid_referrers
   media_ban_user_agent          = var.media_ban_user_agent
   media_ban_empty_refer_uri     = var.media_ban_empty_refer_uri
-  mysql_root_password           = var.mysql_root_password
-  internal_github_domain        = var.internal_github_domain
-  internal_github_client_id     = var.internal_github_client_id
-  internal_github_client_secret = var.internal_github_client_secret
-  authorized_keys               = var.authorized_keys
 }
 
 module "s3" {

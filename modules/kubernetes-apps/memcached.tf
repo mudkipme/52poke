@@ -43,7 +43,7 @@ resource "kubernetes_deployment" "memcached" {
               memory = "512Mi"
             }
             requests {
-              cpu    = "50m"
+              cpu    = "100m"
               memory = "256Mi"
             }
           }

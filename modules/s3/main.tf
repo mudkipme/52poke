@@ -1,12 +1,3 @@
-resource "aws_s3_bucket" "media" {
-  bucket = "media.52poke.com"
-  region = "ap-northeast-1"
-
-  website {
-    index_document = "index.html"
-  }
-}
-
 resource "aws_s3_bucket_policy" "media" {
   bucket = "media.52poke.com"
   policy = jsonencode(

@@ -1,0 +1,11 @@
+auth:
+  rootPassword: "${mongodb_password}"
+persistence:
+  storageClass: linode-block-storage-retain
+  size: 20Gi
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 1Gi

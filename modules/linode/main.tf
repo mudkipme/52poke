@@ -10,7 +10,7 @@ resource "linode_lke_cluster" "lke-meltan-cluster" {
 
   pool {
     type  = "g6-standard-2"
-    count = 3
+    count = 2
   }
 }
 
@@ -19,6 +19,12 @@ resource "local_file" "kubeconfig" {
   filename       = "${path.root}/.kubeconfig"
 }
 
+locals {
+  instance_ids = flatten([
+    for pool in linode_lke_cluster.lke-meltan-cluster.pool : pool.nodes.*.instance_id
+  ])
+}
+
 data "external" "instance-ips" {
-  program = flatten(["python3", "${path.root}/scripts/instance-ips.py", var.linode_token, linode_lke_cluster.lke-meltan-cluster.pool[0].nodes.*.instance_id])
+  program = flatten(["python3", "${path.root}/scripts/instance-ips.py", var.linode_token, local.instance_ids])
 }

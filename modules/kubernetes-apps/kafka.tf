@@ -104,6 +104,7 @@ resource "kubernetes_deployment" "kafka" {
           volume_mount {
             name       = "kafka-persistent-storage"
             mount_path = "/var/lib/kafka/data"
+            sub_path   = "data"
           }
         }
       }
@@ -126,11 +127,11 @@ resource "kubernetes_persistent_volume_claim" "kafka_pvc" {
 
     resources {
       requests = {
-        storage = "5Gi"
+        storage = "10Gi"
       }
     }
 
-    storage_class_name = "longhorn"
+    storage_class_name = "linode-block-storage"
   }
 }
 

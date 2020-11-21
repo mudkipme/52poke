@@ -1,3 +1,9 @@
+resource "random_password" "mysql_password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}
+
 resource "kubernetes_secret" "mysql-root" {
   metadata {
     name = "mysql-root"
@@ -5,7 +11,7 @@ resource "kubernetes_secret" "mysql-root" {
 
   data = {
     username = "root"
-    password = var.mysql_root_password
+    password = random_password.mysql_password.result
   }
 }
 
@@ -28,13 +34,25 @@ resource "kubernetes_secret" "internal-github-oauth" {
   }
 }
 
-resource "kubernetes_secret" "authorized-keys" {
+resource "random_password" "postgres_password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}
+
+resource "kubernetes_secret" "postgres" {
   metadata {
-    name      = "authorized-keys"
-    namespace = "kube-system"
+    name = "postgres"
   }
 
   data = {
-    authorized_keys = join("\n", var.authorized_keys)
+    username = "postgres"
+    password = random_password.postgres_password.result
   }
+}
+
+resource "random_password" "mongodb_password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
 }

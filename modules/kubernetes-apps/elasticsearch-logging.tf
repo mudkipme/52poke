@@ -117,10 +117,10 @@ resource "kubernetes_persistent_volume_claim" "elasticsearch-logging-pvc" {
 
     resources {
       requests = {
-        storage = "20Gi"
+        storage = "10Gi"
       }
     }
 
-    storage_class_name = "longhorn"
+    storage_class_name = "linode-block-storage"
   }
 }

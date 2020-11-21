@@ -54,11 +54,6 @@ variable "s3_additional_allow_ips" {
   default     = []
 }
 
-variable "mysql_root_password" {
-  type        = string
-  description = "MySQL root password"
-}
-
 variable "internal_github_domain" {
   type        = string
   description = "GitHub mail domain allowed to visit internal services"
@@ -72,10 +67,4 @@ variable "internal_github_client_id" {
 variable "internal_github_client_secret" {
   type        = string
   description = "GitHub OAuth Client Secret"
-}
-
-variable "authorized_keys" {
-  type        = list(string)
-  description = "Authorized SSH Public Keys"
-  default     = []
 }

@@ -32,11 +32,6 @@ variable "media_ban_empty_refer_uri" {
   default     = []
 }
 
-variable "mysql_root_password" {
-  type        = string
-  description = "MySQL root password"
-}
-
 variable "media_valid_referrers" {
   type        = string
   description = "Valid referrers for media.52poke.com"
@@ -56,10 +51,4 @@ variable "internal_github_client_id" {
 variable "internal_github_client_secret" {
   type        = string
   description = "GitHub OAuth Client Secret"
-}
-
-variable "authorized_keys" {
-  type        = list(string)
-  description = "Authorized SSH Public Keys"
-  default     = []
 }

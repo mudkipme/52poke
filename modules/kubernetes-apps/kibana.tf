@@ -4,8 +4,8 @@ resource "kubernetes_ingress" "kibana" {
 
     annotations = {
       "cert-manager.io/cluster-issuer"          = "le-http-issuer"
-      "nginx.ingress.kubernetes.io/auth-url"    = "https://internal.52poke.com/oauth2/auth"
-      "nginx.ingress.kubernetes.io/auth-signin" = "https://internal.52poke.com/oauth2/start?rd=$escaped_request_uri"
+      "nginx.ingress.kubernetes.io/auth-url"    = "https://auth.internal.52poke.com/oauth2/auth"
+      "nginx.ingress.kubernetes.io/auth-signin" = "https://auth.internal.52poke.com/oauth2/start?rd=https://$host$escaped_request_uri"
     }
   }
 
@@ -82,8 +82,8 @@ resource "kubernetes_deployment" "kibana" {
           }
 
           env {
-            name  = "elasticsearch.hosts"
-            value = "elasticsearch-logging.default.svc.cluster.local"
+            name  = "ELASTICSEARCH_HOSTS"
+            value = "http://elasticsearch-logging.default.svc.cluster.local:9200"
           }
 
           env {

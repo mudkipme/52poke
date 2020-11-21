@@ -14,3 +14,9 @@ resource "helm_release" "ingress-nginx" {
     file("${path.root}/helm/ingress-nginx/values.yaml")
   ]
 }
+
+data "external" "load-balancer-ip" {
+  depends_on  = [helm_release.ingress-nginx]
+  program     = ["sh", "${path.root}/scripts/get-external-ip.sh"]
+  working_dir = path.root
+}

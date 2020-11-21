@@ -87,11 +87,11 @@ resource "kubernetes_persistent_volume_claim" "redis_pvc" {
 
     resources {
       requests = {
-        storage = "2Gi"
+        storage = "10Gi"
       }
     }
 
-    storage_class_name = "longhorn"
+    storage_class_name = "linode-block-storage"
   }
 }
 
