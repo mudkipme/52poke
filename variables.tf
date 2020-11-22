@@ -83,3 +83,9 @@ variable "restic_password" {
   type        = string
   description = "Restic Backup Password"
 }
+
+variable "authorized_keys" {
+  type        = list(string)
+  description = "Authorized SSH Public Keys"
+  default     = []
+}

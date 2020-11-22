@@ -1,3 +1,7 @@
+data "aws_api_gateway_rest_api" "prod_malasada" {
+  name = "prod-malasada"
+}
+
 resource "aws_s3_bucket_policy" "media" {
   bucket = "media.52poke.com"
   policy = jsonencode(

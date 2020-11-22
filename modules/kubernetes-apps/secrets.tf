@@ -102,10 +102,78 @@ resource "kubernetes_secret" "postgres" {
   }
 }
 
+resource "random_password" "postgres-klinklang-password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}
+
+resource "kubernetes_secret" "postgres-klinklang" {
+  metadata {
+    name = "postgres-klinklang"
+  }
+
+  data = {
+    username = "klinklang"
+    password = random_password.postgres-klinklang-password.result
+  }
+}
+
+resource "random_password" "postgres-pokeapi-password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}
+
+resource "kubernetes_secret" "postgres-pokeapi" {
+  metadata {
+    name = "postgres-pokeapi"
+  }
+
+  data = {
+    username = "pokeapi"
+    password = random_password.postgres-pokeapi-password.result
+  }
+}
+
 resource "random_password" "mongodb_password" {
   length           = 16
   special          = true
   override_special = "_%@"
+}
+
+resource "random_password" "mongodb-forums-password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}
+
+resource "kubernetes_secret" "mongodb-forums" {
+  metadata {
+    name = "mongodb-forums"
+  }
+
+  data = {
+    username = "forums"
+    password = random_password.mongodb-forums-password.result
+  }
+}
+
+resource "random_password" "mongodb-paradise-password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}
+
+resource "kubernetes_secret" "mongodb-paradise" {
+  metadata {
+    name = "mongodb-paradise"
+  }
+
+  data = {
+    username = "paradise"
+    password = random_password.mongodb-paradise-password.result
+  }
 }
 
 resource "kubernetes_secret" "backblaze_b2" {

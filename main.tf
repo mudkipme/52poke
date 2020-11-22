@@ -19,14 +19,20 @@ module "linode" {
   linode_token = var.linode_token
 }
 
-module "lambda" {
-  source = "./modules/lambda"
+module "aws" {
+  source = "./modules/aws"
+  allow_ips = concat(
+    module.linode.instance_ipv4,
+    module.linode.instance_ipv6,
+    var.s3_additional_allow_ips
+  )
 }
 
 module "kubernetes-base" {
-  source     = "./modules/kubernetes-base"
-  depends_on = [module.linode]
-  pool_ids   = module.linode.pool_ids
+  source          = "./modules/kubernetes-base"
+  depends_on      = [module.linode]
+  pool_ids        = module.linode.pool_ids
+  authorized_keys = var.authorized_keys
 }
 
 module "kubernetes-apps" {
@@ -36,7 +42,7 @@ module "kubernetes-apps" {
   internal_github_client_id     = var.internal_github_client_id
   internal_github_client_secret = var.internal_github_client_secret
   cf_zone_id                    = var.cf_zone_id
-  malasada_api_id               = module.lambda.malasada_prod_id
+  malasada_api_id               = module.aws.malasada_prod_id
   wiki_ban_user_agents          = var.wiki_ban_user_agents
   wiki_ban_uri                  = var.wiki_ban_uri
   media_valid_referrers         = var.media_valid_referrers
@@ -46,15 +52,6 @@ module "kubernetes-apps" {
   b2_account_id                 = var.b2_account_id
   b2_account_key                = var.b2_account_key
   restic_password               = var.restic_password
-}
-
-module "s3" {
-  source = "./modules/s3"
-  allow_ips = concat(
-    module.linode.instance_ipv4,
-    module.linode.instance_ipv6,
-    var.s3_additional_allow_ips
-  )
 }
 
 module "migration" {
