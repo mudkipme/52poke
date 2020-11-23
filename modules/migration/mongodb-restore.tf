@@ -1,7 +1,7 @@
-resource "kubernetes_job" "mysql-restore" {
+resource "kubernetes_job" "mongodb-restore" {
   depends_on = [kubernetes_job.database-init]
   metadata {
-    name = "mysql-restore"
+    name = "mongodb-restore"
   }
 
   spec {
@@ -10,21 +10,21 @@ resource "kubernetes_job" "mysql-restore" {
 
       spec {
         container {
-          name  = "mysql-restore"
-          image = "mudkip/mysql-backup-b2:latest"
+          name  = "mongodb-restore"
+          image = "mudkip/mongodb-backup-b2:latest"
 
           env {
-            name = "MYSQL_ROOT_PASSWORD"
+            name = "MONGO_ROOT_PASSWORD"
             value_from {
               secret_key_ref {
-                name = "mysql-root"
-                key  = "password"
+                name = "mongodb"
+                key  = "mongodb-root-password"
               }
             }
           }
 
           env {
-            name = "RCLONE_CONFIG_B2_ACCOUNT"
+            name = "RCLONE_CONFIG_BACKUP_ACCOUNT"
 
             value_from {
               secret_key_ref {
@@ -35,7 +35,7 @@ resource "kubernetes_job" "mysql-restore" {
           }
 
           env {
-            name = "RCLONE_CONFIG_B2_KEY"
+            name = "RCLONE_CONFIG_BACKUP_KEY"
 
             value_from {
               secret_key_ref {
@@ -45,7 +45,7 @@ resource "kubernetes_job" "mysql-restore" {
             }
           }
 
-          command = ["/bin/sh", "-c", file("${path.root}/scripts/mysql-restore.sh")]
+          command = ["/bin/sh", "-c", file("${path.root}/scripts/mongodb-restore.sh")]
         }
 
         restart_policy = "Never"

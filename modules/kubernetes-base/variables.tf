@@ -8,3 +8,8 @@ variable "authorized_keys" {
   description = "Authorized SSH Public Keys"
   default     = []
 }
+
+variable "linode_token" {
+  type        = string
+  description = "Linode API token"
+}

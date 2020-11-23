@@ -13,6 +13,16 @@ variable "aws_secret_key" {
   description = "AWS API secret key"
 }
 
+variable "aws_s3_access_key" {
+  type        = string
+  description = "AWS API access key for S3"
+}
+
+variable "aws_s3_secret_key" {
+  type        = string
+  description = "AWS API secret key for S3"
+}
+
 variable "cf_zone_id" {
   type        = string
   description = "Cloudflare Zone ID"

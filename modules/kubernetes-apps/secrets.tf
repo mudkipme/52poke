@@ -196,3 +196,14 @@ resource "kubernetes_secret" "restic" {
     password = var.restic_password
   }
 }
+
+resource "kubernetes_secret" "aws_s3" {
+  metadata {
+    name = "aws-s3"
+  }
+
+  data = {
+    accessKeyID     = var.aws_s3_access_key
+    secretAccessKey = var.aws_s3_secret_key
+  }
+}

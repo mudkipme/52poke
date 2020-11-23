@@ -8,3 +8,14 @@ resource "kubernetes_secret" "authorized-keys" {
     authorized_keys = join("\n", var.authorized_keys)
   }
 }
+
+resource "kubernetes_secret" "linode-credentials" {
+  metadata {
+    name      = "linode-credentials"
+    namespace = "cert-manager"
+  }
+
+  data = {
+    token = var.linode_token
+  }
+}

@@ -33,6 +33,7 @@ module "kubernetes-base" {
   depends_on      = [module.linode]
   pool_ids        = module.linode.pool_ids
   authorized_keys = var.authorized_keys
+  linode_token    = var.linode_token
 }
 
 module "kubernetes-apps" {
@@ -52,6 +53,8 @@ module "kubernetes-apps" {
   b2_account_id                 = var.b2_account_id
   b2_account_key                = var.b2_account_key
   restic_password               = var.restic_password
+  aws_s3_access_key             = var.aws_s3_access_key
+  aws_s3_secret_key             = var.aws_s3_secret_key
 }
 
 module "migration" {
