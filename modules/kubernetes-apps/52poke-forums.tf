@@ -2,18 +2,50 @@ resource "kubernetes_ingress" "forums_52poke" {
   metadata {
     name = "52poke-forums"
     annotations = {
-      "cert-manager.io/cluster-issuer" = "le-wildcard-issuer"
+      "cert-manager.io/cluster-issuer"                   = "le-wildcard-issuer"
+      "nginx.ingress.kubernetes.io/from-to-www-redirect" = "true"
     }
   }
 
   spec {
     tls {
-      hosts       = ["52poke.net", "*.52poke.net"]
+      hosts       = ["52poke.net", "www.52poke.net", "legacy.52poke.net", "media.52poke.net"]
       secret_name = "52poke-forums-tls"
     }
 
     rule {
       host = "52poke.net"
+
+      http {
+        path {
+          path = "/"
+
+          backend {
+            service_name = "forums-52poke"
+            service_port = "4567"
+          }
+        }
+      }
+    }
+  }
+}
+
+resource "kubernetes_ingress" "forums_52poke_redirect" {
+  metadata {
+    name = "52poke-forums-redirect"
+    annotations = {
+      "cert-manager.io/cluster-issuer"                 = "le-wildcard-issuer"
+      "nginx.ingress.kubernetes.io/permanent-redirect" = "https://52poke.net"
+    }
+  }
+  spec {
+    tls {
+      hosts       = ["*.52poke.com"]
+      secret_name = "wildcard-52poke-tls"
+    }
+
+    rule {
+      host = "bbs.52poke.com"
 
       http {
         path {
@@ -77,10 +109,6 @@ resource "kubernetes_deployment" "forums_52poke" {
           }
         }
 
-        security_context {
-          fs_group = 1000
-        }
-
         container {
           name  = "52poke-forums"
           image = "mudkip/nodebb:latest"
@@ -88,6 +116,9 @@ resource "kubernetes_deployment" "forums_52poke" {
             requests {
               cpu    = "250m"
               memory = "256Mi"
+            }
+            limits {
+              memory = "512Mi"
             }
           }
 
@@ -160,8 +191,6 @@ resource "kubernetes_deployment" "forums_52poke" {
             name       = "52poke-forums-persistent-storage"
             mount_path = "/usr/src/app"
           }
-
-          command = ["node", "./nodebb", "dev"]
         }
       }
     }

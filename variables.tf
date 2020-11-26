@@ -23,9 +23,14 @@ variable "aws_s3_secret_key" {
   description = "AWS API secret key for S3"
 }
 
-variable "cf_zone_id" {
+variable "cf_token" {
   type        = string
-  description = "Cloudflare Zone ID"
+  description = "Cloudflare API Token for Cache Purging"
+}
+
+variable "cf_token_dns" {
+  type        = string
+  description = "Cloudflare API Token for DNS Record Editing"
 }
 
 variable "wiki_ban_user_agents" {
@@ -98,4 +103,44 @@ variable "authorized_keys" {
   type        = list(string)
   description = "Authorized SSH Public Keys"
   default     = []
+}
+
+variable "klinklang_oauth_key" {
+  type        = string
+  description = "52Poké Wiki OAuth Consumer Key for Klinklang"
+}
+
+variable "klinklang_oauth_secret" {
+  type        = string
+  description = "52Poké Wiki OAuth Consumer Secret for Klinklang"
+}
+
+variable "wiki_52poke_secret_key" {
+  type        = string
+  description = "52Poké Wiki secret key"
+}
+
+variable "wiki_52poke_upgrade_key" {
+  type        = string
+  description = "52Poké Wiki upgrade key"
+}
+
+variable "recaptcha_site_key" {
+  type        = string
+  description = "reCAPTCHA site key"
+}
+
+variable "recaptcha_secret_key" {
+  type        = string
+  description = "reCAPTCHA secret key"
+}
+
+variable "aws_ses_access_key" {
+  type        = string
+  description = "AWS API access key for SES"
+}
+
+variable "aws_ses_secret_key" {
+  type        = string
+  description = "AWS API secret key for SES"
 }

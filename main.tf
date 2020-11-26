@@ -28,12 +28,19 @@ module "aws" {
   )
 }
 
+module "cloudflare" {
+  source           = "./modules/cloudflare"
+  cf_token_dns     = var.cf_token_dns
+  load_balancer_ip = module.kubernetes-base.load_balancer_ip
+}
+
 module "kubernetes-base" {
   source          = "./modules/kubernetes-base"
   depends_on      = [module.linode]
   pool_ids        = module.linode.pool_ids
   authorized_keys = var.authorized_keys
   linode_token    = var.linode_token
+  cf_token_dns    = var.cf_token_dns
 }
 
 module "kubernetes-apps" {
@@ -42,7 +49,8 @@ module "kubernetes-apps" {
   internal_github_domain        = var.internal_github_domain
   internal_github_client_id     = var.internal_github_client_id
   internal_github_client_secret = var.internal_github_client_secret
-  cf_zone_id                    = var.cf_zone_id
+  cf_zone_id                    = module.cloudflare.cf_zone_id
+  cf_token                      = var.cf_token
   malasada_api_id               = module.aws.malasada_prod_id
   wiki_ban_user_agents          = var.wiki_ban_user_agents
   wiki_ban_uri                  = var.wiki_ban_uri
@@ -55,6 +63,14 @@ module "kubernetes-apps" {
   restic_password               = var.restic_password
   aws_s3_access_key             = var.aws_s3_access_key
   aws_s3_secret_key             = var.aws_s3_secret_key
+  klinklang_oauth_key           = var.klinklang_oauth_key
+  klinklang_oauth_secret        = var.klinklang_oauth_secret
+  wiki_52poke_secret_key        = var.wiki_52poke_secret_key
+  wiki_52poke_upgrade_key       = var.wiki_52poke_upgrade_key
+  recaptcha_site_key            = var.recaptcha_site_key
+  recaptcha_secret_key          = var.recaptcha_secret_key
+  aws_ses_access_key            = var.aws_ses_access_key
+  aws_ses_secret_key            = var.aws_ses_secret_key
 }
 
 module "migration" {

@@ -207,3 +207,60 @@ resource "kubernetes_secret" "aws_s3" {
     secretAccessKey = var.aws_s3_secret_key
   }
 }
+
+resource "kubernetes_secret" "cloudflare" {
+  metadata {
+    name = "cloudflare"
+  }
+
+  data = {
+    token = var.cf_token
+  }
+}
+
+resource "random_uuid" "klinklang-secret-uuid" {}
+
+resource "kubernetes_secret" "klinklang" {
+  metadata {
+    name = "klinklang"
+  }
+
+  data = {
+    secret            = random_uuid.klinklang-secret-uuid.result
+    wiki-oauth-key    = var.klinklang_oauth_key
+    wiki-oauth-secret = var.klinklang_oauth_secret
+  }
+}
+
+resource "kubernetes_secret" "wiki_52poke" {
+  metadata {
+    name = "52poke-wiki"
+  }
+
+  data = {
+    secretKey  = var.wiki_52poke_secret_key
+    upgradeKey = var.wiki_52poke_upgrade_key
+  }
+}
+
+resource "kubernetes_secret" "aws_ses" {
+  metadata {
+    name = "aws-ses"
+  }
+
+  data = {
+    accessKeyID     = var.aws_ses_access_key
+    secretAccessKey = var.aws_ses_secret_key
+  }
+}
+
+resource "kubernetes_secret" "recaptcha" {
+  metadata {
+    name = "recaptcha"
+  }
+
+  data = {
+    siteKey   = var.recaptcha_site_key
+    secretKey = var.recaptcha_secret_key
+  }
+}

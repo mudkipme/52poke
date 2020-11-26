@@ -12,6 +12,11 @@ resource "linode_lke_cluster" "lke-meltan-cluster" {
     type  = "g6-standard-2"
     count = 3
   }
+
+  pool {
+    type  = "g6-standard-2"
+    count = 1
+  }
 }
 
 resource "local_file" "kubeconfig" {

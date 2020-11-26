@@ -3,6 +3,11 @@ variable "cf_zone_id" {
   description = "Cloudflare Zone ID"
 }
 
+variable "cf_token" {
+  type        = string
+  description = "Cloudflare API Token"
+}
+
 variable "malasada_api_id" {
   type        = string
   description = "API Gateway API ID of malasada"
@@ -81,4 +86,45 @@ variable "aws_s3_access_key" {
 variable "aws_s3_secret_key" {
   type        = string
   description = "AWS API secret key for S3"
+}
+
+
+variable "klinklang_oauth_key" {
+  type        = string
+  description = "52Poké Wiki OAuth Consumer Key for Klinklang"
+}
+
+variable "klinklang_oauth_secret" {
+  type        = string
+  description = "52Poké Wiki OAuth Consumer Secret for Klinklang"
+}
+
+variable "wiki_52poke_secret_key" {
+  type        = string
+  description = "52Poké Wiki secret key"
+}
+
+variable "wiki_52poke_upgrade_key" {
+  type        = string
+  description = "52Poké Wiki upgrade key"
+}
+
+variable "recaptcha_site_key" {
+  type        = string
+  description = "reCAPTCHA site key"
+}
+
+variable "recaptcha_secret_key" {
+  type        = string
+  description = "reCAPTCHA secret key"
+}
+
+variable "aws_ses_access_key" {
+  type        = string
+  description = "AWS API access key for SES"
+}
+
+variable "aws_ses_secret_key" {
+  type        = string
+  description = "AWS API secret key for SES"
 }

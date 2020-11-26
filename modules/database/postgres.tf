@@ -8,10 +8,18 @@ provider "postgresql" {
 
 resource "postgresql_database" "klinklang" {
   name = "klinklang"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "postgresql_database" "pokeapi" {
   name = "pokeapi"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "postgresql_role" "klinklang" {

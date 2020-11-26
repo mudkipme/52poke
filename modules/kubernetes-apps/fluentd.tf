@@ -53,7 +53,7 @@ resource "kubernetes_deployment" "fluentd" {
 
           resources {
             limits {
-              memory = "1Gi"
+              memory = "512Mi"
             }
             requests {
               cpu    = "100m"

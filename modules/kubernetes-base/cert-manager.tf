@@ -57,3 +57,19 @@ resource "null_resource" "le_wildcard_issuer" {
     command = "KUBECONFIG=${path.root}/.kubeconfig kubectl delete -f - <<EOF\n${self.triggers.issuer_yaml}\nEOF"
   }
 }
+
+resource "null_resource" "le_cloudflare_issuer" {
+  depends_on = [helm_release.cert-manager]
+  triggers = {
+    issuer_yaml = file("${path.root}/helm/cert-manager/le-cloudflare-issuer.yaml")
+  }
+
+  provisioner "local-exec" {
+    command = "KUBECONFIG=${path.root}/.kubeconfig kubectl apply -f - <<EOF\n${self.triggers.issuer_yaml}\nEOF"
+  }
+
+  provisioner "local-exec" {
+    when    = destroy
+    command = "KUBECONFIG=${path.root}/.kubeconfig kubectl delete -f - <<EOF\n${self.triggers.issuer_yaml}\nEOF"
+  }
+}

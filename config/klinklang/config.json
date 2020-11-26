@@ -1,0 +1,16 @@
+{
+    "mediawiki": {
+        "scriptPath": "https://wiki.52poke.com/"
+    },
+    "db": {
+        "host": "postgres",
+        "database": "klinklang"
+    },
+    "kafka": {
+        "metadata.broker.list": "kafka-inside:9092"
+    },
+    "redis": {
+        "host": "redis",
+        "port": 6379
+    }
+}

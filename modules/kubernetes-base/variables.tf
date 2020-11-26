@@ -13,3 +13,8 @@ variable "linode_token" {
   type        = string
   description = "Linode API token"
 }
+
+variable "cf_token_dns" {
+  type        = string
+  description = "Cloudflare API Token for DNS Record Editing"
+}

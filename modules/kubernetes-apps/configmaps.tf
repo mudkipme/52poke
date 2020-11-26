@@ -70,14 +70,33 @@ resource "kubernetes_config_map" "curator" {
   }
 }
 
-locals {
-  terraform_database_files = fileset("${path.root}/modules/database", "*.tf")
-}
-
-resource "kubernetes_config_map" "terraform-database" {
+resource "kubernetes_config_map" "config-52poke-www" {
   metadata {
-    name = "terraform-database"
+    name = "52poke-www-config"
   }
 
-  data = zipmap(local.terraform_database_files, [for filename in local.terraform_database_files : file("${path.root}/modules/database/${filename}")])
+  data = {
+    "nginx.conf" = file("${path.root}/config/52poke-www/nginx.conf")
+  }
+}
+
+resource "kubernetes_config_map" "config-pokeapi" {
+  metadata {
+    name = "config-pokeapi"
+  }
+
+  data = {
+    "pokeapi.py" = file("${path.root}/config/pokeapi/pokeapi.py")
+  }
+}
+
+resource "kubernetes_config_map" "klinklang" {
+  metadata {
+    name = "klinklang"
+  }
+
+  data = {
+    "config.json"  = file("${path.root}/config/klinklang/config.json")
+    "workflow.yml" = file("${path.root}/config/klinklang/workflow.yml")
+  }
 }

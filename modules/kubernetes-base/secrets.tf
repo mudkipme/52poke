@@ -19,3 +19,24 @@ resource "kubernetes_secret" "linode-credentials" {
     token = var.linode_token
   }
 }
+
+resource "kubernetes_secret" "linode-credentials-default" {
+  metadata {
+    name = "linode-credentials"
+  }
+
+  data = {
+    token = var.linode_token
+  }
+}
+
+resource "kubernetes_secret" "cloudflare-dns" {
+  metadata {
+    name      = "cloudflare-dns"
+    namespace = "cert-manager"
+  }
+
+  data = {
+    token = var.cf_token_dns
+  }
+}

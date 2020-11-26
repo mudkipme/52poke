@@ -76,7 +76,7 @@ $wgSMTP = array(
 ## Database settings
 $wgDBtype = "mysql";
 $wgDBserver = "mysql";
-$wgDBname = file_get_contents("/run/secrets/52w-db-name");
+$wgDBname = "52poke_wiki";
 $wgDBuser = file_get_contents("/run/secrets/52w-db-user");
 $wgDBpassword = file_get_contents("/run/secrets/52w-db-password");
 
@@ -93,6 +93,7 @@ $wgMemCachedServers = array( 'memcached:11211' );
 $wgObjectCaches['mysql-pc'] = [
     'class' => 'SqlBagOStuff',
     'server' => [
+        'type' => 'mysql',
         'host' => 'mysql-pc',
         'dbname' => $wgDBname,
         'user' => $wgDBuser,
@@ -245,6 +246,7 @@ $wgDisabledVariants = array( 'zh-cn', 'zh-hk', 'zh-tw', 'zh-sg', 'zh-mo', 'zh-my
 $wgUpgradeKey = file_get_contents("/run/secrets/52w-upgrade-key");
 $wgAutoConfirmAge = 7*86400;
 $wgAutoConfirmCount = 50;
+$wgShowExceptionDetails = true;
 
 wfLoadSkin( "MonoBook" );
 wfLoadSkin( "Vector" );
@@ -451,6 +453,7 @@ $wgMaxSquidPurgeTitles = 5;
 $wgJobRunRate = 0;
 $wgJobTypeConf['default'] = [ 'class' => '\\MediaWiki\\Extension\\EventBus\\Adapters\\JobQueue\\JobQueueEventBus', 'readOnlyReason' => false ];
 $wgMiserMode = true;
+$wgEventBusEnableRunJobAPI = true;
 
 # ImageMap Extension
 wfLoadExtension( 'ImageMap' );

@@ -8,6 +8,6 @@ resources:
     cpu: 100m
     memory: 256Mi
   limits:
-    memory: 1Gi
+    memory: 768Mi
 nodeSelector:
   lke.linode.com/pool-id: "${pool_id}"
