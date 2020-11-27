@@ -49,7 +49,7 @@ resource "kubernetes_deployment" "mysql" {
         container {
           name  = "mysql"
           image = "mysql:8"
-          args  = ["--default-authentication-plugin=mysql_native_password", "--character-set-server=utf8", "--collation-server=utf8_general_ci", "--binlog-expire-logs-seconds=604800"]
+          args  = ["--default-authentication-plugin=mysql_native_password", "--character-set-server=utf8", "--collation-server=utf8_general_ci", "--binlog-expire-logs-seconds=604800", "--slow-query-log=on"]
 
           resources {
             limits {
@@ -106,6 +106,6 @@ resource "kubernetes_persistent_volume_claim" "mysql_pvc" {
       }
     }
 
-    storage_class_name = "linode-block-storage-retain"
+    storage_class_name = "local-path"
   }
 }

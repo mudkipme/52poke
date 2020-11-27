@@ -1,7 +1,7 @@
-resource "kubernetes_job" "wiki-52poke-update" {
+resource "kubernetes_job" "wiki-52poke-init" {
   depends_on = [kubernetes_job.database-init]
   metadata {
-    name = "52poke-wiki-update"
+    name = "52poke-wiki-init"
   }
 
   spec {
@@ -55,6 +55,45 @@ resource "kubernetes_job" "wiki-52poke-update" {
           secret {
             secret_name = "recaptcha"
           }
+        }
+
+        init_container {
+          name  = "mysql-restore"
+          image = "mudkip/mysql-backup-b2:latest"
+
+          env {
+            name = "MYSQL_ROOT_PASSWORD"
+            value_from {
+              secret_key_ref {
+                name = "mysql-root"
+                key  = "password"
+              }
+            }
+          }
+
+          env {
+            name = "RCLONE_CONFIG_B2_ACCOUNT"
+
+            value_from {
+              secret_key_ref {
+                name = "backblaze-b2"
+                key  = "b2-account-id"
+              }
+            }
+          }
+
+          env {
+            name = "RCLONE_CONFIG_B2_KEY"
+
+            value_from {
+              secret_key_ref {
+                name = "backblaze-b2"
+                key  = "b2-account-key"
+              }
+            }
+          }
+
+          command = ["/bin/sh", "-c", file("${path.root}/scripts/52poke-wiki-restore.sh")]
         }
 
         container {

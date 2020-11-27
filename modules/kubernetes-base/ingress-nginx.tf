@@ -12,13 +12,10 @@ resource "helm_release" "ingress-nginx" {
 
   values = [
     templatefile("${path.root}/helm/ingress-nginx/values.yaml", {
-      pool_id = var.pool_ids[0]
+      pool_id = var.pool_ids[0],
+      load_balancer_ip = var.load_balancer_ip,
+      http_port = var.http_port,
+      https_port = var.https_port,
     })
   ]
-}
-
-data "external" "load-balancer-ip" {
-  depends_on  = [helm_release.ingress-nginx]
-  program     = ["sh", "${path.root}/scripts/get-external-ip.sh"]
-  working_dir = path.root
 }

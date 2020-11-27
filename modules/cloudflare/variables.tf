@@ -5,5 +5,5 @@ variable "cf_token_dns" {
 
 variable "load_balancer_ip" {
   type        = string
-  description = "IP Address of Linode NodeBalancer"
+  description = "IP Address of Load Balancer"
 }

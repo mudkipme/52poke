@@ -4,6 +4,7 @@ resource "kubernetes_ingress" "nginx-52w" {
     annotations = {
       "cert-manager.io/cluster-issuer"                = "le-wildcard-issuer"
       "nginx.ingress.kubernetes.io/enable-access-log" = "false"
+      "nginx.ingress.kubernetes.io/proxy-body-size"   = "16m"
     }
   }
 

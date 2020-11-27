@@ -8,5 +8,9 @@ controller:
     lke.linode.com/pool-id: "${pool_id}"
 
   service:
-    annotations:
-      service.beta.kubernetes.io/linode-loadbalancer-proxy-protocol: v2
+    externalIPs:
+    - ${load_balancer_ip}
+    type: NodePort
+    nodePorts:
+      http: "${http_port}"
+      https: "${https_port}"

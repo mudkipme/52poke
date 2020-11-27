@@ -143,7 +143,7 @@ resource "kubernetes_deployment" "forums_52poke_legacy" {
             mount_path = "/var/www/html"
           }
 
-          command = [ "/bin/sh", "-c", <<EOF
+          command = ["/bin/sh", "-c", <<EOF
 set -e
 sed -i "s/\$db_username=.*/\$db_username=\"$MYSQL_USERNAME\";/g" /var/www/html/datafile/config.php
 sed -i "s/\$db_password=.*/\$db_password=\"$MYSQL_PASSWORD\";/g" /var/www/html/datafile/config.php
