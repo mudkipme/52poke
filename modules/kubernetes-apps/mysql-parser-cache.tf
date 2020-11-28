@@ -106,6 +106,6 @@ resource "kubernetes_persistent_volume_claim" "mysql-pc-pvc" {
       }
     }
 
-    storage_class_name = "linode-block-storage"
+    storage_class_name = "local-path"
   }
 }

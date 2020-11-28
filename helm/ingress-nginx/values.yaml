@@ -6,6 +6,8 @@ controller:
   
   nodeSelector:
     lke.linode.com/pool-id: "${pool_id}"
+  
+  replicaCount: 2
 
   service:
     externalIPs:

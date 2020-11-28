@@ -34,10 +34,6 @@ resource "kubernetes_deployment" "wiki_52poke" {
       }
 
       spec {
-        node_selector = {
-          "lke.linode.com/pool-id" = var.pool_ids[1]
-        }
-
         volume {
           name = "52poke-wiki-config"
 
@@ -202,5 +198,30 @@ resource "kubernetes_deployment" "wiki_52poke" {
     strategy {
       type = "Recreate"
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      spec[0].replicas
+    ]
+  }
+}
+
+resource "kubernetes_horizontal_pod_autoscaler" "wiki-52poke" {
+  metadata {
+    name = "52poke-wiki"
+  }
+
+  spec {
+    min_replicas = 1
+    max_replicas = 4
+
+    scale_target_ref {
+      api_version = "apps/v1"
+      kind        = "Deployment"
+      name        = "52poke-wiki"
+    }
+
+    target_cpu_utilization_percentage = 80
   }
 }

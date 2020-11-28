@@ -17,6 +17,15 @@ resource "linode_lke_cluster" "lke-meltan-cluster" {
     type  = "g6-standard-2"
     count = 1
   }
+
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes = [
+      # https://github.com/linode/terraform-provider-linode/issues/198
+      pool[0].count,
+      pool[1].count
+    ]
+  }
 }
 
 resource "local_file" "kubeconfig" {
@@ -32,4 +41,8 @@ locals {
 
 data "external" "instance-ips" {
   program = flatten(["python3", "${path.root}/scripts/instance-ips.py", var.linode_token, local.instance_ids])
+}
+
+data "external" "static-pool-ips" {
+  program = flatten(["python3", "${path.root}/scripts/instance-ips.py", var.linode_token, linode_lke_cluster.lke-meltan-cluster.pool[0].nodes.*.instance_id])
 }

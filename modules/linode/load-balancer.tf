@@ -30,4 +30,11 @@ resource "linode_instance" "load-balancer" {
     "https_port"  = local.https_port,
     "private_ips" = replace(data.external.instance-ips.result.private, ",", " ")
   }
+
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes = [
+      stackscript_data
+    ]
+  }
 }

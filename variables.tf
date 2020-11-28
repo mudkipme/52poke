@@ -63,12 +63,6 @@ variable "media_valid_referrers" {
   default     = "52poke.com *.52poke.com 52poke.wiki *.52poke.wiki 52poke.net *.52poke.net"
 }
 
-variable "s3_additional_allow_ips" {
-  type        = list(string)
-  description = "Additional IP addresses allowed to access S3"
-  default     = []
-}
-
 variable "internal_github_domain" {
   type        = string
   description = "GitHub mail domain allowed to visit internal services"

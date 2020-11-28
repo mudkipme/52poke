@@ -24,8 +24,7 @@ module "aws" {
   source = "./modules/aws"
   allow_ips = concat(
     module.linode.instance_ipv4,
-    module.linode.instance_ipv6,
-    var.s3_additional_allow_ips
+    module.linode.instance_ipv6
   )
 }
 
@@ -80,4 +79,9 @@ module "kubernetes-apps" {
 module "migration" {
   source     = "./modules/migration"
   depends_on = [module.kubernetes-apps]
+}
+
+module "maintenance" {
+  source     = "./modules/maintenance"
+  depends_on = [module.migration]
 }

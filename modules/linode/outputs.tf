@@ -15,7 +15,7 @@ output "instance_ipv6" {
 }
 
 output "instance_private" {
-  value = split(",", data.external.instance-ips.result.private)
+  value = split(",", data.external.static-pool-ips.result.private)
 }
 
 output "pool_ids" {

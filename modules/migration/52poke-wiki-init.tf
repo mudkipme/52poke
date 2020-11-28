@@ -105,8 +105,8 @@ resource "kubernetes_job" "wiki-52poke-init" {
               memory = "1Gi"
             }
             requests {
-              cpu    = "500m"
-              memory = "512Mi"
+              cpu    = "150m"
+              memory = "128Mi"
             }
           }
 
