@@ -5,7 +5,7 @@
 
 This is a repository to track the infrastructure, deployment, tech documentation and issues in general of 52Poké.
 
-We believe in the openness, inclusiveness and independence of individual fan communities, and we plan to make 52Poké a set of open source projects in 2020. That means everything of 52Poké other than user data, passwords, keys and tokens should be open. Most of the projects will be licensed under BSD-3-Clause, MIT or GPLv2. To be compatible with [the content license of 52Poké Wiki](https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh), some projects may choose restrictive licenses which forbid commercial use.
+We believe in the openness, inclusiveness and independence of individual fan communities, and 52Poké is managed by a set of open source projects including this one. Most of the projects will be licensed under BSD-3-Clause, MIT or GPLv2. To be compatible with [the content license of 52Poké Wiki](https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh), some projects may choose restrictive licenses which forbid commercial use.
 
 While these projects are developed for 52Poké, most of them could be useful for similar websites or services, such as [MediaWiki](https://www.mediawiki.org/) wikis, [NodeBB](https://nodebb.org/) forums, [WordPress](https://wordpress.org/) blogs, or fan works related to Pokémon.
 
@@ -28,9 +28,9 @@ Please use [issues](https://github.com/mudkipme/52poke/issues) and [wiki](https:
 
 ## Deployment
 
-Currently 52Poké runs on Linode cloud servers and services are orchestrated with Docker Swarm. See [wiki page](https://github.com/mudkipme/52poke/wiki/Deployment) for the details.
+As of December 2020, 52Poké runs on multiple cloud providers including Linode, AWS and Cloudflare, and most resources and applications are running in a Linode Kubernetes Engine cluster.
 
-We plan to migrate to Kubernetes in 2020, and we will open source all configurations in the philosophy of IaC (infrastructure as code).
+This repository uses Terraform to manage the infrastructure of 52Poké.
 
 ## License
 

@@ -33,3 +33,7 @@ output "https_port" {
 output "load_balancer_ip" {
   value = linode_instance.load-balancer.ip_address
 }
+
+output "load_balancer_ipv6" {
+  value = split("/", linode_instance.load-balancer.ipv6)[0]
+}

@@ -35,15 +35,16 @@ module "cloudflare" {
 }
 
 module "kubernetes-base" {
-  source           = "./modules/kubernetes-base"
-  depends_on       = [module.linode]
-  pool_ids         = module.linode.pool_ids
-  authorized_keys  = var.authorized_keys
-  linode_token     = var.linode_token
-  cf_token_dns     = var.cf_token_dns
-  load_balancer_ip = module.linode.load_balancer_ip
-  http_port        = module.linode.http_port
-  https_port       = module.linode.https_port
+  source             = "./modules/kubernetes-base"
+  depends_on         = [module.linode]
+  pool_ids           = module.linode.pool_ids
+  authorized_keys    = var.authorized_keys
+  linode_token       = var.linode_token
+  cf_token_dns       = var.cf_token_dns
+  load_balancer_ip   = module.linode.load_balancer_ip
+  load_balancer_ipv6 = module.linode.load_balancer_ipv6
+  http_port          = module.linode.http_port
+  https_port         = module.linode.https_port
 }
 
 module "kubernetes-apps" {

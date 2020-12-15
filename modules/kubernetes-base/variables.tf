@@ -24,6 +24,11 @@ variable "load_balancer_ip" {
   description = "IP Address of Load Balancer"
 }
 
+variable "load_balancer_ipv6" {
+  type        = string
+  description = "IPv6 Address of Load Balancer"
+}
+
 variable "http_port" {
   type        = string
   description = "HTTP NodePort of Ingress Controller"
