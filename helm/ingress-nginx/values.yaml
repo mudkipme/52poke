@@ -12,7 +12,6 @@ controller:
   service:
     externalIPs:
     - ${load_balancer_ip}
-    - ${load_balancer_ipv6}
     type: NodePort
     nodePorts:
       http: "${http_port}"

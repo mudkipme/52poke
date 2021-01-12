@@ -1,4 +1,3 @@
-import os
 import sys
 import json
 from linode_api4 import LinodeClient, Instance
