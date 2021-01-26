@@ -10,8 +10,8 @@ resource "kubernetes_ingress" "nginx-52w" {
 
   spec {
     tls {
-      hosts       = ["*.52poke.com"]
-      secret_name = "wildcard-52poke-tls"
+      hosts       = ["wiki.52poke.com"]
+      secret_name = "wiki-52poke-tls"
     }
 
     rule {

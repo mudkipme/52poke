@@ -10,8 +10,8 @@ resource "kubernetes_ingress" "pokeapi" {
 
   spec {
     tls {
-      hosts       = ["*.52poke.com"]
-      secret_name = "wildcard-52poke-tls"
+      hosts       = ["pokeapi.52poke.com"]
+      secret_name = "pokeapi-52poke-tls"
     }
 
     rule {

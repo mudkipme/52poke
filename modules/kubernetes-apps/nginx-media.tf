@@ -10,8 +10,8 @@ resource "kubernetes_ingress" "nginx-media" {
 
   spec {
     tls {
-      hosts       = ["*.52poke.com"]
-      secret_name = "wildcard-52poke-tls"
+      hosts       = ["media.52poke.com"]
+      secret_name = "media-52poke-tls"
     }
 
     rule {
