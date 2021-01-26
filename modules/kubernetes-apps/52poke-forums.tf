@@ -111,7 +111,7 @@ resource "kubernetes_deployment" "forums_52poke" {
 
         container {
           name  = "52poke-forums"
-          image = "mudkip/nodebb:latest"
+          image = "node:lts"
           resources {
             requests {
               cpu    = "250m"
@@ -187,10 +187,34 @@ resource "kubernetes_deployment" "forums_52poke" {
             value = "redis"
           }
 
+          env {
+            name  = "NODE_ENV"
+            value = "production"
+          }
+
+          env {
+            name  = "daemon"
+            value = "false"
+          }
+
+          env {
+            name  = "silent"
+            value = "false"
+          }
+
           volume_mount {
             name       = "52poke-forums-persistent-storage"
             mount_path = "/usr/src/app"
           }
+
+          command = ["/bin/sh", "-c", <<EOF
+set -e
+cd /usr/src/app
+node ./nodebb upgrade
+node ./nodebb build
+node ./nodebb start
+EOF
+          ]
         }
       }
     }
