@@ -128,3 +128,8 @@ variable "aws_ses_secret_key" {
   type        = string
   description = "AWS API secret key for SES"
 }
+
+variable "discord_token" {
+  type        = string
+  description = "Discord bot token"
+}

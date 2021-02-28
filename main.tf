@@ -75,6 +75,7 @@ module "kubernetes-apps" {
   recaptcha_secret_key          = var.recaptcha_secret_key
   aws_ses_access_key            = var.aws_ses_access_key
   aws_ses_secret_key            = var.aws_ses_secret_key
+  discord_token                 = var.discord_token
 }
 
 module "migration" {

@@ -117,9 +117,6 @@ resource "kubernetes_deployment" "forums_52poke" {
               cpu    = "250m"
               memory = "256Mi"
             }
-            limits {
-              memory = "512Mi"
-            }
           }
 
           port {
@@ -211,7 +208,6 @@ resource "kubernetes_deployment" "forums_52poke" {
 set -e
 cd /usr/src/app
 node ./nodebb upgrade
-node ./nodebb build
 node ./nodebb start
 EOF
           ]

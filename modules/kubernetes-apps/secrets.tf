@@ -264,3 +264,13 @@ resource "kubernetes_secret" "recaptcha" {
     secretKey = var.recaptcha_secret_key
   }
 }
+
+resource "kubernetes_secret" "discord_52poke" {
+  metadata {
+    name = "52poke-discord"
+  }
+
+  data = {
+    token = var.discord_token
+  }
+}
