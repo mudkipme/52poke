@@ -274,3 +274,35 @@ resource "kubernetes_secret" "discord_52poke" {
     token = var.discord_token
   }
 }
+
+resource "random_password" "mysql-makeawish-password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}
+
+resource "kubernetes_secret" "mysql-makeawish" {
+  metadata {
+    name = "mysql-makeawish"
+  }
+
+  data = {
+    username = "makeawish"
+    password = random_password.mysql-makeawish-password.result
+  }
+}
+
+resource "random_password" "makeawish-key" {
+  length  = 32
+  special = false
+}
+
+resource "kubernetes_secret" "makeawish" {
+  metadata {
+    name = "makeawish"
+  }
+
+  data = {
+    appKey = random_password.makeawish-key.result
+  }
+}

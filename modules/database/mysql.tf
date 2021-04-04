@@ -32,6 +32,16 @@ resource "mysql_database" "mysql-52poke-www" {
   }
 }
 
+resource "mysql_database" "mysql-makeawish" {
+  name                  = "makeawish"
+  default_character_set = "utf8mb4"
+  default_collation     = "utf8mb4_0900_ai_ci"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
 resource "mysql_user" "wiki" {
   user               = "wiki"
   host               = "%"
@@ -48,6 +58,12 @@ resource "mysql_user" "legacyforums" {
   user               = "legacyforums"
   host               = "%"
   plaintext_password = var.mysql_legacyforums_password
+}
+
+resource "mysql_user" "makeawish" {
+  user               = "makeawish"
+  host               = "%"
+  plaintext_password = var.mysql_makeawish_password
 }
 
 resource "mysql_grant" "wiki" {
@@ -68,5 +84,12 @@ resource "mysql_grant" "legacyforums" {
   user       = mysql_user.legacyforums.user
   host       = "%"
   database   = mysql_database.mysql-52poke-bbs.name
+  privileges = ["ALL"]
+}
+
+resource "mysql_grant" "makeawish" {
+  user       = mysql_user.makeawish.user
+  host       = "%"
+  database   = mysql_database.mysql-makeawish.name
   privileges = ["ALL"]
 }

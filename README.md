@@ -25,6 +25,7 @@ Please use [issues](https://github.com/mudkipme/52poke/issues) and [wiki](https:
 - [nodebb-plugin-opencc](https://github.com/mudkipme/nodebb-plugin-opencc): A NodeBB plugin to translate between Traditional and Simplified Chinese.
 - [nodebb-plugin-sso-mediawiki](https://github.com/mudkipme/nodebb-plugin-sso-mediawiki): NodeBB Plugin that allows users to login/register via MediaWiki.
 - [ivcalc](https://github.com/mudkipme/ivcalc): Pokémon Individual Value & Stat Calculator in Chinese.
+- [makeawish](https://github.com/mudkipme/makeawish): Petition for In-game Chinese Support in Pokémon Video Games.
 
 ## Deployment
 

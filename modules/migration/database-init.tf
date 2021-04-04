@@ -138,6 +138,16 @@ resource "kubernetes_job" "database-init" {
           }
 
           env {
+            name = "TF_VAR_mysql_makeawish_password"
+            value_from {
+              secret_key_ref {
+                name = "mysql-makeawish"
+                key  = "password"
+              }
+            }
+          }
+
+          env {
             name = "TF_VAR_postgres_password"
             value_from {
               secret_key_ref {

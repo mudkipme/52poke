@@ -100,3 +100,13 @@ resource "kubernetes_config_map" "klinklang" {
     "workflow.yml" = file("${path.root}/config/klinklang/workflow.yml")
   }
 }
+
+resource "kubernetes_config_map" "makeawish" {
+  metadata {
+    name = "makeawish"
+  }
+
+  data = {
+    ".env" = file("${path.root}/config/makeawish/env")
+  }
+}

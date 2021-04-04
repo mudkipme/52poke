@@ -10,6 +10,10 @@ variable "mysql_legacyforums_password" {
   type = string
 }
 
+variable "mysql_makeawish_password" {
+  type = string
+}
+
 variable "postgres_password" {
   type = string
 }
