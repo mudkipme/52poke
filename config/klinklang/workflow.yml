@@ -485,3 +485,33 @@ actions:
     list:
       mode: jsonPath
       jsonPath: $.payload
+---
+name: Recent change to Discord
+isPrivate: false
+enabled: true
+triggers:
+- type: TRIGGER_EVENTBUS
+  topic: mediawiki.revision-create
+  predicate:
+    op: not
+    apply:
+    - op: test
+      path: performer.user_is_bot
+      value: true
+actions:
+- actionType: DISCORD_MESSAGE
+  inputBuilder:
+    channel:
+      mode: rawValue
+      value: "792599126511452212"
+    message:
+      embed:
+        url:
+          mode: jsonPath
+          jsonPath: $.payload.meta.uri
+        title:
+          mode: jsonPath
+          jsonPath: $.payload.page_title
+        description:
+          mode: template
+          template: "updated by {{payload.performer.user_text}} {{payload.parsedcomment}}"

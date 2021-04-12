@@ -141,6 +141,16 @@ resource "kubernetes_deployment" "klinklang" {
             }
           }
 
+          env {
+            name = "DISCORD_TOKEN"
+            value_from {
+              secret_key_ref {
+                name = "52poke-discord"
+                key  = "token"
+              }
+            }
+          }
+
           volume_mount {
             name       = "klinklang-config"
             read_only  = true
