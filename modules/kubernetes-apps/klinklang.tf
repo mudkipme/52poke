@@ -82,7 +82,7 @@ resource "kubernetes_deployment" "klinklang" {
 
           resources {
             requests {
-              cpu    = "100m"
+              cpu    = "50m"
               memory = "256Mi"
             }
           }

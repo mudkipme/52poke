@@ -64,7 +64,7 @@ resource "kubernetes_deployment" "es-mediawiki" {
               memory = "2.0Gi"
             }
             requests {
-              cpu    = "500m"
+              cpu    = "200m"
               memory = "1.5Gi"
             }
           }

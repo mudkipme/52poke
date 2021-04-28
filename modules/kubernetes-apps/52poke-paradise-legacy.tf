@@ -65,9 +65,6 @@ resource "kubernetes_deployment" "paradise_52poke_legacy" {
       }
 
       spec {
-        node_selector = {
-          "lke.linode.com/pool-id" = var.pool_ids[0]
-        }
 
         volume {
           name = "52poke-paradise-legacy-persistent-storage"
@@ -82,7 +79,7 @@ resource "kubernetes_deployment" "paradise_52poke_legacy" {
           image = "mudkip/52poke-paradise-legacy:latest"
           resources {
             requests {
-              cpu    = "50m"
+              cpu    = "10m"
               memory = "128Mi"
             }
             limits {

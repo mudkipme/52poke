@@ -61,7 +61,7 @@ resource "kubernetes_deployment" "elasticsearch-logging" {
               memory = "2Gi"
             }
             requests {
-              cpu    = "250m"
+              cpu    = "100m"
               memory = "1Gi"
             }
           }

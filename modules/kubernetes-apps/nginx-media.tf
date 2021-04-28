@@ -158,7 +158,7 @@ resource "kubernetes_deployment" "nginx-media" {
           resources {
             requests {
               cpu    = "200m"
-              memory = "512Mi"
+              memory = "256Mi"
             }
           }
 

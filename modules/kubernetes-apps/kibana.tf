@@ -66,9 +66,6 @@ resource "kubernetes_deployment" "kibana" {
       }
 
       spec {
-        node_selector = {
-          "lke.linode.com/pool-id" = var.pool_ids[0]
-        }
 
         container {
           name  = "kibana"

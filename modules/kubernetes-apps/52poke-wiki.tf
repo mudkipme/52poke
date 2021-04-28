@@ -34,6 +34,24 @@ resource "kubernetes_deployment" "wiki_52poke" {
       }
 
       spec {
+        affinity {
+          pod_anti_affinity {
+            required_during_scheduling_ignored_during_execution {
+              label_selector {
+                match_expressions {
+                  key      = "app"
+                  operator = "In"
+                  values = [
+                    "52poke-wiki"
+                  ]
+                }
+              }
+
+              topology_key = "kubernetes.io/hostname"
+            }
+          }
+        }
+
         volume {
           name = "52poke-wiki-config"
 
@@ -88,8 +106,8 @@ resource "kubernetes_deployment" "wiki_52poke" {
 
           resources {
             requests {
-              cpu    = "1.5"
-              memory = "512Mi"
+              cpu    = "800m"
+              memory = "384Mi"
             }
           }
 
@@ -184,7 +202,7 @@ resource "kubernetes_deployment" "wiki_52poke" {
           resources {
             requests {
               cpu    = "50m"
-              memory = "128Mi"
+              memory = "64Mi"
             }
           }
 
@@ -222,6 +240,6 @@ resource "kubernetes_horizontal_pod_autoscaler" "wiki-52poke" {
       name        = "52poke-wiki"
     }
 
-    target_cpu_utilization_percentage = 80
+    target_cpu_utilization_percentage = 125
   }
 }

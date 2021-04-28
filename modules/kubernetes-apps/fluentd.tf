@@ -56,8 +56,8 @@ resource "kubernetes_deployment" "fluentd" {
               memory = "512Mi"
             }
             requests {
-              cpu    = "100m"
-              memory = "256Mi"
+              cpu    = "50m"
+              memory = "192Mi"
             }
           }
 

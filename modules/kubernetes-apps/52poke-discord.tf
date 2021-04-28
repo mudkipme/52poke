@@ -18,17 +18,13 @@ resource "kubernetes_deployment" "discord_52poke" {
       }
 
       spec {
-        node_selector = {
-          "lke.linode.com/pool-id" = var.pool_ids[0]
-        }
-
         container {
           name  = "52poke-discord"
           image = "ghcr.io/mudkipme/52poke-discord:latest"
           resources {
             requests {
-              cpu    = "50m"
-              memory = "128Mi"
+              cpu    = "10m"
+              memory = "64Mi"
             }
             limits {
               memory = "256Mi"
