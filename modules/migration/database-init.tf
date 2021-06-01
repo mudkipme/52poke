@@ -76,7 +76,7 @@ resource "kubernetes_job" "database-init" {
             name = "MYSQL_USERNAME"
             value_from {
               secret_key_ref {
-                name = "mysql-root"
+                name = "mysql-server"
                 key  = "username"
               }
             }
@@ -86,7 +86,7 @@ resource "kubernetes_job" "database-init" {
             name = "MYSQL_PASSWORD"
             value_from {
               secret_key_ref {
-                name = "mysql-root"
+                name = "mysql-server"
                 key  = "password"
               }
             }

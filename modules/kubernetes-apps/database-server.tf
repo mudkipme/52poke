@@ -1,6 +1,6 @@
 resource "kubernetes_service" "mysql-server" {
   metadata {
-    name = "mysql-server"
+    name = "mysql"
   }
 
   spec {
@@ -13,7 +13,7 @@ resource "kubernetes_service" "mysql-server" {
 
 resource "kubernetes_endpoints" "mysql-server" {
   metadata {
-    name = "mysql-server"
+    name = "mysql"
   }
   subset {
     address {
@@ -28,7 +28,7 @@ resource "kubernetes_endpoints" "mysql-server" {
 
 resource "kubernetes_service" "mysql-pc-server" {
   metadata {
-    name = "mysql-pc-server"
+    name = "mysql-pc"
   }
 
   spec {
@@ -41,7 +41,7 @@ resource "kubernetes_service" "mysql-pc-server" {
 
 resource "kubernetes_endpoints" "mysql-pc-server" {
   metadata {
-    name = "mysql-pc-server"
+    name = "mysql-pc"
   }
   subset {
     address {

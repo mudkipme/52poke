@@ -50,7 +50,7 @@ resource "kubernetes_cron_job" "backup-mysql" {
 
                 value_from {
                   secret_key_ref {
-                    name = "mysql-root"
+                    name = "mysql-server"
                     key  = "password"
                   }
                 }

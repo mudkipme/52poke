@@ -1,19 +1,3 @@
-resource "kubernetes_service" "mysql" {
-  metadata {
-    name = "mysql"
-  }
-
-  spec {
-    port {
-      port = 3306
-    }
-
-    selector = {
-      app = "mysql"
-    }
-  }
-}
-
 resource "kubernetes_deployment" "mysql" {
   metadata {
     name = "mysql"
