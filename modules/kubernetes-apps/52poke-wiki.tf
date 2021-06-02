@@ -240,6 +240,6 @@ resource "kubernetes_horizontal_pod_autoscaler" "wiki-52poke" {
       name        = "52poke-wiki"
     }
 
-    target_cpu_utilization_percentage = 125
+    target_cpu_utilization_percentage = 100
   }
 }
