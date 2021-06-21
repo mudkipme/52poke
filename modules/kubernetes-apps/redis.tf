@@ -51,11 +51,11 @@ resource "kubernetes_deployment" "redis" {
           image = "redis"
 
           resources {
-            limits {
+            limits = {
               cpu    = "1"
               memory = "1Gi"
             }
-            requests {
+            requests = {
               cpu    = "50m"
               memory = "256Mi"
             }

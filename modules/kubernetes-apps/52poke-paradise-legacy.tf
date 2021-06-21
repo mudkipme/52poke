@@ -78,11 +78,11 @@ resource "kubernetes_deployment" "paradise_52poke_legacy" {
           name  = "52poke-paradise-legacy"
           image = "mudkip/52poke-paradise-legacy:latest"
           resources {
-            requests {
+            requests = {
               cpu    = "10m"
               memory = "128Mi"
             }
-            limits {
+            limits = {
               memory = "384Mi"
             }
           }

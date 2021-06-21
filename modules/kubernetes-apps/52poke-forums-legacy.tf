@@ -101,11 +101,11 @@ resource "kubernetes_deployment" "forums_52poke_legacy" {
           name  = "52poke-forums-legacy"
           image = "mudkip/52poke-forums-legacy:latest"
           resources {
-            requests {
+            requests = {
               cpu    = "10m"
               memory = "128Mi"
             }
-            limits {
+            limits = {
               memory = "256Mi"
             }
           }

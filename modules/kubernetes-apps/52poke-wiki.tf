@@ -105,7 +105,7 @@ resource "kubernetes_deployment" "wiki_52poke" {
           image = "ghcr.io/mudkipme/mediawiki:latest"
 
           resources {
-            requests {
+            requests = {
               cpu    = "800m"
               memory = "384Mi"
             }
@@ -200,7 +200,7 @@ resource "kubernetes_deployment" "wiki_52poke" {
           image = "mudkip/poolcounter"
 
           resources {
-            requests {
+            requests = {
               cpu    = "50m"
               memory = "64Mi"
             }

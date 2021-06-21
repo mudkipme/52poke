@@ -72,7 +72,7 @@ resource "kubernetes_deployment" "kibana" {
           image = "kibana:7.9.3"
 
           resources {
-            requests {
+            requests = {
               cpu    = "100m"
               memory = "256Mi"
             }

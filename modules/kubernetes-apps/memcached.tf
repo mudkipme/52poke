@@ -43,10 +43,10 @@ resource "kubernetes_deployment" "memcached" {
           image = "memcached"
 
           resources {
-            limits {
+            limits = {
               memory = "512Mi"
             }
-            requests {
+            requests = {
               cpu    = "100m"
               memory = "256Mi"
             }

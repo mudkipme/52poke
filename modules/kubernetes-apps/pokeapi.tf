@@ -80,11 +80,11 @@ resource "kubernetes_deployment" "pokeapi" {
           name  = "pokeapi"
           image = "mudkip/pokeapi:latest"
           resources {
-            requests {
+            requests = {
               cpu    = "100m"
               memory = "256Mi"
             }
-            limits {
+            limits = {
               memory = "512Mi"
             }
           }

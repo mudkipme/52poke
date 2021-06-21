@@ -124,11 +124,11 @@ resource "kubernetes_deployment" "www_52poke" {
           name  = "wordpress"
           image = "wordpress:php7.2-fpm"
           resources {
-            requests {
+            requests = {
               cpu    = "100m"
               memory = "256Mi"
             }
-            limits {
+            limits = {
               memory = "512Mi"
             }
           }
@@ -172,11 +172,11 @@ resource "kubernetes_deployment" "www_52poke" {
           name  = "nginx"
           image = "nginx:latest"
           resources {
-            requests {
+            requests = {
               cpu    = "50m"
               memory = "64Mi"
             }
-            limits {
+            limits = {
               memory = "256Mi"
             }
           }

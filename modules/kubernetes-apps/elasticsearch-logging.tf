@@ -57,10 +57,10 @@ resource "kubernetes_deployment" "elasticsearch-logging" {
           image = "elasticsearch:7.9.3"
 
           resources {
-            limits {
+            limits = {
               memory = "2Gi"
             }
-            requests {
+            requests = {
               cpu    = "100m"
               memory = "1Gi"
             }

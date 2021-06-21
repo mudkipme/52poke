@@ -156,7 +156,7 @@ resource "kubernetes_deployment" "nginx-media" {
           name  = "nginx-media"
           image = "mudkip/frontend-nginx:latest"
           resources {
-            requests {
+            requests = {
               cpu    = "200m"
               memory = "256Mi"
             }

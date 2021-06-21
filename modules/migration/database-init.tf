@@ -49,6 +49,8 @@ resource "kubernetes_role_binding" "terraform" {
 }
 
 resource "kubernetes_job" "database-init" {
+  count = 0
+  
   metadata {
     name = "database-init"
   }

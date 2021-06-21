@@ -52,10 +52,10 @@ resource "kubernetes_deployment" "fluentd" {
           image = "mudkip/fluentd:latest"
 
           resources {
-            limits {
+            limits = {
               memory = "512Mi"
             }
-            requests {
+            requests = {
               cpu    = "50m"
               memory = "192Mi"
             }

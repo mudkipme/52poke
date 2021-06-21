@@ -67,10 +67,10 @@ resource "kubernetes_cron_job" "wiki-52poke-daily" {
               image = "ghcr.io/mudkipme/mediawiki:latest"
 
               resources {
-                limits {
+                limits = {
                   memory = "1Gi"
                 }
-                requests {
+                requests = {
                   cpu    = "150m"
                   memory = "128Mi"
                 }

@@ -317,3 +317,10 @@ resource "kubernetes_secret" "makeawish" {
     appKey = random_password.makeawish-key.result
   }
 }
+
+
+resource "random_password" "grafana_password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}

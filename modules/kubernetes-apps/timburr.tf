@@ -35,10 +35,10 @@ resource "kubernetes_deployment" "timburr" {
           image = "ghcr.io/mudkipme/timburr:latest"
 
           resources {
-            limits {
+            limits = {
               memory = "512Mi"
             }
-            requests {
+            requests = {
               cpu    = "100m"
               memory = "128Mi"
             }

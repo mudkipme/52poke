@@ -80,10 +80,10 @@ resource "kubernetes_deployment" "makeawish" {
           image = "ghcr.io/mudkipme/makeawish:latest"
 
           resources {
-            limits {
+            limits = {
               memory = "512Mi"
             }
-            requests {
+            requests = {
               cpu    = "50m"
               memory = "128Mi"
             }

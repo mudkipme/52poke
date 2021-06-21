@@ -1,0 +1,41 @@
+grafana:
+  adminPassword: "${grafana_password}"
+  ingress:
+    enabled: true
+    hosts:
+    - grafana.internal.52poke.com
+    annotations:
+      cert-manager.io/cluster-issuer: le-http-issuer
+      nginx.ingress.kubernetes.io/auth-url: "https://auth.internal.52poke.com/oauth2/auth"
+      nginx.ingress.kubernetes.io/auth-signin: "https://auth.internal.52poke.com/oauth2/start?rd=https://$host$escaped_request_uri"
+    tls:
+    - hosts:
+      - "grafana.internal.52poke.com"
+      secretName: grafana-tls
+
+alertmanager:
+  alertmanagerSpec:
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: linode-block-storage
+          resources:
+            requests:
+              storage: 10Gi
+
+prometheus:
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: linode-block-storage
+          resources:
+            requests:
+              storage: 10Gi
+
+kubeEtcd:
+  enabled: false
+
+defaultRules:
+  rules:
+    etcd: false

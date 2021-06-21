@@ -51,11 +51,11 @@ resource "kubernetes_deployment" "zookeeper" {
           image = "zookeeper"
 
           resources {
-            limits {
+            limits = {
               cpu    = "0.5"
               memory = "512Mi"
             }
-            requests {
+            requests = {
               cpu    = "100m"
               memory = "128Mi"
             }

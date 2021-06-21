@@ -60,10 +60,10 @@ resource "kubernetes_deployment" "es-mediawiki" {
           name  = "es-mediawiki"
           image = "elasticsearch:6.8.13"
           resources {
-            limits {
+            limits = {
               memory = "2.0Gi"
             }
-            requests {
+            requests = {
               cpu    = "200m"
               memory = "1.5Gi"
             }

@@ -55,11 +55,11 @@ resource "kubernetes_deployment" "kafka" {
           image = "confluentinc/cp-kafka"
 
           resources {
-            limits {
+            limits = {
               cpu    = "1"
               memory = "1Gi"
             }
-            requests {
+            requests = {
               cpu    = "100m"
               memory = "512Mi"
             }

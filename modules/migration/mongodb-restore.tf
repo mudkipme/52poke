@@ -1,4 +1,6 @@
 resource "kubernetes_job" "mongodb-restore" {
+  count = 0
+  
   depends_on = [kubernetes_job.database-init]
   metadata {
     name = "mongodb-restore"

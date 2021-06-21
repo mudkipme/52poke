@@ -22,11 +22,11 @@ resource "kubernetes_deployment" "discord_52poke" {
           name  = "52poke-discord"
           image = "ghcr.io/mudkipme/52poke-discord:latest"
           resources {
-            requests {
+            requests = {
               cpu    = "10m"
               memory = "64Mi"
             }
-            limits {
+            limits = {
               memory = "256Mi"
             }
           }

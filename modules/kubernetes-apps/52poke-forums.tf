@@ -109,7 +109,7 @@ resource "kubernetes_deployment" "forums_52poke" {
           name  = "52poke-forums"
           image = "node:lts"
           resources {
-            requests {
+            requests = {
               cpu    = "50m"
               memory = "256Mi"
             }

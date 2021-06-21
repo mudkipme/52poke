@@ -124,7 +124,7 @@ resource "kubernetes_deployment" "nginx-52w" {
           name  = "nginx-52w"
           image = "mudkip/frontend-nginx:latest"
           resources {
-            requests {
+            requests = {
               cpu    = "200m"
               memory = "256Mi"
             }

@@ -1,4 +1,6 @@
 resource "kubernetes_job" "wiki-52poke-init" {
+  count = 0
+
   depends_on = [kubernetes_job.database-init]
   metadata {
     name = "52poke-wiki-init"
@@ -101,10 +103,10 @@ resource "kubernetes_job" "wiki-52poke-init" {
           image = "ghcr.io/mudkipme/mediawiki:latest"
 
           resources {
-            limits {
+            limits = {
               memory = "1Gi"
             }
-            requests {
+            requests = {
               cpu    = "150m"
               memory = "128Mi"
             }

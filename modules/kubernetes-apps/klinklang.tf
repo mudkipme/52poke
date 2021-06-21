@@ -81,7 +81,7 @@ resource "kubernetes_deployment" "klinklang" {
           image = "ghcr.io/mudkipme/klinklang:latest"
 
           resources {
-            requests {
+            requests = {
               cpu    = "50m"
               memory = "256Mi"
             }
