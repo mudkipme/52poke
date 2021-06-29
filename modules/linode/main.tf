@@ -4,7 +4,7 @@ provider "linode" {
 
 resource "linode_lke_cluster" "lke-meltan-cluster" {
   label       = "lke-meltan-cluster"
-  k8s_version = "1.18"
+  k8s_version = "1.19"
   region      = "ap-northeast"
   tags        = ["52Poké"]
 

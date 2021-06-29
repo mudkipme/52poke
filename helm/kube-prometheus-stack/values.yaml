@@ -36,6 +36,10 @@ prometheus:
 kubeEtcd:
   enabled: false
 
+kubeScheduler:
+  enabled: false
+
 defaultRules:
   rules:
     etcd: false
+    kubeScheduler: false
