@@ -1,6 +1,6 @@
 resource "kubernetes_job" "pokeapi-init" {
   count = 0
-  
+
   depends_on = [kubernetes_job.database-init]
   metadata {
     name = "pokeapi-init"

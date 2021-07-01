@@ -1,6 +1,6 @@
 resource "kubernetes_job" "nfs-restore" {
   count = 0
-  
+
   metadata {
     name = "nfs-restore"
   }
