@@ -59,17 +59,6 @@ resource "kubernetes_config_map" "nginx-media" {
   }
 }
 
-resource "kubernetes_config_map" "curator" {
-  metadata {
-    name = "curator"
-  }
-
-  data = {
-    "config.yml"      = file("${path.root}/config/curator/config.yml")
-    "action_file.yml" = file("${path.root}/config/curator/action_file.yml")
-  }
-}
-
 resource "kubernetes_config_map" "config-52poke-www" {
   metadata {
     name = "52poke-www-config"
