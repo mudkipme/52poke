@@ -53,3 +53,7 @@ output "mysql_pc_port" {
 output "mysql_password" {
   value = random_password.mysql_password.result
 }
+
+output "cluster_id" {
+  value = linode_lke_cluster.lke-meltan-cluster.id
+}

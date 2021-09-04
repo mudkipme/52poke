@@ -45,6 +45,7 @@ module "kubernetes-base" {
   load_balancer_ipv6 = module.linode.load_balancer_ipv6
   http_port          = module.linode.http_port
   https_port         = module.linode.https_port
+  cluster_id         = module.linode.cluster_id
 }
 
 module "kubernetes-apps" {

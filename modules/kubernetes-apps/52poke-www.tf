@@ -34,7 +34,7 @@ resource "kubernetes_ingress" "baokemeng" {
   metadata {
     name = "baokemeng"
     annotations = {
-      "cert-manager.io/cluster-issuer"                   = "le-wildcard-issuer"
+      "cert-manager.io/cluster-issuer"                   = "le-http-issuer"
       "nginx.ingress.kubernetes.io/from-to-www-redirect" = "true"
       "nginx.ingress.kubernetes.io/temporal-redirect"    = "https://www.portal-pokemon.com/"
     }
@@ -127,9 +127,6 @@ resource "kubernetes_deployment" "www_52poke" {
             requests = {
               cpu    = "100m"
               memory = "256Mi"
-            }
-            limits = {
-              memory = "512Mi"
             }
           }
 

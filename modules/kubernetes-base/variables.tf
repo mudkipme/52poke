@@ -38,3 +38,8 @@ variable "https_port" {
   type        = string
   description = "HTTPS NodePort of Ingress Controller"
 }
+
+variable "cluster_id" {
+  type        = string
+  description = "LKE cluster ID"
+}

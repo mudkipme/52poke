@@ -42,7 +42,8 @@ resource "kubernetes_deployment" "wiki_52poke" {
                   key      = "app"
                   operator = "In"
                   values = [
-                    "52poke-wiki"
+                    "52poke-wiki",
+                    "es-mediawiki"
                   ]
                 }
               }
@@ -232,7 +233,7 @@ resource "kubernetes_horizontal_pod_autoscaler" "wiki-52poke" {
 
   spec {
     min_replicas = 1
-    max_replicas = 4
+    max_replicas = 8
 
     scale_target_ref {
       api_version = "apps/v1"
