@@ -5,6 +5,7 @@ terraform {
     }
     linode = {
       source = "linode/linode"
+      version = ">= 1.22.0"
     }
     helm = {
       source  = "hashicorp/helm"

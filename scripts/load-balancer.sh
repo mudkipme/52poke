@@ -10,6 +10,7 @@ sysctl -p
 sysctl net.ipv4.tcp_available_congestion_control
 
 # Install HAProxy
+apt-get update && apt-get -y dist-upgrade
 apt-get install -y haproxy
 
 cat > /etc/haproxy/haproxy.cfg <<EOF

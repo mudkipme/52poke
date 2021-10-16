@@ -1,9 +1,0 @@
-[global]
-linode-token=${linode_token}
-lke-cluster-id=${cluster_id}
-defaut-min-size-per-linode-type=1
-defaut-max-size-per-linode-type=5
-do-not-import-pool-id=${ignore_pool_id}
-[nodegroup "g6-standard-2"]
-max-size=1
-max-size=5

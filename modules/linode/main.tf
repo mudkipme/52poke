@@ -4,7 +4,7 @@ provider "linode" {
 
 resource "linode_lke_cluster" "lke-meltan-cluster" {
   label       = "lke-meltan-cluster"
-  k8s_version = "1.19"
+  k8s_version = "1.20"
   region      = "ap-northeast"
   tags        = ["52Poké"]
 
@@ -16,6 +16,10 @@ resource "linode_lke_cluster" "lke-meltan-cluster" {
   pool {
     type  = "g6-standard-2"
     count = 1
+    autoscaler {
+      min = 1
+      max = 5
+    }
   }
 
   lifecycle {

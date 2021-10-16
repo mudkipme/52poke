@@ -40,18 +40,3 @@ resource "kubernetes_secret" "cloudflare-dns" {
     token = var.cf_token_dns
   }
 }
-
-resource "kubernetes_secret" "cluster-autoscaler-cloud-config" {
-  metadata {
-    name      = "cluster-autoscaler-cloud-config"
-    namespace = "kube-system"
-  }
-
-  data = {
-    cloud-config = templatefile("${path.root}/config/cluster-autoscaler/cloud-config", {
-      ignore_pool_id = var.pool_ids[0],
-      linode_token   = var.linode_token,
-      cluster_id     = var.cluster_id
-    })
-  }
-}
