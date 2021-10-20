@@ -122,7 +122,7 @@ resource "kubernetes_deployment" "www_52poke" {
 
         container {
           name  = "wordpress"
-          image = "wordpress:php7.2-fpm"
+          image = "wordpress:php7.4-fpm"
           resources {
             requests = {
               cpu    = "100m"

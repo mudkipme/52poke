@@ -28,7 +28,7 @@ resource "linode_instance" "load-balancer" {
   stackscript_data = {
     "http_port"   = random_integer.http_port.result,
     "https_port"  = local.https_port,
-    "private_ips" = replace(data.external.instance-ips.result.private, ",", " ")
+    "private_ips" = replace(data.external.static-pool-ips.result.private, ",", " ")
   }
 
   lifecycle {

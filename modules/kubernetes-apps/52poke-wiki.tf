@@ -42,8 +42,7 @@ resource "kubernetes_deployment" "wiki_52poke" {
                   key      = "app"
                   operator = "In"
                   values = [
-                    "52poke-wiki",
-                    "es-mediawiki"
+                    "52poke-wiki"
                   ]
                 }
               }

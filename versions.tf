@@ -4,7 +4,7 @@ terraform {
       source = "hashicorp/aws"
     }
     linode = {
-      source = "linode/linode"
+      source  = "linode/linode"
       version = ">= 1.22.0"
     }
     helm = {
