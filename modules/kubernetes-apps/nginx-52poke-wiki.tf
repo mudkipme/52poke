@@ -165,7 +165,7 @@ resource "kubernetes_persistent_volume_claim" "nginx-52w-pvc" {
 
     resources {
       requests = {
-        storage = "10Gi"
+        storage = "30Gi"
       }
     }
 

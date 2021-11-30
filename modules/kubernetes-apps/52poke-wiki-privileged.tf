@@ -1,6 +1,6 @@
-resource "kubernetes_service" "wiki_52poke" {
+resource "kubernetes_service" "wiki_52poke_privileged" {
   metadata {
-    name = "wiki-52poke"
+    name = "wiki-52poke-privileged"
   }
 
   spec {
@@ -9,45 +9,36 @@ resource "kubernetes_service" "wiki_52poke" {
     }
 
     selector = {
-      app = "52poke-wiki"
+      app = "52poke-wiki-privileged"
     }
   }
 }
 
-resource "kubernetes_deployment" "wiki_52poke" {
+resource "kubernetes_deployment" "wiki_52poke_privileged" {
   metadata {
-    name = "52poke-wiki"
+    name = "52poke-wiki-privileged"
   }
 
   spec {
     selector {
       match_labels = {
-        app = "52poke-wiki"
+        app = "52poke-wiki-privileged"
       }
     }
 
     template {
       metadata {
         labels = {
-          app = "52poke-wiki"
+          app = "52poke-wiki-privileged"
         }
       }
 
       spec {
+        node_selector = {
+          "lke.linode.com/pool-id" = var.pool_ids[0]
+        }
+
         affinity {
-          node_affinity {
-            required_during_scheduling_ignored_during_execution {
-              node_selector_term {
-                match_expressions {
-                  key      = "lke.linode.com/pool-id"
-                  operator = "NotIn"
-                  values = [
-                    var.pool_ids[0]
-                  ]
-                }
-              }
-            }
-          }
           pod_anti_affinity {
             required_during_scheduling_ignored_during_execution {
               label_selector {
@@ -120,7 +111,7 @@ resource "kubernetes_deployment" "wiki_52poke" {
 
           resources {
             requests = {
-              cpu    = "800m"
+              cpu    = "400m"
               memory = "384Mi"
             }
           }
@@ -230,30 +221,5 @@ resource "kubernetes_deployment" "wiki_52poke" {
     strategy {
       type = "Recreate"
     }
-  }
-
-  lifecycle {
-    ignore_changes = [
-      spec[0].replicas
-    ]
-  }
-}
-
-resource "kubernetes_horizontal_pod_autoscaler" "wiki-52poke" {
-  metadata {
-    name = "52poke-wiki"
-  }
-
-  spec {
-    min_replicas = 1
-    max_replicas = 8
-
-    scale_target_ref {
-      api_version = "apps/v1"
-      kind        = "Deployment"
-      name        = "52poke-wiki"
-    }
-
-    target_cpu_utilization_percentage = 100
   }
 }

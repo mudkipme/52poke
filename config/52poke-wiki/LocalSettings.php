@@ -344,8 +344,8 @@ $wgPoolCounterConf = [
     'ArticleView' => [
         'class' => 'PoolCounter_Client',
         'timeout' => 15,
-        'workers' => 2,
-        'maxqueue' => 100
+        'workers' => 4,
+        'maxqueue' => 6
     ],
     'CirrusSearch-Search' => [
         'class' => 'PoolCounter_Client',
