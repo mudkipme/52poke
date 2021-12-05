@@ -126,7 +126,7 @@ resource "kubernetes_deployment" "nginx-52w" {
           resources {
             requests = {
               cpu    = "200m"
-              memory = "256Mi"
+              memory = "512Mi"
             }
           }
 

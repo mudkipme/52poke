@@ -120,7 +120,7 @@ resource "kubernetes_deployment" "wiki_52poke" {
 
           resources {
             requests = {
-              cpu    = "800m"
+              cpu    = "1150m"
               memory = "384Mi"
             }
           }
