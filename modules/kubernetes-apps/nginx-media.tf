@@ -35,7 +35,7 @@ resource "kubernetes_ingress" "nginx-media-net" {
   metadata {
     name = "nginx-media-net"
     annotations = {
-      "cert-manager.io/cluster-issuer"                = "le-wildcard-issuer"
+      "cert-manager.io/cluster-issuer"                = "le-http-issuer"
       "nginx.ingress.kubernetes.io/enable-access-log" = "false"
     }
   }

@@ -2,7 +2,7 @@ resource "kubernetes_ingress" "forums_52poke_legacy" {
   metadata {
     name = "52poke-forums-legacy"
     annotations = {
-      "cert-manager.io/cluster-issuer"        = "le-wildcard-issuer"
+      "cert-manager.io/cluster-issuer"        = "le-http-issuer"
       "nginx.ingress.kubernetes.io/use-regex" = "true"
     }
   }
