@@ -11,7 +11,9 @@ resource "helm_release" "cert-manager" {
   namespace  = "cert-manager"
   version    = "v1.0.4"
   values = [
-    file("${path.root}/helm/cert-manager/values.yaml")
+    templatefile("${path.root}/helm/cert-manager/values.yaml", {
+      pool_id = var.pool_ids[0]
+    })
   ]
 }
 

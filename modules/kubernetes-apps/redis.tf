@@ -57,7 +57,7 @@ resource "kubernetes_deployment" "redis" {
             }
             requests = {
               cpu    = "50m"
-              memory = "256Mi"
+              memory = "512Mi"
             }
           }
 

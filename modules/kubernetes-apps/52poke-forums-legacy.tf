@@ -97,6 +97,10 @@ resource "kubernetes_deployment" "forums_52poke_legacy" {
           fs_group = 82
         }
 
+        node_selector = {
+          "lke.linode.com/pool-id" = var.pool_ids[0]
+        }
+
         container {
           name  = "52poke-forums-legacy"
           image = "mudkip/52poke-forums-legacy:latest"

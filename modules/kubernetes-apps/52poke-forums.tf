@@ -97,6 +97,10 @@ resource "kubernetes_deployment" "forums_52poke" {
       }
 
       spec {
+        node_selector = {
+          "lke.linode.com/pool-id" = var.pool_ids[0]
+        }
+
         volume {
           name = "52poke-forums-persistent-storage"
 

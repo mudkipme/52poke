@@ -6,3 +6,5 @@ loki:
     table_manager:
       retention_deletes_enabled: true
       retention_period: 168h
+  nodeSelector:
+    lke.linode.com/pool-id: "${pool_id}"

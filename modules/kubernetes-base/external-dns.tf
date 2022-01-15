@@ -68,6 +68,10 @@ resource "kubernetes_deployment" "external_dns" {
       spec {
         automount_service_account_token = true
 
+        node_selector = {
+          "lke.linode.com/pool-id" = var.pool_ids[0]
+        }
+
         container {
           name  = "external-dns"
           image = "k8s.gcr.io/external-dns/external-dns:v0.7.4"
