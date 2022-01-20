@@ -91,6 +91,14 @@ resource "kubernetes_deployment" "wiki_52poke" {
         }
 
         volume {
+          name = "52poke-wiki-oauth2"
+
+          secret {
+            secret_name = "52poke-wiki-oauth2"
+          }
+        }
+
+        volume {
           name = "aws-s3"
 
           secret {
@@ -204,6 +212,12 @@ resource "kubernetes_deployment" "wiki_52poke" {
             read_only  = true
             mount_path = "/run/secrets/recaptcha-secret-key"
             sub_path   = "secretKey"
+          }
+
+          volume_mount {
+            name       = "52poke-wiki-oauth2"
+            read_only  = true
+            mount_path = "/run/secrets/oauth2"
           }
 
           image_pull_policy = "Always"

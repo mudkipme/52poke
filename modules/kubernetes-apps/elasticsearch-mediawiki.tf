@@ -61,11 +61,11 @@ resource "kubernetes_deployment" "es-mediawiki" {
           image = "elasticsearch:6.8.13"
           resources {
             limits = {
-              memory = "1.5Gi"
+              memory = "2Gi"
             }
             requests = {
               cpu    = "200m"
-              memory = "1Gi"
+              memory = "1.5Gi"
             }
           }
 
@@ -81,7 +81,7 @@ resource "kubernetes_deployment" "es-mediawiki" {
 
           env {
             name  = "ES_JAVA_OPTS"
-            value = "-Xmx512m -Xms512m"
+            value = "-Xmx768m -Xms768m"
           }
 
           env {

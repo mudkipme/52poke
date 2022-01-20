@@ -327,6 +327,8 @@ $wgGroupPermissions['sysop']['mwoauthmanageconsumer'] = true;
 $wgGroupPermissions['sysop']['mwoauthsuppress'] = true;
 $wgGroupPermissions['sysop']['mwoauthviewsuppressed'] = true;
 $wgGroupPermissions['sysop']['mwoauthviewprivate'] = true;
+$wgOAuth2PrivateKey = '/run/secrets/oauth2/private.key';
+$wgOAuth2PublicKey = '/run/secrets/oauth2/public.key';
 
 # Elasticsearch Extension
 wfLoadExtension( 'Elastica' );
