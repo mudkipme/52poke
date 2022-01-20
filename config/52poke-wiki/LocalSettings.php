@@ -478,3 +478,6 @@ $wgTemplateStylesAllowedUrls = [
     ],
     "css" => []
 ];
+
+# AbuseFilter Extension
+wfLoadExtension( 'AbuseFilter' );
