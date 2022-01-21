@@ -116,7 +116,7 @@ resource "kubernetes_deployment" "nginx-52w" {
           name = "nginx-52w-persistent-storage"
 
           persistent_volume_claim {
-            claim_name = "nginx-52w-pvc-local"
+            claim_name = "nginx-52w-pvc"
           }
         }
 
@@ -154,9 +154,9 @@ resource "kubernetes_deployment" "nginx-52w" {
   }
 }
 
-resource "kubernetes_persistent_volume_claim" "nginx-52w-pvc-local" {
+resource "kubernetes_persistent_volume_claim" "nginx-52w-pvc" {
   metadata {
-    name      = "nginx-52w-pvc-local"
+    name      = "nginx-52w-pvc"
     namespace = "default"
   }
 
@@ -165,10 +165,10 @@ resource "kubernetes_persistent_volume_claim" "nginx-52w-pvc-local" {
 
     resources {
       requests = {
-        storage = "30Gi"
+        storage = "20Gi"
       }
     }
 
-    storage_class_name = "local-path"
+    storage_class_name = "linode-block-storage"
   }
 }

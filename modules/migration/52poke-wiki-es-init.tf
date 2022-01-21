@@ -1,4 +1,5 @@
 resource "kubernetes_job" "wiki-52poke-es-init" {
+  count = 0
   metadata {
     name = "52poke-wiki-es-init"
   }
