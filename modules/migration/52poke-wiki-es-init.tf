@@ -1,9 +1,6 @@
-resource "kubernetes_job" "wiki-52poke-init" {
-  count = 0
-
-  depends_on = [kubernetes_job.database-init]
+resource "kubernetes_job" "wiki-52poke-es-init" {
   metadata {
-    name = "52poke-wiki-init"
+    name = "52poke-wiki-es-init"
   }
 
   spec {
@@ -36,6 +33,14 @@ resource "kubernetes_job" "wiki-52poke-init" {
         }
 
         volume {
+          name = "52poke-wiki-oauth2"
+
+          secret {
+            secret_name = "52poke-wiki-oauth2"
+          }
+        }
+
+        volume {
           name = "aws-s3"
 
           secret {
@@ -57,45 +62,6 @@ resource "kubernetes_job" "wiki-52poke-init" {
           secret {
             secret_name = "recaptcha"
           }
-        }
-
-        init_container {
-          name  = "mysql-restore"
-          image = "mudkip/mysql-backup-b2:latest"
-
-          env {
-            name = "MYSQL_ROOT_PASSWORD"
-            value_from {
-              secret_key_ref {
-                name = "mysql-root"
-                key  = "password"
-              }
-            }
-          }
-
-          env {
-            name = "RCLONE_CONFIG_B2_ACCOUNT"
-
-            value_from {
-              secret_key_ref {
-                name = "backblaze-b2"
-                key  = "b2-account-id"
-              }
-            }
-          }
-
-          env {
-            name = "RCLONE_CONFIG_B2_KEY"
-
-            value_from {
-              secret_key_ref {
-                name = "backblaze-b2"
-                key  = "b2-account-key"
-              }
-            }
-          }
-
-          command = ["/bin/sh", "-c", file("${path.root}/scripts/52poke-wiki-restore.sh")]
         }
 
         container {
@@ -189,13 +155,19 @@ resource "kubernetes_job" "wiki-52poke-init" {
             sub_path   = "secretKey"
           }
 
+          volume_mount {
+            name       = "52poke-wiki-oauth2"
+            read_only  = true
+            mount_path = "/run/secrets/oauth2"
+          }
+
           image_pull_policy = "Always"
           command = ["/bin/sh", "-c", <<EOF
 set -e
 cd /home/52poke/wiki/maintenance
 php update.php
 cd /home/52poke/wiki/extensions/CirrusSearch/maintenance
-php UpdateSearchIndexConfig.php
+php UpdateSearchIndexConfig.php --reindexAndRemoveOk --indexIdentifier=now
 php ForceSearchIndex.php --skipLinks --indexOnSkip
 php ForceSearchIndex.php --skipParse
 EOF

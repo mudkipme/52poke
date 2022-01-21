@@ -58,7 +58,7 @@ resource "kubernetes_deployment" "es-mediawiki" {
 
         container {
           name  = "es-mediawiki"
-          image = "elasticsearch:6.8.13"
+          image = "ghcr.io/mudkipme/52w-elasticsearch:latest"
           resources {
             limits = {
               memory = "2Gi"
