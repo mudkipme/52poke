@@ -91,11 +91,11 @@ resource "kubernetes_persistent_volume_claim" "redis_pvc" {
 
     resources {
       requests = {
-        storage = "10Gi"
+        storage = "1Gi"
       }
     }
 
-    storage_class_name = "linode-block-storage"
+    storage_class_name = "nfs"
   }
 }
 

@@ -481,3 +481,17 @@ $wgTemplateStylesAllowedUrls = [
 
 # AbuseFilter Extension
 wfLoadExtension( 'AbuseFilter' );
+$wgGroupPermissions['sysop']['abusefilter-modify'] = true;
+$wgGroupPermissions['sysop']['abusefilter-log-detail'] = true;
+$wgGroupPermissions['sysop']['abusefilter-view'] = true;
+$wgGroupPermissions['sysop']['abusefilter-log'] = true;
+$wgGroupPermissions['sysop']['abusefilter-privatedetails'] = true;
+$wgGroupPermissions['sysop']['abusefilter-modify-restricted'] = true;
+$wgGroupPermissions['sysop']['abusefilter-revert'] = true;
+$wgGroupPermissions['inspector']['abusefilter-modify'] = true;
+$wgGroupPermissions['inspector']['abusefilter-log-detail'] = true;
+$wgGroupPermissions['inspector']['abusefilter-view'] = true;
+$wgGroupPermissions['inspector']['abusefilter-log'] = true;
+$wgGroupPermissions['inspector']['abusefilter-privatedetails'] = true;
+$wgGroupPermissions['inspector']['abusefilter-modify-restricted'] = true;
+$wgGroupPermissions['inspector']['abusefilter-revert'] = true;

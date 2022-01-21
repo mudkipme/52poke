@@ -20,10 +20,10 @@ alertmanager:
     storage:
       volumeClaimTemplate:
         spec:
-          storageClassName: linode-block-storage
+          storageClassName: nfs
           resources:
             requests:
-              storage: 10Gi
+              storage: 100Mi
     nodeSelector:
       lke.linode.com/pool-id: "${pool_id}"
 

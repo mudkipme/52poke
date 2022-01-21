@@ -42,7 +42,7 @@ resource "kubernetes_deployment" "kafka" {
           name = "kafka-persistent-storage"
 
           persistent_volume_claim {
-            claim_name = "kafka-pvc"
+            claim_name = "kafka-zk-pvc"
           }
         }
 
@@ -52,7 +52,7 @@ resource "kubernetes_deployment" "kafka" {
 
         container {
           name  = "kafka"
-          image = "confluentinc/cp-kafka"
+          image = "confluentinc/cp-kafka:7.0.0"
 
           resources {
             limits = {
@@ -108,7 +108,7 @@ resource "kubernetes_deployment" "kafka" {
           volume_mount {
             name       = "kafka-persistent-storage"
             mount_path = "/var/lib/kafka/data"
-            sub_path   = "data"
+            sub_path   = "kafka-data"
           }
         }
       }
@@ -120,9 +120,9 @@ resource "kubernetes_deployment" "kafka" {
   }
 }
 
-resource "kubernetes_persistent_volume_claim" "kafka_pvc" {
+resource "kubernetes_persistent_volume_claim" "kafka_zk_pvc" {
   metadata {
-    name      = "kafka-pvc"
+    name      = "kafka-zk-pvc"
     namespace = "default"
   }
 

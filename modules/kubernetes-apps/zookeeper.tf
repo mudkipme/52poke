@@ -39,10 +39,10 @@ resource "kubernetes_deployment" "zookeeper" {
         }
 
         volume {
-          name = "zookeeper-persistent-storage"
+          name = "kafka-persistent-storage"
 
           persistent_volume_claim {
-            claim_name = "zookeeper-pvc"
+            claim_name = "kafka-zk-pvc"
           }
         }
 
@@ -67,15 +67,15 @@ resource "kubernetes_deployment" "zookeeper" {
           }
 
           volume_mount {
-            name       = "zookeeper-persistent-storage"
+            name       = "kafka-persistent-storage"
             mount_path = "/data"
-            sub_path   = "data"
+            sub_path   = "zookeeper-data"
           }
 
           volume_mount {
-            name       = "zookeeper-persistent-storage"
+            name       = "kafka-persistent-storage"
             mount_path = "/datalog"
-            sub_path   = "datalog"
+            sub_path   = "zookeeper-datalog"
           }
         }
       }
@@ -84,24 +84,5 @@ resource "kubernetes_deployment" "zookeeper" {
     strategy {
       type = "Recreate"
     }
-  }
-}
-
-resource "kubernetes_persistent_volume_claim" "zookeeper_pvc" {
-  metadata {
-    name      = "zookeeper-pvc"
-    namespace = "default"
-  }
-
-  spec {
-    access_modes = ["ReadWriteOnce"]
-
-    resources {
-      requests = {
-        storage = "10Gi"
-      }
-    }
-
-    storage_class_name = "linode-block-storage"
   }
 }
