@@ -4,6 +4,7 @@ resource "kubernetes_ingress" "www_52poke" {
     annotations = {
       "cert-manager.io/cluster-issuer"                   = "le-wildcard-issuer"
       "nginx.ingress.kubernetes.io/from-to-www-redirect" = "true"
+      "nginx.ingress.kubernetes.io/proxy-body-size"      = "16m"
     }
   }
 
@@ -165,6 +166,12 @@ resource "kubernetes_deployment" "www_52poke" {
           volume_mount {
             name       = "52poke-www-persistent-storage"
             mount_path = "/var/www/html"
+          }
+
+          volume_mount {
+            name       = "52poke-www-config"
+            mount_path = "/usr/local/etc/php/conf.d/php-custom.ini"
+            sub_path   = "php-custom.ini"
           }
         }
 

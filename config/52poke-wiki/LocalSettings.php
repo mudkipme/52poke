@@ -337,7 +337,7 @@ wfLoadExtension( 'CirrusSearch' );
 $wgCirrusSearchServers = [
     'default' => 'es-mediawiki',
 ];
-
+$wgCirrusSearchClientSideSearchTimeout = [ 'default' => 3, 'regex' => 18 ];
 $wgSearchType = 'CirrusSearch';
 
 # PoolCounter
