@@ -54,12 +54,19 @@ resource "kubernetes_deployment" "timburr" {
             }
           }
 
+          port {
+            name           = "fluentd-52w"
+            container_port = 5001
+          }
+
           volume_mount {
             name       = "timburr-config"
             read_only  = true
             mount_path = "/app/conf/config.yml"
             sub_path   = "config.yml"
           }
+
+          image_pull_policy = "Always"
         }
       }
     }

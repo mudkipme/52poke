@@ -21,16 +21,6 @@ resource "kubernetes_config_map" "wiki-52poke" {
   }
 }
 
-resource "kubernetes_config_map" "fluentd" {
-  metadata {
-    name = "fluentd"
-  }
-
-  data = {
-    "fluent.conf" = file("${path.root}/config/fluentd/fluent.conf")
-  }
-}
-
 resource "kubernetes_config_map" "nginx-52w" {
   metadata {
     name = "nginx-52w"

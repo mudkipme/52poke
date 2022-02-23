@@ -5,9 +5,12 @@ options:
   groupIDPrefix: timburr-
   metadataWatchGroupID: timburr-watcher
   metadataWatchRefreshInterval: 10000
+  listen: 0.0.0.0:5001
+  topicKey: meta.stream
+  defaultTopic: wiki-52poke
 
 jobRunner:
-  endpoint: http://wiki-52poke/rest.php/eventbus/v0/internal/job/execute
+  endpoint: http://wiki-52poke-privileged/rest.php/eventbus/v0/internal/job/execute
   excludeFields: ["host", "headers", "@timestamp", "@version"]
 
 purge:

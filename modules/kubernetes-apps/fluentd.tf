@@ -10,74 +10,7 @@ resource "kubernetes_service" "fluentd" {
     }
 
     selector = {
-      app = "fluentd"
+      app = "timburr"
     }
   }
 }
-
-resource "kubernetes_deployment" "fluentd" {
-  metadata {
-    name = "fluentd"
-  }
-
-  spec {
-    selector {
-      match_labels = {
-        app = "fluentd"
-      }
-    }
-
-    template {
-      metadata {
-        labels = {
-          app = "fluentd"
-        }
-      }
-
-      spec {
-        node_selector = {
-          "lke.linode.com/pool-id" = var.pool_ids[0]
-        }
-
-        volume {
-          name = "fluentd-config"
-
-          config_map {
-            name = "fluentd"
-          }
-        }
-
-        container {
-          name  = "fluentd"
-          image = "mudkip/fluentd:latest"
-
-          resources {
-            limits = {
-              memory = "512Mi"
-            }
-            requests = {
-              cpu    = "50m"
-              memory = "192Mi"
-            }
-          }
-
-          port {
-            name           = "fluentd-52w"
-            container_port = 5001
-          }
-
-          volume_mount {
-            name       = "fluentd-config"
-            read_only  = true
-            mount_path = "/fluentd/etc"
-          }
-        }
-      }
-    }
-
-    strategy {
-      type = "Recreate"
-    }
-  }
-}
-
