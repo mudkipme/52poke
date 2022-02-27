@@ -9,7 +9,7 @@ resource "helm_release" "cert-manager" {
   repository = "https://charts.jetstack.io"
   chart      = "cert-manager"
   namespace  = "cert-manager"
-  version    = "v1.0.4"
+  version    = "v1.7.1"
   values = [
     templatefile("${path.root}/helm/cert-manager/values.yaml", {
       pool_id = var.pool_ids[0]
@@ -36,11 +36,16 @@ resource "null_resource" "le_http_issuer" {
 resource "helm_release" "cert-manager-webhook-linode" {
   depends_on = [helm_release.cert-manager]
   name       = "cert-manager-webhook-linode"
-  chart      = "${path.root}/charts/cert-manager-webhook-linode"
+  chart      = "https://github.com/slicen/cert-manager-webhook-linode/releases/download/v0.2.0/cert-manager-webhook-linode-v0.2.0.tgz"
   namespace  = "cert-manager"
   set {
     name  = "api.groupName"
     value = "52poke.com"
+  }
+
+  set {
+    name  = "deployment.logLevel"
+    value = ""
   }
 }
 

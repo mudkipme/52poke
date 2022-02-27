@@ -1,9 +1,11 @@
-resource "kubernetes_ingress" "forums_52poke" {
+resource "kubernetes_ingress_v1" "forums_52poke" {
   metadata {
     name = "52poke-forums"
     annotations = {
       "cert-manager.io/cluster-issuer"                   = "le-http-issuer"
       "nginx.ingress.kubernetes.io/from-to-www-redirect" = "true"
+      "kubernetes.io/ingress.class"                      = "nginx"
+      "ingressClassName"                                 = "nginx"
     }
   }
 
@@ -21,8 +23,12 @@ resource "kubernetes_ingress" "forums_52poke" {
           path = "/"
 
           backend {
-            service_name = "forums-52poke"
-            service_port = "4567"
+            service {
+              name = "forums-52poke"
+              port {
+                number = 4567
+              }
+            }
           }
         }
       }
@@ -30,12 +36,14 @@ resource "kubernetes_ingress" "forums_52poke" {
   }
 }
 
-resource "kubernetes_ingress" "forums_52poke_redirect" {
+resource "kubernetes_ingress_v1" "forums_52poke_redirect" {
   metadata {
     name = "52poke-forums-redirect"
     annotations = {
       "cert-manager.io/cluster-issuer"                 = "le-wildcard-issuer"
       "nginx.ingress.kubernetes.io/permanent-redirect" = "https://52poke.net"
+      "kubernetes.io/ingress.class"                    = "nginx"
+      "ingressClassName"                               = "nginx"
     }
   }
   spec {
@@ -52,8 +60,12 @@ resource "kubernetes_ingress" "forums_52poke_redirect" {
           path = "/"
 
           backend {
-            service_name = "forums-52poke"
-            service_port = "4567"
+            service {
+              name = "forums-52poke"
+              port {
+                number = 4567
+              }
+            }
           }
         }
       }

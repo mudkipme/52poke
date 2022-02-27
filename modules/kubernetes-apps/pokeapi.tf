@@ -1,10 +1,12 @@
-resource "kubernetes_ingress" "pokeapi" {
+resource "kubernetes_ingress_v1" "pokeapi" {
   metadata {
     name = "pokeapi"
     annotations = {
       "cert-manager.io/cluster-issuer"              = "le-wildcard-issuer"
       "nginx.ingress.kubernetes.io/limit-rpm"       = "120"
       "nginx.ingress.kubernetes.io/limit-whitelist" = "10.0.0.0/8"
+      "kubernetes.io/ingress.class"                 = "nginx"
+      "ingressClassName"                            = "nginx"
     }
   }
 
@@ -22,8 +24,12 @@ resource "kubernetes_ingress" "pokeapi" {
           path = "/"
 
           backend {
-            service_name = "pokeapi"
-            service_port = "8000"
+            service {
+              name = "pokeapi"
+              port {
+                number = 8000
+              }
+            }
           }
         }
       }

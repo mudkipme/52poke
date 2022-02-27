@@ -55,7 +55,7 @@ resource "kubernetes_config_map" "config-52poke-www" {
   }
 
   data = {
-    "nginx.conf" = file("${path.root}/config/52poke-www/nginx.conf")
+    "nginx.conf"     = file("${path.root}/config/52poke-www/nginx.conf")
     "php-custom.ini" = file("${path.root}/config/52poke-www/php-custom.ini")
   }
 }

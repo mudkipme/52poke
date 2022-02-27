@@ -1,8 +1,10 @@
-resource "kubernetes_ingress" "paradise_52poke_legacy" {
+resource "kubernetes_ingress_v1" "paradise_52poke_legacy" {
   metadata {
     name = "52poke-paradise-legacy"
     annotations = {
       "cert-manager.io/cluster-issuer" = "le-wildcard-issuer"
+      "kubernetes.io/ingress.class"    = "nginx"
+      "ingressClassName"               = "nginx"
     }
   }
 
@@ -20,8 +22,12 @@ resource "kubernetes_ingress" "paradise_52poke_legacy" {
           path = "/"
 
           backend {
-            service_name = "paradise-52poke-legacy"
-            service_port = "1012"
+            service {
+              name = "paradise-52poke-legacy"
+              port {
+                number = 1012
+              }
+            }
           }
         }
       }

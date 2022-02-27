@@ -1,9 +1,11 @@
-resource "kubernetes_ingress" "klinklang" {
+resource "kubernetes_ingress_v1" "klinklang" {
   metadata {
     name = "klinklang"
 
     annotations = {
       "cert-manager.io/cluster-issuer" = "le-cloudflare-issuer"
+      "kubernetes.io/ingress.class"    = "nginx"
+      "ingressClassName"               = "nginx"
     }
   }
 
@@ -19,8 +21,12 @@ resource "kubernetes_ingress" "klinklang" {
       http {
         path {
           backend {
-            service_name = "klinklang"
-            service_port = "3000"
+            service {
+              name = "klinklang"
+              port {
+                number = 3000
+              }
+            }
           }
         }
       }

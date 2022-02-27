@@ -1,10 +1,12 @@
-resource "kubernetes_ingress" "nginx-52w" {
+resource "kubernetes_ingress_v1" "nginx-52w" {
   metadata {
     name = "nginx-52w"
     annotations = {
       "cert-manager.io/cluster-issuer"                = "le-wildcard-issuer"
       "nginx.ingress.kubernetes.io/enable-access-log" = "false"
       "nginx.ingress.kubernetes.io/proxy-body-size"   = "16m"
+      "kubernetes.io/ingress.class"                   = "nginx"
+      "ingressClassName"                              = "nginx"
     }
   }
 
@@ -22,8 +24,13 @@ resource "kubernetes_ingress" "nginx-52w" {
           path = "/"
 
           backend {
-            service_name = "nginx-52w"
-            service_port = "80"
+            service {
+              name = "nginx-52w"
+              port {
+                number = 80
+              }
+            }
+
           }
         }
       }
@@ -31,13 +38,15 @@ resource "kubernetes_ingress" "nginx-52w" {
   }
 }
 
-resource "kubernetes_ingress" "nginx-52w-wiki" {
+resource "kubernetes_ingress_v1" "nginx-52w-wiki" {
   metadata {
     name = "nginx-52w-wiki"
     annotations = {
       "cert-manager.io/cluster-issuer"             = "le-cloudflare-issuer"
       "nginx.ingress.kubernetes.io/server-alias"   = "www.52poke.wiki"
       "nginx.ingress.kubernetes.io/rewrite-target" = "https://wiki.52poke.com/wiki/$1"
+      "kubernetes.io/ingress.class"                = "nginx"
+      "ingressClassName"                           = "nginx"
     }
   }
 
@@ -55,8 +64,12 @@ resource "kubernetes_ingress" "nginx-52w-wiki" {
           path = "/(.*)"
 
           backend {
-            service_name = "nginx-52w"
-            service_port = "80"
+            service {
+              name = "nginx-52w"
+              port {
+                number = 80
+              }
+            }
           }
         }
       }

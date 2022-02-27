@@ -1,10 +1,12 @@
-resource "kubernetes_ingress" "www_52poke" {
+resource "kubernetes_ingress_v1" "www_52poke" {
   metadata {
     name = "52poke-www"
     annotations = {
       "cert-manager.io/cluster-issuer"                   = "le-wildcard-issuer"
       "nginx.ingress.kubernetes.io/from-to-www-redirect" = "true"
       "nginx.ingress.kubernetes.io/proxy-body-size"      = "16m"
+      "kubernetes.io/ingress.class"                      = "nginx"
+      "ingressClassName"                                 = "nginx"
     }
   }
 
@@ -22,8 +24,12 @@ resource "kubernetes_ingress" "www_52poke" {
           path = "/"
 
           backend {
-            service_name = "www-52poke"
-            service_port = "80"
+            service {
+              name = "www-52poke"
+              port {
+                number = 80
+              }
+            }
           }
         }
       }
@@ -31,13 +37,15 @@ resource "kubernetes_ingress" "www_52poke" {
   }
 }
 
-resource "kubernetes_ingress" "baokemeng" {
+resource "kubernetes_ingress_v1" "baokemeng" {
   metadata {
     name = "baokemeng"
     annotations = {
       "cert-manager.io/cluster-issuer"                   = "le-http-issuer"
       "nginx.ingress.kubernetes.io/from-to-www-redirect" = "true"
       "nginx.ingress.kubernetes.io/temporal-redirect"    = "https://www.portal-pokemon.com/"
+      "kubernetes.io/ingress.class"                      = "nginx"
+      "ingressClassName"                                 = "nginx"
     }
   }
 
@@ -55,8 +63,12 @@ resource "kubernetes_ingress" "baokemeng" {
           path = "/"
 
           backend {
-            service_name = "www-52poke"
-            service_port = "80"
+            service {
+              name = "www-52poke"
+              port {
+                number = 80
+              }
+            }
           }
         }
       }

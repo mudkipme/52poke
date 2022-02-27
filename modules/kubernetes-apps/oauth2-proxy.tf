@@ -1,9 +1,11 @@
-resource "kubernetes_ingress" "oauth2-proxy" {
+resource "kubernetes_ingress_v1" "oauth2-proxy" {
   metadata {
     name      = "oauth2-proxy"
     namespace = "kube-system"
     annotations = {
       "cert-manager.io/cluster-issuer" = "le-http-issuer"
+      "kubernetes.io/ingress.class"    = "nginx"
+      "ingressClassName"               = "nginx"
     }
   }
 
@@ -21,8 +23,12 @@ resource "kubernetes_ingress" "oauth2-proxy" {
           path = "/oauth2"
 
           backend {
-            service_name = "oauth2-proxy"
-            service_port = "4180"
+            service {
+              name = "oauth2-proxy"
+              port {
+                number = 4180
+              }
+            }
           }
         }
       }

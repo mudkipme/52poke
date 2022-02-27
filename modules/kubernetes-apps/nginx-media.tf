@@ -1,10 +1,12 @@
-resource "kubernetes_ingress" "nginx-media" {
+resource "kubernetes_ingress_v1" "nginx-media" {
   metadata {
     name = "nginx-media"
     annotations = {
       "cert-manager.io/cluster-issuer"                = "le-wildcard-issuer"
       "nginx.ingress.kubernetes.io/enable-access-log" = "false"
       "nginx.ingress.kubernetes.io/server-alias"      = "assets.52poke.com,static.52poke.com"
+      "kubernetes.io/ingress.class"                   = "nginx"
+      "ingressClassName"                              = "nginx"
     }
   }
 
@@ -22,8 +24,12 @@ resource "kubernetes_ingress" "nginx-media" {
           path = "/"
 
           backend {
-            service_name = "nginx-media"
-            service_port = "80"
+            service {
+              name = "nginx-media"
+              port {
+                number = 80
+              }
+            }
           }
         }
       }
@@ -31,12 +37,14 @@ resource "kubernetes_ingress" "nginx-media" {
   }
 }
 
-resource "kubernetes_ingress" "nginx-media-net" {
+resource "kubernetes_ingress_v1" "nginx-media-net" {
   metadata {
     name = "nginx-media-net"
     annotations = {
       "cert-manager.io/cluster-issuer"                = "le-http-issuer"
       "nginx.ingress.kubernetes.io/enable-access-log" = "false"
+      "kubernetes.io/ingress.class"                   = "nginx"
+      "ingressClassName"                              = "nginx"
     }
   }
 
@@ -54,8 +62,12 @@ resource "kubernetes_ingress" "nginx-media-net" {
           path = "/"
 
           backend {
-            service_name = "nginx-media"
-            service_port = "80"
+            service {
+              name = "nginx-media"
+              port {
+                number = 80
+              }
+            }
           }
         }
       }
@@ -63,13 +75,15 @@ resource "kubernetes_ingress" "nginx-media-net" {
   }
 }
 
-resource "kubernetes_ingress" "nginx-media-wiki" {
+resource "kubernetes_ingress_v1" "nginx-media-wiki" {
   metadata {
     name = "nginx-media-wiki"
     annotations = {
       "cert-manager.io/cluster-issuer"                = "le-cloudflare-issuer"
       "nginx.ingress.kubernetes.io/enable-access-log" = "false"
       "nginx.ingress.kubernetes.io/server-alias"      = "s1.52poke.wiki"
+      "kubernetes.io/ingress.class"                   = "nginx"
+      "ingressClassName"                              = "nginx"
     }
   }
 
@@ -87,8 +101,12 @@ resource "kubernetes_ingress" "nginx-media-wiki" {
           path = "/"
 
           backend {
-            service_name = "nginx-media"
-            service_port = "80"
+            service {
+              name = "nginx-media"
+              port {
+                number = 80
+              }
+            }
           }
         }
       }

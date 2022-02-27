@@ -1,9 +1,11 @@
-resource "kubernetes_ingress" "forums_52poke_legacy" {
+resource "kubernetes_ingress_v1" "forums_52poke_legacy" {
   metadata {
     name = "52poke-forums-legacy"
     annotations = {
       "cert-manager.io/cluster-issuer"        = "le-http-issuer"
       "nginx.ingress.kubernetes.io/use-regex" = "true"
+      "kubernetes.io/ingress.class"           = "nginx"
+      "ingressClassName"                      = "nginx"
     }
   }
 
@@ -22,8 +24,12 @@ resource "kubernetes_ingress" "forums_52poke_legacy" {
           path = "/(images|gallery)/.*"
 
           backend {
-            service_name = "forums-52poke-legacy"
-            service_port = "80"
+            service {
+              name = "forums-52poke-legacy"
+              port {
+                number = 80
+              }
+            }
           }
         }
 
@@ -31,8 +37,12 @@ resource "kubernetes_ingress" "forums_52poke_legacy" {
           path = "/upload/(month[0-9]+|usravatars)/.*"
 
           backend {
-            service_name = "forums-52poke-legacy"
-            service_port = "80"
+            service {
+              name = "forums-52poke-legacy"
+              port {
+                number = 80
+              }
+            }
           }
         }
 
@@ -40,8 +50,12 @@ resource "kubernetes_ingress" "forums_52poke_legacy" {
           path = "/.*\\.(gif|png|txt|jpg|jpeg)$"
 
           backend {
-            service_name = "forums-52poke-legacy"
-            service_port = "80"
+            service {
+              name = "forums-52poke-legacy"
+              port {
+                number = 80
+              }
+            }
           }
         }
       }

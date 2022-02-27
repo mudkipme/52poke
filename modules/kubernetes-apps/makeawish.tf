@@ -1,8 +1,10 @@
-resource "kubernetes_ingress" "makeawish" {
+resource "kubernetes_ingress_v1" "makeawish" {
   metadata {
     name = "makeawish"
     annotations = {
       "cert-manager.io/cluster-issuer" = "le-wildcard-issuer"
+      "kubernetes.io/ingress.class"    = "nginx"
+      "ingressClassName"               = "nginx"
     }
   }
 
@@ -20,8 +22,12 @@ resource "kubernetes_ingress" "makeawish" {
           path = "/"
 
           backend {
-            service_name = "makeawish"
-            service_port = "80"
+            service {
+              name = "makeawish"
+              port {
+                number = 80
+              }
+            }
           }
         }
       }
