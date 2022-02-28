@@ -1,4 +1,4 @@
-resource "kubernetes_cron_job" "backup-media" {
+resource "kubernetes_cron_job_v1" "backup-media" {
   metadata {
     name = "backup-media"
   }

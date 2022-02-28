@@ -1,4 +1,4 @@
-resource "kubernetes_cron_job" "wiki-52poke-daily" {
+resource "kubernetes_cron_job_v1" "wiki-52poke-daily" {
   metadata {
     name = "52poke-wiki-daily"
   }

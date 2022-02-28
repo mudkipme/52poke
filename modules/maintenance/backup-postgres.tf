@@ -1,4 +1,4 @@
-resource "kubernetes_cron_job" "backup-postgres" {
+resource "kubernetes_cron_job_v1" "backup-postgres" {
   metadata {
     name = "backup-postgres"
   }

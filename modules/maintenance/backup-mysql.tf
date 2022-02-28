@@ -1,4 +1,4 @@
-resource "kubernetes_cron_job" "backup-mysql" {
+resource "kubernetes_cron_job_v1" "backup-mysql" {
   metadata {
     name = "backup-mysql"
   }

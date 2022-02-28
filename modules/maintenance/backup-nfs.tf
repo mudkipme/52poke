@@ -1,4 +1,4 @@
-resource "kubernetes_cron_job" "backup-nfs" {
+resource "kubernetes_cron_job_v1" "backup-nfs" {
   metadata {
     name = "backup-nfs"
   }

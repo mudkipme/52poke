@@ -1,4 +1,4 @@
-resource "kubernetes_cron_job" "backup-mongodb" {
+resource "kubernetes_cron_job_v1" "backup-mongodb" {
   metadata {
     name = "backup-mongodb"
   }
