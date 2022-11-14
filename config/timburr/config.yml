@@ -24,8 +24,8 @@ purge:
     - zh-hans
     - zh-hant
     uris:
-    - "http://nginx-52w#url##variants#"
-    - "http://nginx-52w#url##variants#mobile"
+    #- "http://nginx-52w#url##variants#"
+    #- "http://nginx-52w#url##variants#mobile"
     headers:
       host: wiki.52poke.com
   - host: media.52poke.com
