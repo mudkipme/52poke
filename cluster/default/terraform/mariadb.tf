@@ -1,5 +1,5 @@
 provider "mysql" {
-  endpoint = "mysql:3306"
+  endpoint = "mariadb:3306"
 }
 
 resource "mysql_database" "mysql-52poke-wiki" {
@@ -35,7 +35,7 @@ resource "mysql_database" "mysql-52poke-www" {
 resource "mysql_database" "mysql-makeawish" {
   name                  = "makeawish"
   default_character_set = "utf8mb4"
-  default_collation     = "utf8mb4_0900_ai_ci"
+  default_collation     = "utf8mb4_general_ci"
 
   lifecycle {
     prevent_destroy = true

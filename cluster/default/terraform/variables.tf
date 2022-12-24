@@ -26,10 +26,10 @@ variable "postgres_pokeapi_password" {
   type = string
 }
 
-variable "mongodb_forums_password" {
+variable "postgres_forums_password" {
   type = string
 }
 
-variable "mongodb_paradise_password" {
+variable "postgres_paradise_password" {
   type = string
 }

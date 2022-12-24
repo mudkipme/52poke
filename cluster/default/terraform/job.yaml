@@ -1,0 +1,89 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: database-init
+  namespace: default
+spec:
+  ttlSecondsAfterFinished: 180
+  template:
+    spec:
+      containers:
+      - name: database-provision
+        image: hashicorp/terraform:light
+        command:
+        - /bin/sh
+        - -c
+        - |
+          set -e
+          mkdir -p /tmp/database-init
+          cd /tmp/database-init
+          cp -r /mnt/terraform-database/. .
+          terraform init
+          terraform apply -auto-approve
+        volumeMounts:
+        - name: terraform-database
+          mountPath: /mnt/terraform-database
+        env:
+        - name: MYSQL_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root
+              key: username
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root
+              key: password
+        - name: KUBE_NAMESPACE
+          value: terraform
+        - name: TF_VAR_mysql_wiki_password
+          valueFrom:
+            secretKeyRef:
+              name: mysql-wiki
+              key: password
+        - name: TF_VAR_mysql_www_password
+          valueFrom:
+            secretKeyRef:
+              name: mysql-www
+              key: password
+        - name: TF_VAR_mysql_legacyforums_password
+          valueFrom:
+            secretKeyRef:
+              name: mysql-legacyforums
+              key: password
+        - name: TF_VAR_mysql_makeawish_password
+          valueFrom:
+            secretKeyRef:
+              name: mysql-makeawish
+              key: password
+        - name: TF_VAR_postgres_password
+          valueFrom:
+            secretKeyRef:
+              name: postgres
+              key: password
+        - name: TF_VAR_postgres_pokeapi_password
+          valueFrom:
+            secretKeyRef:
+              name: postgres-pokeapi
+              key: password
+        - name: TF_VAR_postgres_klinklang_password
+          valueFrom:
+            secretKeyRef:
+              name: postgres-klinklang
+              key: password
+        - name: TF_VAR_postgres_forums_password
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-forums
+              key: password
+        - name: TF_VAR_postgres_paradise_password
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-paradise
+              key: password
+      restartPolicy: Never
+      serviceAccountName: terraform
+      volumes:
+      - name: terraform-database
+        configMap:
+          name: terraform-database
