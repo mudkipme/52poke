@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb-pc
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: mariadb-pc
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mariadb-pc
+    spec:
+      nodeSelector:
+        lke.linode.com/pool-id: "125654"
+      containers:
+      - name: mariadb-pc
+        image: mariadb:10
+        args:
+          - "--default-authentication-plugin=mysql_native_password"
+          - "--character-set-server=utf8"
+          - "--collation-server=utf8_general_ci"
+          - "--skip-log-bin"
+        resources:
+          limits:
+            memory: "768Mi"
+          requests:
+            memory: "512Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: mariadb-pc-persistant-storage
+        env:
+        - name: MARIADB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root
+              key: password
+      volumes:
+      - name: mariadb-pc-persistant-storage
+        persistentVolumeClaim:
+          claimName: mariadb-pc-pvc
