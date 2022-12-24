@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: elasticsearch
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+      - env:
+        - name: ES_JAVA_OPTS
+          value: -Xmx640m -Xms640m
+        - name: discovery.type
+          value: single-node
+        - name: xpack.security.enabled
+          value: "false"
+        image: ghcr.io/mudkipme/52w-elasticsearch:latest
+        imagePullPolicy: Always
+        name: elasticsearch
+        ports:
+        - containerPort: 9200
+          name: es
+        - containerPort: 9300
+          name: es-control
+        resources:
+          limits:
+            memory: 2Gi
+          requests:
+            cpu: 200m
+            memory: 1280Mi
+        volumeMounts:
+        - mountPath: /usr/share/elasticsearch/data
+          name: elasticsearch-persistent-storage
+          subPath: data
+      nodeSelector:
+        lke.linode.com/pool-id: "125654"
+      securityContext:
+        fsGroup: 1000
+      volumes:
+      - name: elasticsearch-persistent-storage
+        persistentVolumeClaim:
+          claimName: elasticsearch-pvc
