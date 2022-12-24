@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-media
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: nginx-media
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nginx-media
+    spec:
+      containers:
+      - image: ghcr.io/mudkipme/52w-nginx:latest
+        imagePullPolicy: Always
+        name: nginx-media
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 200m
+            memory: 256Mi
+        volumeMounts:
+        - mountPath: /etc/nginx/nginx.conf
+          name: nginx-media
+          subPath: nginx.conf
+        - mountPath: /var/cache/nginx
+          name: nginx-media-persistent-storage
+      nodeSelector:
+        lke.linode.com/pool-id: "125654"
+      volumes:
+      - configMap:
+          name: nginx-media
+        name: nginx-media
+      - name: nginx-media-persistent-storage
+        persistentVolumeClaim:
+          claimName: nginx-media-pvc

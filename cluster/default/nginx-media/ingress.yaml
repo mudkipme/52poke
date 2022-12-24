@@ -1,0 +1,89 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: le-wildcard-issuer
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/enable-access-log: "false"
+    nginx.ingress.kubernetes.io/server-alias: assets.52poke.com,static.52poke.com
+  name: nginx-media
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: media.52poke.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx-media
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - media.52poke.com
+    secretName: media-52poke-tls
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: le-cloudflare-issuer
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/enable-access-log: "false"
+    nginx.ingress.kubernetes.io/server-alias: s1.52poke.wiki
+  name: nginx-media-wiki
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: s0.52poke.wiki
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx-media
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - 52poke.wiki
+    - www.52poke.wiki
+    - s0.52poke.wiki
+    - s1.52poke.wiki
+    - util.52poke.wiki
+    secretName: 52poke-wiki-tls
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: le-http-issuer
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/enable-access-log: "false"
+  name: nginx-media-net
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: media.52poke.net
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx-media
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - 52poke.net
+    - www.52poke.net
+    - legacy.52poke.net
+    - media.52poke.net
+    secretName: 52poke-forums-tls

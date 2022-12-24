@@ -1,0 +1,57 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: le-wildcard-issuer
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 16m
+  name: 52poke-www
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: 52poke.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: www-52poke
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - 52poke.com
+    - www.52poke.com
+    secretName: 52poke-tls
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: le-http-issuer
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    nginx.ingress.kubernetes.io/temporal-redirect: https://www.portal-pokemon.com/
+  name: baokemeng
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: baokemeng.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: www-52poke
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - baokemeng.com
+    - www.baokemeng.com
+    secretName: baokemeng-tls
