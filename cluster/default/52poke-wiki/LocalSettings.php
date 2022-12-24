@@ -22,7 +22,7 @@ if( defined( 'MW_INSTALL_PATH' ) ) {
 $path = array( $IP, "$IP/includes", "$IP/languages" );
 set_include_path( implode( PATH_SEPARATOR, $path ) . PATH_SEPARATOR . get_include_path() );
 
-require_once( "$IP/includes/DefaultSettings.php" );
+# require_once( "$IP/includes/DefaultSettings.php" );
 
 if ( $wgCommandLineMode ) {
     if ( isset( $_SERVER ) && array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
@@ -45,6 +45,7 @@ $wgScriptPath = "";
 $wgArticlePath = "/wiki/$1";
 $wgUsePathInfo = true;
 $wgScriptExtension = ".php";
+$wgExtensionDirectory = "$IP/extensions";
 
 ## The relative URL path to the skins directory
 $wgStylePath = "$wgScriptPath/skins";
@@ -52,6 +53,23 @@ $wgStylePath = "$wgScriptPath/skins";
 ## The relative URL path to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
 $wgLogo = "https://s0.52poke.wiki/assets/wikilogo.png";
+$wgLogos = [
+    'icon' => 'https://s0.52poke.wiki/wiki/4/4b/Wikilogo.png',
+    'wordmark' => [
+        'src' => 'https://s0.52poke.wiki/assets/wiki-wordmark-sc.png',
+        'width' => 131,
+        'height' => 21,
+    ],
+    'variants' => [
+        'zh-hant' => [
+            'wordmark' => [
+                'src' => 'https://s0.52poke.wiki/assets/wiki-wordmark-tc.png',
+                'width' => 131,
+                'height' => 21,
+            ],
+        ],
+    ],
+];
 
 ## UPO means: this is also a user preference option
 
@@ -75,7 +93,7 @@ $wgSMTP = array(
 
 ## Database settings
 $wgDBtype = "mysql";
-$wgDBserver = "mysql";
+$wgDBserver = "mariadb";
 $wgDBname = "52poke_wiki";
 $wgDBuser = file_get_contents("/run/secrets/52w-db-user");
 $wgDBpassword = file_get_contents("/run/secrets/52w-db-password");
@@ -94,7 +112,7 @@ $wgObjectCaches['mysql-pc'] = [
     'class' => 'SqlBagOStuff',
     'server' => [
         'type' => 'mysql',
-        'host' => 'mysql-pc',
+        'host' => 'mariadb-pc',
         'dbname' => $wgDBname,
         'user' => $wgDBuser,
         'password' => $wgDBpassword,
@@ -140,7 +158,19 @@ $wgSecretKey = file_get_contents("/run/secrets/52w-secret-key");
 
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'vector', 'monobook':
-$wgDefaultSkin = 'vector';
+$wgStyleDirectory = "$IP/skins";
+$wgDefaultSkin = 'vector-2022';
+$wgVectorMaxWidthOptions = [
+    "exclude" => [
+        "mainpage" => true,
+		"namespaces" => [ 0, 2, 4, 12, 100 ],
+        "querystring" => [
+            "action" => "(history|edit)",
+            "diff" => ".+",
+        ],
+    ],
+];
+$wgVectorLanguageInMainPageHeader = true;
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation
@@ -277,12 +307,7 @@ wfLoadExtension( "ReplaceText" );
 $wgGroupPermissions['sysop']['replacetext'] = true;
 $wgGroupPermissions['bot']['replacetext'] = true;
 
-# MobileFrontend Extension
-wfLoadExtension( "MobileFrontend" );
-$wgMFDefaultSkinClass = 'SkinMinerva';
-$wgMFAutodetectMobileView = true;
-$wgMFMobileHeader = 'X-Mobile';
-$wgMFLazyLoadImages = [ 'base' => false ];
+$wgVectorResponsive = true;
 
 # Renameuser Extension
 wfLoadExtension( "Renameuser" );
@@ -335,52 +360,53 @@ wfLoadExtension( 'Elastica' );
 wfLoadExtension( 'CirrusSearch' );
 
 $wgCirrusSearchServers = [
-    'default' => 'es-mediawiki',
+    'default' => 'elasticsearch',
 ];
 $wgCirrusSearchClientSideSearchTimeout = [ 'default' => 3, 'regex' => 18 ];
 $wgSearchType = 'CirrusSearch';
+$wgCirrusSearchEnableIncomingLinkCounting = false;
 
 # PoolCounter
 wfLoadExtension( 'PoolCounter' );
 $wgPoolCounterConf = [
     'ArticleView' => [
-        'class' => 'PoolCounter_Client',
+        'class' => MediaWiki\Extension\PoolCounter\Client::class,
         'timeout' => 15,
         'workers' => 4,
         'maxqueue' => 6
     ],
     'CirrusSearch-Search' => [
-        'class' => 'PoolCounter_Client',
+        'class' => MediaWiki\Extension\PoolCounter\Client::class,
         'timeout' => 15,
         'workers' => 50,
         'maxqueue' => 150
     ],
     'CirrusSearch-Prefix' => [
-        'class' => 'PoolCounter_Client',
+        'class' => MediaWiki\Extension\PoolCounter\Client::class,
         'timeout' => 15,
         'workers' => 8,
         'maxqueue' => 15
     ],
     'CirrusSearch-Completion' => [
-        'class' => 'PoolCounter_Client',
+        'class' => MediaWiki\Extension\PoolCounter\Client::class,
         'timeout' => 15,
         'workers' => 108,
         'maxqueue' => 150
     ],
     'CirrusSearch-Regex' => [
-        'class' => 'PoolCounter_Client',
+        'class' => MediaWiki\Extension\PoolCounter\Client::class,
         'timeout' => 60,
         'workers' => 2,
         'maxqueue' => 5
     ],
     'CirrusSearch-NamespaceLookup' => [
-        'class' => 'PoolCounter_Client',
+        'class' => MediaWiki\Extension\PoolCounter\Client::class,
         'timeout' => 5,
         'workers' => 12,
         'maxqueue' => 50
     ],
     'CirrusSearch-MoreLike' => [
-        'class' => 'PoolCounter_Client',
+        'class' => MediaWiki\Extension\PoolCounter\Client::class,
         'timeout' => 5,
         'workers' => 12,
         'maxqueue' => 50
@@ -495,3 +521,9 @@ $wgGroupPermissions['inspector']['abusefilter-log'] = true;
 $wgGroupPermissions['inspector']['abusefilter-privatedetails'] = true;
 $wgGroupPermissions['inspector']['abusefilter-modify-restricted'] = true;
 $wgGroupPermissions['inspector']['abusefilter-revert'] = true;
+
+# UniversalLanguageSelector
+$wgULSEnable = false;
+wfLoadExtension( 'UniversalLanguageSelector' );
+
+$wgReadOnly = ( PHP_SAPI === 'cli' ) ? false : 'This wiki is currently being upgraded to a newer software version. Please check back in a couple of hours.';

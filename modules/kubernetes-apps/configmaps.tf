@@ -11,16 +11,6 @@ resource "kubernetes_config_map" "timburr" {
   }
 }
 
-resource "kubernetes_config_map" "wiki-52poke" {
-  metadata {
-    name = "52poke-wiki"
-  }
-
-  data = {
-    "LocalSettings.php" = file("${path.root}/config/52poke-wiki/LocalSettings.php")
-  }
-}
-
 resource "kubernetes_config_map" "nginx-52w" {
   metadata {
     name = "nginx-52w"
@@ -78,15 +68,5 @@ resource "kubernetes_config_map" "klinklang" {
   data = {
     "config.json"  = file("${path.root}/config/klinklang/config.json")
     "workflow.yml" = file("${path.root}/config/klinklang/workflow.yml")
-  }
-}
-
-resource "kubernetes_config_map" "makeawish" {
-  metadata {
-    name = "makeawish"
-  }
-
-  data = {
-    ".env" = file("${path.root}/config/makeawish/env")
   }
 }
