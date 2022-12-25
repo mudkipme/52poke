@@ -15,17 +15,6 @@ resource "kubernetes_secret" "mysql-root" {
   }
 }
 
-resource "kubernetes_secret" "mysql-server" {
-  metadata {
-    name = "mysql-server"
-  }
-
-  data = {
-    username = "root"
-    password = var.mysql_password
-  }
-}
-
 resource "random_password" "mysql-wiki-password" {
   length           = 16
   special          = true

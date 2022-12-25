@@ -77,10 +77,8 @@ module "kubernetes-apps" {
   aws_ses_access_key            = var.aws_ses_access_key
   aws_ses_secret_key            = var.aws_ses_secret_key
   discord_token                 = var.discord_token
-  mysql_password                = module.linode.mysql_password
   mysql_port                    = module.linode.mysql_port
   mysql_pc_port                 = module.linode.mysql_pc_port
-  database_server_private_ip    = module.linode.database_server_private_ip
 }
 
 module "migration" {

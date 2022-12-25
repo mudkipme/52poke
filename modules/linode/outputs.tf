@@ -34,20 +34,12 @@ output "load_balancer_ipv6" {
   value = split("/", linode_instance.load-balancer.ipv6)[0]
 }
 
-output "database_server_private_ip" {
-  value = linode_instance.database-server.private_ip_address
-}
-
 output "mysql_port" {
   value = random_integer.mysql_port.result
 }
 
 output "mysql_pc_port" {
   value = local.mysql_pc_port
-}
-
-output "mysql_password" {
-  value = random_password.mysql_password.result
 }
 
 output "cluster_id" {

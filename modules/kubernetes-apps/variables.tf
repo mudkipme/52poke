@@ -134,11 +134,6 @@ variable "discord_token" {
   description = "Discord bot token"
 }
 
-variable "mysql_password" {
-  type        = string
-  description = "MySQL password"
-}
-
 variable "mysql_port" {
   type        = number
   description = "MySQL port"
@@ -147,9 +142,4 @@ variable "mysql_port" {
 variable "mysql_pc_port" {
   type        = number
   description = "MySQL parser cache port"
-}
-
-variable "database_server_private_ip" {
-  type        = string
-  description = "Database server private IP"
 }
