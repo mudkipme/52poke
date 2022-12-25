@@ -133,13 +133,3 @@ variable "discord_token" {
   type        = string
   description = "Discord bot token"
 }
-
-variable "mysql_port" {
-  type        = number
-  description = "MySQL port"
-}
-
-variable "mysql_pc_port" {
-  type        = number
-  description = "MySQL parser cache port"
-}

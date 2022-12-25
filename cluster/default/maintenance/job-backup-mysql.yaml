@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-mysql
+  namespace: default
+spec:
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      completions: 1
+      parallelism: 1
+      template:
+        spec:
+          containers:
+          - env:
+            - name: MYSQL_HOST
+              value: mariadb
+            - name: RCLONE_CONFIG_B2_ACCOUNT
+              valueFrom:
+                secretKeyRef:
+                  key: b2-account-id
+                  name: backblaze-b2
+            - name: RCLONE_CONFIG_B2_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: b2-account-key
+                  name: backblaze-b2
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: mysql-root
+            - name: B2_TARGET
+              value: 52poke-backup/database
+            image: mudkip/mysql-backup-b2:latest
+            imagePullPolicy: Always
+            name: backup-mysql
+  schedule: 0 20 * * *
+  successfulJobsHistoryLimit: 1

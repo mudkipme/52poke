@@ -34,14 +34,6 @@ output "load_balancer_ipv6" {
   value = split("/", linode_instance.load-balancer.ipv6)[0]
 }
 
-output "mysql_port" {
-  value = random_integer.mysql_port.result
-}
-
-output "mysql_pc_port" {
-  value = local.mysql_pc_port
-}
-
 output "cluster_id" {
   value = linode_lke_cluster.lke-meltan-cluster.id
 }
