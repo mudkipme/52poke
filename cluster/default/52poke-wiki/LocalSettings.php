@@ -525,5 +525,3 @@ $wgGroupPermissions['inspector']['abusefilter-revert'] = true;
 # UniversalLanguageSelector
 $wgULSEnable = false;
 wfLoadExtension( 'UniversalLanguageSelector' );
-
-$wgReadOnly = ( PHP_SAPI === 'cli' ) ? false : 'This wiki is currently being upgraded to a newer software version. Please check back in a couple of hours.';
