@@ -4,6 +4,7 @@ metadata:
   name: elasticsearch-init
   namespace: default
 spec:
+  suspend: true
   ttlSecondsAfterFinished: 180
   template:
     spec:
