@@ -51,6 +51,8 @@ spec:
           value: "yes"
         - name: KAFKA_CFG_ADVERTISED_LISTENERS
           value: PLAINTEXT://kafka-inside.default.svc.cluster.local:9092
+        - name: KAFKA_CFG_LOG_RETENTION_HOURS
+          value: "24"
       volumes:
         - name: kafka-persistent-storage
           persistentVolumeClaim:
