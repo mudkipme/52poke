@@ -31,7 +31,6 @@ spec:
         name: 52poke-wiki
         ports:
         - containerPort: 80
-          protocol: TCP
         resources:
           requests:
             cpu: 400m
@@ -89,7 +88,6 @@ spec:
         name: poolcounter
         ports:
         - containerPort: 7531
-          protocol: TCP
         resources:
           requests:
             cpu: 50m

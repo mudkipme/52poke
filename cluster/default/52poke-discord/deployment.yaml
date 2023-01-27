@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 52poke-discord
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: 52poke-discord
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: 52poke-discord
+    spec:
+      nodeSelector:
+        lke.linode.com/pool-id: "125654"
+      containers:
+      - env:
+        - name: TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: token
+              name: 52poke-discord
+        image: ghcr.io/mudkipme/52poke-discord:latest
+        imagePullPolicy: Always
+        name: 52poke-discord
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            cpu: 10m
+            memory: 64Mi
+      restartPolicy: Always

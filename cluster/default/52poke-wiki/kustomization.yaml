@@ -4,6 +4,7 @@ namespace: default
 resources:
 - "deployment.yaml"
 - "service.yaml"
+- "hpa.yaml"
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timburr
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: timburr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: timburr
+    spec:
+      containers:
+      - env:
+        - name: TIMBURR_PURGE_CFTOKEN
+          valueFrom:
+            secretKeyRef:
+              key: token
+              name: cloudflare
+        image: ghcr.io/mudkipme/timburr:latest
+        imagePullPolicy: Always
+        name: timburr
+        ports:
+        - containerPort: 5001
+          name: fluentd-52w
+        resources:
+          limits:
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        volumeMounts:
+        - mountPath: /app/conf/config.yml
+          name: timburr-config
+          readOnly: true
+          subPath: config.yml
+      nodeSelector:
+        lke.linode.com/pool-id: "125654"
+      restartPolicy: Always
+      volumes:
+      - configMap:
+          name: timburr
+        name: timburr-config

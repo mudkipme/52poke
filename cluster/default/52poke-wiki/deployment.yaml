@@ -86,7 +86,6 @@ spec:
         name: poolcounter
         ports:
         - containerPort: 7531
-          protocol: TCP
         resources:
           requests:
             cpu: 50m
