@@ -514,4 +514,4 @@ actions:
           jsonPath: $.payload.page_title
         description:
           mode: template
-          template: "updated by {{payload.performer.user_text}} {{payload.parsedcomment}}"
+          template: "updated by {{payload.performer.user_text}} {{payload.comment}}"

@@ -39,17 +39,6 @@ resource "kubernetes_config_map" "nginx-media" {
   }
 }
 
-resource "kubernetes_config_map" "config-52poke-www" {
-  metadata {
-    name = "52poke-www-config"
-  }
-
-  data = {
-    "nginx.conf"     = file("${path.root}/config/52poke-www/nginx.conf")
-    "php-custom.ini" = file("${path.root}/config/52poke-www/php-custom.ini")
-  }
-}
-
 resource "kubernetes_config_map" "config-pokeapi" {
   metadata {
     name = "config-pokeapi"
@@ -57,16 +46,5 @@ resource "kubernetes_config_map" "config-pokeapi" {
 
   data = {
     "pokeapi.py" = file("${path.root}/config/pokeapi/pokeapi.py")
-  }
-}
-
-resource "kubernetes_config_map" "klinklang" {
-  metadata {
-    name = "klinklang"
-  }
-
-  data = {
-    "config.json"  = file("${path.root}/config/klinklang/config.json")
-    "workflow.yml" = file("${path.root}/config/klinklang/workflow.yml")
   }
 }

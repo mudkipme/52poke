@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: root-ssh-manager
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: root-ssh-manager
+  template:
+    metadata:
+      labels:
+        app: root-ssh-manager
+    spec:
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - |
+          set -o errexit
+          set -o xtrace
+          umask 0077
+          while true
+          do
+            mkdir -p /mnt/root/.ssh
+            rm -f /mnt/root/.ssh/authorized_keys_new
+            for key in $(find /mnt/keys -type f); do (cat ${key}; echo) >> /mnt/root/.ssh/authorized_keys_new; done
+            mv /mnt/root/.ssh/authorized_keys_new /mnt/root/.ssh/authorized_keys
+            sleep 60s;
+          done
+        image: busybox:latest
+        imagePullPolicy: Always
+        name: update-ssh-authorized-keys
+        securityContext:
+          allowPrivilegeEscalation: true
+          privileged: true
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+        volumeMounts:
+        - mountPath: /mnt/root
+          name: root
+        - mountPath: /mnt/keys
+          name: ssh-keys
+          readOnly: true
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /root
+        name: root
+      - name: ssh-keys
+        secret:
+          secretName: authorized-keys
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
