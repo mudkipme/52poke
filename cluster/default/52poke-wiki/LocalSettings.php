@@ -203,7 +203,7 @@ $wgNonincludableNamespaces[] = 103;
 
 # Permissions
 $wgGroupPermissions['*']['edit'] = false;
-$wgGroupPermissions['*']['writeapi'] = false;
+$wgGroupPermissions['*']['writeapi'] = true;
 $wgGroupPermissions['*']['createtalk'] = false;
 $wgGroupPermissions['*']['createpage'] = false;
 $wgGroupPermissions['sysop']['renameuser'] = true;
