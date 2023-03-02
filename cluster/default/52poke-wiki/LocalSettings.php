@@ -373,8 +373,8 @@ $wgPoolCounterConf = [
     'ArticleView' => [
         'class' => MediaWiki\Extension\PoolCounter\Client::class,
         'timeout' => 15,
-        'workers' => 4,
-        'maxqueue' => 6
+        'workers' => 5,
+        'maxqueue' => 10
     ],
     'CirrusSearch-Search' => [
         'class' => MediaWiki\Extension\PoolCounter\Client::class,

@@ -15,14 +15,16 @@ spec:
         app: 52poke-wiki
     spec:
       affinity:
-        nodeAffinity:
+        podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: lke.linode.com/pool-id
-                operator: NotIn
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
                 values:
-                - "125654"
+                - 52poke-wiki
+                - 52poke-wiki-privileged
+            topologyKey: kubernetes.io/hostname
       containers:
       - image: ghcr.io/mudkipme/mediawiki:latest
         imagePullPolicy: Always
@@ -31,8 +33,11 @@ spec:
         - containerPort: 80
         resources:
           requests:
-            cpu: 1350m
+            cpu: 2000m
             memory: 384Mi
+          limits:
+            cpu: 3000m
+            memory: 1Gi
         volumeMounts:
         - mountPath: /home/52poke/wiki/LocalSettings.php
           name: 52poke-wiki-config
@@ -90,6 +95,9 @@ spec:
           requests:
             cpu: 50m
             memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 128Mi
       volumes:
       - configMap:
           name: 52poke-wiki-1-39

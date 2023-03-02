@@ -35,6 +35,9 @@ spec:
           requests:
             cpu: 400m
             memory: 384Mi
+          limits:
+            cpu: 3000m
+            memory: 1Gi
         volumeMounts:
         - mountPath: /home/52poke/wiki/LocalSettings.php
           name: 52poke-wiki-config
@@ -92,6 +95,9 @@ spec:
           requests:
             cpu: 50m
             memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 128Mi
       nodeSelector:
         lke.linode.com/pool-id: "125654"
       volumes:

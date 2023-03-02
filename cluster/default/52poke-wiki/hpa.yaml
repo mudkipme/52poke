@@ -4,7 +4,7 @@ metadata:
   name: 52poke-wiki
   namespace: default
 spec:
-  maxReplicas: 8
+  maxReplicas: 4
   metrics:
   - resource:
       name: cpu
