@@ -1,5 +1,0 @@
-args:
-- "--kubelet-preferred-address-types=InternalIP"
-- "--kubelet-insecure-tls"
-nodeSelector:
-  lke.linode.com/pool-id: "${pool_id}"
