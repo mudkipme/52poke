@@ -86,7 +86,7 @@ spec:
         - mountPath: /run/secrets/oauth2
           name: 52poke-wiki-oauth2
           readOnly: true
-      - image: ghcr.io/mudkipme/poolcounter:latest
+      - image: ghcr.io/mudkipme/poolcounter@sha256:48c4488b0954194eb1b5d56d5f37983869842049faba2bdd1cbd5e7d71905811
         imagePullPolicy: Always
         name: poolcounter
         ports:
