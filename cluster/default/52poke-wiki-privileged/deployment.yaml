@@ -26,7 +26,7 @@ spec:
                 - 52poke-wiki-privileged
             topologyKey: kubernetes.io/hostname
       containers:
-      - image: ghcr.io/mudkipme/mediawiki:latest
+      - image: ghcr.io/mudkipme/mediawiki@sha256:d960c5ae4e7485cabc2c54fe492a978ce9a78c60720ec6b986c444af30df89df
         imagePullPolicy: Always
         name: 52poke-wiki
         ports:
