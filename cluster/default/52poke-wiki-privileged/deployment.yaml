@@ -26,7 +26,7 @@ spec:
                 - 52poke-wiki-privileged
             topologyKey: kubernetes.io/hostname
       containers:
-      - image: ghcr.io/mudkipme/mediawiki@sha256:d960c5ae4e7485cabc2c54fe492a978ce9a78c60720ec6b986c444af30df89df
+      - image: ghcr.io/mudkipme/mediawiki:latest
         imagePullPolicy: Always
         name: 52poke-wiki
         ports:
@@ -86,7 +86,7 @@ spec:
         - mountPath: /run/secrets/oauth2
           name: 52poke-wiki-oauth2
           readOnly: true
-      - image: ghcr.io/mudkipme/poolcounter@sha256:48c4488b0954194eb1b5d56d5f37983869842049faba2bdd1cbd5e7d71905811
+      - image: ghcr.io/mudkipme/poolcounter:latest
         imagePullPolicy: Always
         name: poolcounter
         ports:
