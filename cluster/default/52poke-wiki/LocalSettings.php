@@ -172,6 +172,8 @@ $wgVectorMaxWidthOptions = [
 ];
 $wgVectorLanguageInMainPageHeader = true;
 $wgVectorTableOfContentsCollapseAtCount = 200;
+$wgVectorDefaultSidebarVisibleForAuthorisedUser = true;
+$wgVectorDefaultSidebarVisibleForAnonymousUser = true;
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation
