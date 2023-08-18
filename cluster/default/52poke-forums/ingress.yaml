@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: https://pub.52poke.net/.well-known/$1
+  name: activitypub-rewrite
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: 52poke.net
+    http:
+      paths:
+      - backend:
+          service:
+            name: forums-52poke
+            port:
+              number: 4567
+        path: /.well-known/(webfinger|nodeinfo|host-meta)$
+        pathType: Prefix
