@@ -528,3 +528,8 @@ $wgGroupPermissions['inspector']['abusefilter-revert'] = true;
 # UniversalLanguageSelector
 $wgULSEnable = false;
 wfLoadExtension( 'UniversalLanguageSelector' );
+
+# CodeMirror
+wfLoadExtension( 'CodeMirror' );
+$wgDefaultUserOptions['usecodemirror'] = 1;
+$wgCodeMirrorLineNumberingNamespaces = [ NS_TEMPLATE, NS_MEDIAWIKI ];

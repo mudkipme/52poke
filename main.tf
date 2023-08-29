@@ -78,13 +78,3 @@ module "kubernetes-apps" {
   aws_ses_secret_key            = var.aws_ses_secret_key
   discord_token                 = var.discord_token
 }
-
-module "migration" {
-  source     = "./modules/migration"
-  depends_on = [module.kubernetes-apps]
-}
-
-module "maintenance" {
-  source     = "./modules/maintenance"
-  depends_on = [module.migration]
-}

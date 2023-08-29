@@ -1,7 +1,7 @@
 52Poké
 ======
 
-52Poké (神奇宝贝部落格/神奇寶貝部落格) is a nonprofit Chinese-language Pokémon fan community. It hosts [52Poké Wiki](https://wiki.52poke.com/), as well as other sub-websites such as a [Pokémon news blog](https://52poke.com/) and a [fan forum](https://52poke.net/). 52Poké Wiki (神奇宝贝百科/神奇寶貝百科) is the largest Chinese-language Pokémon encyclopedia, and a member of [Encyclopædiæ Pokémonis](http://www.encyclopaediae-pokemonis.org/).
+52Poké (神奇宝贝部落格/神奇寶貝部落格) is a nonprofit Chinese-language Pokémon fan community. It hosts [52Poké Wiki](https://52poke.wiki/), as well as other sub-websites such as a [Pokémon news blog](https://52poke.com/) and a [fan forum](https://52poke.net/). 52Poké Wiki (神奇宝贝百科/神奇寶貝百科) is the largest Chinese-language Pokémon encyclopedia, and a member of [Encyclopædiæ Pokémonis](http://www.encyclopaediae-pokemonis.org/).
 
 This is a repository to track the infrastructure, deployment, tech documentation and issues in general of 52Poké.
 
@@ -15,11 +15,10 @@ Please use [issues](https://github.com/mudkipme/52poke/issues) and [wiki](https:
 
 - [timburr](https://github.com/mudkipme/timburr): A MediaWiki event handler.
 - [malasada](https://github.com/mudkipme/malasada): A serverless function to resize and convert images.
+- [inazuma](https://github.com/mudkipme/inazuma): A front-end proxy server with cache in object storage.
 - [meltan](https://github.com/mudkipme/meltan): Dockerfiles to build containers for services and jobs on 52Poké.
 - [mediawiki](https://github.com/mudkipme/mediawiki): Core MediaWiki repository of 52Poké Wiki.
-- [mediawiki-lazyload](https://github.com/mudkipme/mediawiki-lazyload): An extension to lazy-loading images on MediaWiki pages.
 - [klinklang](https://github.com/mudkipme/klinklang): A collection of utilities for 52Poké Wiki.
-- [pokeapi-v2-typescript](https://github.com/mudkipme/pokeapi-v2-typescript): TypeScript definitions for pokedex-promise-v2 and PokeAPI endpoints.
 - [nodebb-plugin-checkin](https://github.com/mudkipme/nodebb-plugin-checkin): A checking-in and award plugin for NodeBB.
 - [nodebb-plugin-wikilink](https://github.com/mudkipme/nodebb-plugin-wikilink): A NodeBB plugin to link `[[text]]` with the the appropriate wiki-system.
 - [nodebb-plugin-opencc](https://github.com/mudkipme/nodebb-plugin-opencc): A NodeBB plugin to translate between Traditional and Simplified Chinese.
@@ -31,7 +30,7 @@ Please use [issues](https://github.com/mudkipme/52poke/issues) and [wiki](https:
 
 As of December 2020, 52Poké runs on multiple cloud providers including Linode, AWS and Cloudflare, and most resources and applications are running in a Linode Kubernetes Engine cluster.
 
-This repository uses Terraform to manage the infrastructure of 52Poké.
+This repository uses [FluxCD](https://fluxcd.io/) to manage the Kubernetes workloads and describes other infrastructure of 52Poké with Terraform.
 
 ## License
 
