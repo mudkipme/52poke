@@ -527,7 +527,7 @@ actions:
             value: "Actions"
           value:
             mode: template
-            template: "[Show diff](https://{{payload.meta.domain}}/index.php?title={{encodeURIComponent payload.page_title}}/fc&diff={{payload.rev_id}}&oldid={{payload.rev_parent_id}})"
+            template: "[Show diff](https://{{payload.meta.domain}}/index.php?title={{encodeURIComponent payload.page_title}}&diff={{payload.rev_id}}&oldid={{payload.rev_parent_id}})"
 ---
 name: Clear cache after page editing
 isPrivate: false
