@@ -514,4 +514,79 @@ actions:
           jsonPath: $.payload.page_title
         description:
           mode: template
-          template: "updated by {{payload.performer.user_text}} {{payload.comment}}"
+          template: "{{stripHTML payload.parsedcomment}}"
+        fields:
+        - name:
+            mode: rawValue
+            value: "By"
+          value:
+            mode: template
+            template: "{{payload.performer.user_text}}"
+        - name:
+            mode: rawValue
+            value: "Actions"
+          value:
+            mode: template
+            template: "[Show diff](https://{{payload.meta.domain}}/index.php?title={{encodeURIComponent payload.page_title}}/fc&diff={{payload.rev_id}}&oldid={{payload.rev_parent_id}})"
+---
+name: Clear cache after page editing
+isPrivate: false
+enabled: true
+triggers:
+- type: TRIGGER_EVENTBUS
+  topic: mediawiki.revision-create
+actions:
+- actionType: REQUEST
+  inputBuilder:
+    method:
+      mode: rawValue
+      value: "PURGE"
+    url:
+      mode: template
+      template: "http://nginx-52w/wiki/{{encodeURI payload.page_title}}zh"
+  outputContext: response
+- actionType: REQUEST
+  inputBuilder:
+    method:
+      mode: rawValue
+      value: "PURGE"
+    url:
+      mode: template
+      template: "http://nginx-52w/wiki/{{encodeURI payload.page_title}}zh-hans"
+  outputContext: response
+- actionType: REQUEST
+  inputBuilder:
+    method:
+      mode: rawValue
+      value: "PURGE"
+    url:
+      mode: template
+      template: "http://nginx-52w/wiki/{{encodeURI payload.page_title}}zh-hant"
+  outputContext: response
+- actionType: REQUEST
+  inputBuilder:
+    method:
+      mode: rawValue
+      value: "PURGE"
+    url:
+      mode: template
+      template: "http://nginx-52w/zh/{{encodeURI payload.page_title}}"
+  outputContext: response
+- actionType: REQUEST
+  inputBuilder:
+    method:
+      mode: rawValue
+      value: "PURGE"
+    url:
+      mode: template
+      template: "http://nginx-52w/zh-hans/{{encodeURI payload.page_title}}"
+  outputContext: response
+- actionType: REQUEST
+  inputBuilder:
+    method:
+      mode: rawValue
+      value: "PURGE"
+    url:
+      mode: template
+      template: "http://nginx-52w/zh-hant/{{encodeURI payload.page_title}}"
+  outputContext: response
