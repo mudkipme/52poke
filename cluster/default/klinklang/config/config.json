@@ -1,4 +1,7 @@
 {
+    "app": {
+        "url": "https://util.52poke.wiki"
+    },
     "mediawiki": {
         "scriptPath": "https://wiki.52poke.com/"
     },

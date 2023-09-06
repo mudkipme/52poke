@@ -590,3 +590,33 @@ actions:
       mode: template
       template: "http://nginx-52w/zh-hant/{{encodeURI payload.page_title}}"
   outputContext: response
+---
+name: Recent change to Fedi
+isPrivate: true
+enabled: true
+user: MudkipRadar
+triggers:
+- type: TRIGGER_EVENTBUS
+  topic: mediawiki.revision-create
+  predicate:
+    op: and
+    apply:
+    - op: not
+      apply:
+      - op: test
+        path: /performer.user_is_bot
+        value: true
+    - op: test
+      path: /page_namespace
+      value: 0
+  throttle: 86400
+  throttleKeyPath: $.page_title
+actions:
+- actionType: FEDI_POST
+  inputBuilder:
+    subject:
+      mode: rawValue
+      value: "@rotom@pub.52poke.net"
+    status:
+      mode: template
+      template: "{{payload.page_title}} {{payload.meta.uri}}"
