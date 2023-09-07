@@ -496,7 +496,7 @@ triggers:
     op: not
     apply:
     - op: test
-      path: performer.user_is_bot
+      path: /performer/user_is_bot
       value: true
 actions:
 - actionType: DISCORD_MESSAGE
@@ -604,7 +604,7 @@ triggers:
     - op: not
       apply:
       - op: test
-        path: /performer.user_is_bot
+        path: /performer/user_is_bot
         value: true
     - op: test
       path: /page_namespace
