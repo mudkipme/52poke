@@ -179,8 +179,7 @@ $wgVectorDefaultSidebarVisibleForAnonymousUser = true;
 ## appropriate copyright notice / icon. GNU Free Documentation
 ## License and Creative Commons licenses are supported so far.
 $wgEnableCreativeCommonsRdf = true;
-$wgRightsPage = ""; # Set to the title of a wiki page that describes your license/copyright
-$wgRightsUrl = "//creativecommons.org/licenses/by-nc-sa/3.0/deed.zh";
+$wgRightsPage = "神奇宝贝百科:版权声明";
 $wgRightsText = "署名-非商业性使用-相同方式共享 3.0";
 $wgRightsIcon = "//licensebuttons.net/l/by-nc-sa/3.0/88x31.png";
 

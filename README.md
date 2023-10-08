@@ -5,7 +5,7 @@
 
 This is a repository to track the infrastructure, deployment, tech documentation and issues in general of 52Poké.
 
-We believe in the openness, inclusiveness and independence of individual fan communities, and 52Poké is managed by a set of open source projects including this one. Most of the projects will be licensed under BSD-3-Clause, MIT or GPLv2. To be compatible with [the content license of 52Poké Wiki](https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh), some projects may choose restrictive licenses which forbid commercial use.
+We believe in the openness, inclusiveness and independence of individual fan communities, and 52Poké is managed by a set of open source projects including this one. Most of the projects will be licensed under BSD-3-Clause, MIT or GPLv2. To be compatible with [the content license of 52Poké Wiki](https://creativecommons.org/licenses/by-nc-sa/3.0/), some projects may choose restrictive licenses which forbid commercial use.
 
 While these projects are developed for 52Poké, most of them could be useful for similar websites or services, such as [MediaWiki](https://www.mediawiki.org/) wikis, [NodeBB](https://nodebb.org/) forums, [WordPress](https://wordpress.org/) blogs, or fan works related to Pokémon.
 
