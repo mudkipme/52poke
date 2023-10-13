@@ -122,7 +122,7 @@ $wgParserCacheType = 'mysql-pc';
 
 ## To enable image uploads, make sure the 'images' directory
 ## is writable, then set this to true:
-$wgEnableUploads = true;
+$wgEnableUploads = false;
 $wgUseImageMagick = true;
 $wgImageMagickConvertCommand = "/usr/bin/convert";
 
@@ -424,6 +424,7 @@ $wgFileBackends['s3'] = [ // backend config for wiki's local repo
     'name'               => 'AmazonS3',
     'wikiId'             => 'wiki',
     'lockManager'        => 'redisLockManager',
+    'endpoint'           => 'jp-osa-1.linodeobjects.com',
     'containerPaths'     => [
         'wiki-local-public'  => 'media.52poke.com/wiki',
         'wiki-local-thumb'   => 'media.52poke.com/wiki/thumb',
