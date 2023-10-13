@@ -35,12 +35,12 @@ spec:
           valueFrom:
             secretKeyRef:
               key: accessKeyID
-              name: aws-s3
+              name: linode-object-storage
         - name: AWS_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
               key: secretAccessKey
-              name: aws-s3
+              name: linode-object-storage
         image: ghcr.io/mudkipme/makeawish:latest
         imagePullPolicy: Always
         name: makeawish

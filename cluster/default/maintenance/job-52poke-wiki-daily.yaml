@@ -87,7 +87,7 @@ spec:
               secretName: 52poke-wiki
           - name: aws-s3
             secret:
-              secretName: aws-s3
+              secretName: linode-object-storage
           - name: aws-ses
             secret:
               secretName: aws-ses

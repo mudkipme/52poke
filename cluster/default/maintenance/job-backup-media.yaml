@@ -25,12 +25,14 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: accessKeyID
-                  name: aws-s3
+                  name: linode-object-storage
             - name: RCLONE_CONFIG_MEDIA_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   key: secretAccessKey
-                  name: aws-s3
+                  name: linode-object-storage
+            - name: RCLONE_CONFIG_MEDIA_ENDPOINT
+              value: jp-osa-1.linodeobjects.com
             - name: RCLONE_CONFIG_B2_TYPE
               value: b2
             - name: RCLONE_CONFIG_B2_ACCOUNT
