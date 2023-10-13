@@ -32,13 +32,12 @@ spec:
           name: nginx-media
           subPath: nginx.conf
         - mountPath: /var/cache/nginx
-          name: nginx-media-persistent-storage
+          name: nginx-media-cache
       nodeSelector:
         lke.linode.com/pool-id: "125654"
       volumes:
       - configMap:
           name: nginx-media
         name: nginx-media
-      - name: nginx-media-persistent-storage
-        persistentVolumeClaim:
-          claimName: nginx-media-pvc
+      - name: nginx-media-cache
+        emptyDir: {}
