@@ -38,7 +38,7 @@ purge:
   - host: media.52poke.com
     method: DELETE
     uris:
-    - "https://${malasada_api_id}.execute-api.ap-northeast-1.amazonaws.com/prod/webp#url#"
+    - "https://${malasada_api_id}.execute-api.ap-northeast-1.amazonaws.com/webp#url#"
   - host: media.52poke.com
     method: Cloudflare
     uris:
