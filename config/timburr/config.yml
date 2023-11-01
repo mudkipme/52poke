@@ -1,6 +1,6 @@
 kafka:
   brokerList: "kafka-inside:9092"
-  
+
 options:
   groupIDPrefix: timburr-
   metadataWatchGroupID: timburr-watcher
@@ -44,6 +44,7 @@ purge:
     uris:
     - "https://s0.52poke.wiki#url#"
     - "https://s1.52poke.wiki#url#"
+    - "https://media.52poke.com#url#"
 
 rules:
 - name: basic
