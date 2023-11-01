@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    cert-manager.io/cluster-issuer: le-wildcard-issuer
+    cert-manager.io/cluster-issuer: le-cloudflare-issuer
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/enable-access-log: "false"
     nginx.ingress.kubernetes.io/server-alias: assets.52poke.com,static.52poke.com
