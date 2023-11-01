@@ -45,7 +45,7 @@ EOF
 
 PRIVATE_IP=($PRIVATE_IPS)
 for i in "${!PRIVATE_IP[@]}"; do
-echo "    server      http${i} ${PRIVATE_IP[$i]}:${HTTP_PORT} check send-proxy" >> /etc/haproxy/haproxy.cfg
+echo "    server      http${i} ${PRIVATE_IP[$i]}:${HTTP_PORT} check" >> /etc/haproxy/haproxy.cfg
 done
 
 cat >> /etc/haproxy/haproxy.cfg <<EOF
@@ -56,7 +56,7 @@ backend https
 EOF
 
 for i in "${!PRIVATE_IP[@]}"; do
-echo "    server      https${i} ${PRIVATE_IP[$i]}:${HTTPS_PORT} check send-proxy" >> /etc/haproxy/haproxy.cfg
+echo "    server      https${i} ${PRIVATE_IP[$i]}:${HTTPS_PORT} check" >> /etc/haproxy/haproxy.cfg
 done
 
 systemctl restart haproxy

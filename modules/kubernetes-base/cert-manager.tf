@@ -33,22 +33,6 @@ resource "null_resource" "le_http_issuer" {
   }
 }
 
-resource "helm_release" "cert-manager-webhook-linode" {
-  depends_on = [helm_release.cert-manager]
-  name       = "cert-manager-webhook-linode"
-  chart      = "https://github.com/slicen/cert-manager-webhook-linode/releases/download/v0.2.0/cert-manager-webhook-linode-v0.2.0.tgz"
-  namespace  = "cert-manager"
-  set {
-    name  = "api.groupName"
-    value = "52poke.com"
-  }
-
-  set {
-    name  = "deployment.logLevel"
-    value = ""
-  }
-}
-
 resource "null_resource" "le_cloudflare_issuer" {
   depends_on = [helm_release.cert-manager]
   triggers = {
