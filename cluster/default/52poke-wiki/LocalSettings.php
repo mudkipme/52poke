@@ -331,7 +331,7 @@ $wgGroupPermissions['sysop']['interwiki'] = true;
 
 # RSS Extension
 wfLoadExtension( "RSS" );
-$wgRSSUrlWhitelist = array('https://52poke.com/feed/');
+$wgRSSUrlWhitelist = array('https://52poke.com/feed/', 'http://www-52poke/feed/');
 
 # Gadgets Extension
 wfLoadExtension( "Gadgets" );
