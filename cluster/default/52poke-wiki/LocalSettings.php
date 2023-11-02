@@ -52,18 +52,18 @@ $wgStylePath = "$wgScriptPath/skins";
 
 ## The relative URL path to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
-$wgLogo = "https://s0.52poke.wiki/assets/wikilogo.png";
+$wgLogo = "https://media.52poke.com/assets/wikilogo.png";
 $wgLogos = [
-    'icon' => 'https://s0.52poke.wiki/wiki/4/4b/Wikilogo.png',
+    'icon' => 'https://media.52poke.com/wiki/4/4b/Wikilogo.png',
     'wordmark' => [
-        'src' => 'https://s0.52poke.wiki/assets/wiki-wordmark-sc.png',
+        'src' => 'https://media.52poke.com/assets/wiki-wordmark-sc.png',
         'width' => 131,
         'height' => 21,
     ],
     'variants' => [
         'zh-hant' => [
             'wordmark' => [
-                'src' => 'https://s0.52poke.wiki/assets/wiki-wordmark-tc.png',
+                'src' => 'https://media.52poke.com/assets/wiki-wordmark-tc.png',
                 'width' => 131,
                 'height' => 21,
             ],

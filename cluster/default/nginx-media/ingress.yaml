@@ -5,7 +5,7 @@ metadata:
     cert-manager.io/cluster-issuer: le-cloudflare-issuer
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/enable-access-log: "false"
-    nginx.ingress.kubernetes.io/server-alias: assets.52poke.com,static.52poke.com
+    nginx.ingress.kubernetes.io/server-alias: assets.52poke.com,static.52poke.com,s1.52poke.com
   name: nginx-media
   namespace: default
 spec:
@@ -24,6 +24,9 @@ spec:
   tls:
   - hosts:
     - media.52poke.com
+    - assets.52poke.com
+    - static.52poke.com
+    - s1.52poke.com
     secretName: media-52poke-tls
 ---
 apiVersion: networking.k8s.io/v1

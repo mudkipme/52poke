@@ -34,9 +34,10 @@ metadata:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/server-alias: www.52poke.wiki
     nginx.ingress.kubernetes.io/enable-access-log: "false"
-    nginx.ingress.kubernetes.io/proxy-body-size: 16m
-    nginx.ingress.kubernetes.io/proxy-redirect-from: "https://wiki.52poke.com"
-    nginx.ingress.kubernetes.io/proxy-redirect-to: "https://52poke.wiki"
+    nginx.ingress.kubernetes.io/rewrite-target: https://wiki.52poke.com/$1
+    #nginx.ingress.kubernetes.io/proxy-body-size: 16m
+    #nginx.ingress.kubernetes.io/proxy-redirect-from: "https://wiki.52poke.com"
+    #nginx.ingress.kubernetes.io/proxy-redirect-to: "https://52poke.wiki"
   name: nginx-52w-wiki
   namespace: default
 spec:
@@ -50,7 +51,7 @@ spec:
             name: nginx-52w
             port:
               number: 80
-        path: /
+        path: /(.*)
         pathType: ImplementationSpecific
   tls:
   - hosts:

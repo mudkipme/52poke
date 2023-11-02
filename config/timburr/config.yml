@@ -45,6 +45,7 @@ purge:
     - "https://s0.52poke.wiki#url#"
     - "https://s1.52poke.wiki#url#"
     - "https://media.52poke.com#url#"
+    - "https://s1.52poke.com#url#"
 
 rules:
 - name: basic
