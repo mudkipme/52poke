@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: move-thumbnails
+  namespace: default
+spec:
+  suspend: true
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - rclone copy los:media.52poke.com/webp-cache/wiki/thumb los:media.52poke.com/wiki/thumb
+        env:
+        - name: RCLONE_CONFIG_LOS_TYPE
+          value: s3
+        - name: RCLONE_CONFIG_LOS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: accessKeyID
+              name: linode-object-storage
+        - name: RCLONE_CONFIG_LOS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secretAccessKey
+              name: linode-object-storage
+        - name: RCLONE_CONFIG_LOS_ENDPOINT
+          value: jp-osa-1.linodeobjects.com
+        image: rclone/rclone:latest
+        imagePullPolicy: Always
+        name: move-thumbnails
+      restartPolicy: Never
