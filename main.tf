@@ -63,18 +63,4 @@ module "kubernetes-apps" {
   media_ban_user_agent          = var.media_ban_user_agent
   media_ban_empty_refer_uri     = var.media_ban_empty_refer_uri
   pool_ids                      = module.linode.pool_ids
-  b2_account_id                 = var.b2_account_id
-  b2_account_key                = var.b2_account_key
-  restic_password               = var.restic_password
-  aws_s3_access_key             = var.aws_s3_access_key
-  aws_s3_secret_key             = var.aws_s3_secret_key
-  klinklang_oauth_key           = var.klinklang_oauth_key
-  klinklang_oauth_secret        = var.klinklang_oauth_secret
-  wiki_52poke_secret_key        = var.wiki_52poke_secret_key
-  wiki_52poke_upgrade_key       = var.wiki_52poke_upgrade_key
-  recaptcha_site_key            = var.recaptcha_site_key
-  recaptcha_secret_key          = var.recaptcha_secret_key
-  aws_ses_access_key            = var.aws_ses_access_key
-  aws_ses_secret_key            = var.aws_ses_secret_key
-  discord_token                 = var.discord_token
 }

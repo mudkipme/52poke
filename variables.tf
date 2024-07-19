@@ -13,16 +13,6 @@ variable "aws_secret_key" {
   description = "AWS API secret key"
 }
 
-variable "aws_s3_access_key" {
-  type        = string
-  description = "AWS API access key for S3"
-}
-
-variable "aws_s3_secret_key" {
-  type        = string
-  description = "AWS API secret key for S3"
-}
-
 variable "cf_token" {
   type        = string
   description = "Cloudflare API Token for Cache Purging"
@@ -78,68 +68,8 @@ variable "internal_github_client_secret" {
   description = "GitHub OAuth Client Secret"
 }
 
-variable "b2_account_id" {
-  type        = string
-  description = "B2 Account ID"
-}
-
-variable "b2_account_key" {
-  type        = string
-  description = "B2 Account Key"
-}
-
-variable "restic_password" {
-  type        = string
-  description = "Restic Backup Password"
-}
-
 variable "authorized_keys" {
   type        = list(string)
   description = "Authorized SSH Public Keys"
   default     = []
-}
-
-variable "klinklang_oauth_key" {
-  type        = string
-  description = "52Poké Wiki OAuth Consumer Key for Klinklang"
-}
-
-variable "klinklang_oauth_secret" {
-  type        = string
-  description = "52Poké Wiki OAuth Consumer Secret for Klinklang"
-}
-
-variable "wiki_52poke_secret_key" {
-  type        = string
-  description = "52Poké Wiki secret key"
-}
-
-variable "wiki_52poke_upgrade_key" {
-  type        = string
-  description = "52Poké Wiki upgrade key"
-}
-
-variable "recaptcha_site_key" {
-  type        = string
-  description = "reCAPTCHA site key"
-}
-
-variable "recaptcha_secret_key" {
-  type        = string
-  description = "reCAPTCHA secret key"
-}
-
-variable "aws_ses_access_key" {
-  type        = string
-  description = "AWS API access key for SES"
-}
-
-variable "aws_ses_secret_key" {
-  type        = string
-  description = "AWS API secret key for SES"
-}
-
-variable "discord_token" {
-  type        = string
-  description = "Discord bot token"
 }
