@@ -38,13 +38,3 @@ resource "kubernetes_config_map" "nginx-media" {
     })
   }
 }
-
-resource "kubernetes_config_map" "config-pokeapi" {
-  metadata {
-    name = "config-pokeapi"
-  }
-
-  data = {
-    "pokeapi.py" = file("${path.root}/config/pokeapi/pokeapi.py")
-  }
-}

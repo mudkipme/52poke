@@ -53,21 +53,6 @@ variable "media_valid_referrers" {
   default     = "52poke.com *.52poke.com 52poke.wiki *.52poke.wiki 52poke.net *.52poke.net"
 }
 
-variable "internal_github_domain" {
-  type        = string
-  description = "GitHub mail domain allowed to visit internal services"
-}
-
-variable "internal_github_client_id" {
-  type        = string
-  description = "GitHub OAuth Client ID"
-}
-
-variable "internal_github_client_secret" {
-  type        = string
-  description = "GitHub OAuth Client Secret"
-}
-
 variable "authorized_keys" {
   type        = list(string)
   description = "Authorized SSH Public Keys"

@@ -37,22 +37,13 @@ module "cloudflare" {
 module "kubernetes-base" {
   source             = "./modules/kubernetes-base"
   depends_on         = [module.linode]
-  pool_ids           = module.linode.pool_ids
   authorized_keys    = var.authorized_keys
   linode_token       = var.linode_token
-  load_balancer_ip   = module.linode.load_balancer_ip
-  load_balancer_ipv6 = module.linode.load_balancer_ipv6
-  http_port          = module.linode.http_port
-  https_port         = module.linode.https_port
-  cluster_id         = module.linode.cluster_id
 }
 
 module "kubernetes-apps" {
   source                        = "./modules/kubernetes-apps"
   depends_on                    = [module.kubernetes-base]
-  internal_github_domain        = var.internal_github_domain
-  internal_github_client_id     = var.internal_github_client_id
-  internal_github_client_secret = var.internal_github_client_secret
   cf_zone_id                    = module.cloudflare.cf_zone_id
   cf_token                      = var.cf_token
   malasada_api_id               = module.aws.malasada_prod_id
@@ -61,5 +52,4 @@ module "kubernetes-apps" {
   media_valid_referrers         = var.media_valid_referrers
   media_ban_user_agent          = var.media_ban_user_agent
   media_ban_empty_refer_uri     = var.media_ban_empty_refer_uri
-  pool_ids                      = module.linode.pool_ids
 }
