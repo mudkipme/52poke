@@ -34,13 +34,6 @@ module "cloudflare" {
   load_balancer_ip = module.linode.load_balancer_ip
 }
 
-module "kubernetes-base" {
-  source             = "./modules/kubernetes-base"
-  depends_on         = [module.linode]
-  authorized_keys    = var.authorized_keys
-  linode_token       = var.linode_token
-}
-
 module "kubernetes-apps" {
   source                        = "./modules/kubernetes-apps"
   depends_on                    = [module.kubernetes-base]
