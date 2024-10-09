@@ -7,9 +7,9 @@ This is a repository to track the infrastructure, deployment, tech documentation
 
 We believe in the openness, inclusiveness and independence of individual fan communities, and 52Poké is managed by a set of open source projects including this one. Most of the projects will be licensed under BSD-3-Clause, MIT or GPLv2. To be compatible with [the content license of 52Poké Wiki](https://creativecommons.org/licenses/by-nc-sa/3.0/), some projects may choose restrictive licenses which forbid commercial use.
 
-While these projects are developed for 52Poké, most of them could be useful for similar websites or services, such as [MediaWiki](https://www.mediawiki.org/) wikis, [NodeBB](https://nodebb.org/) forums, [WordPress](https://wordpress.org/) blogs, or fan works related to Pokémon.
+While these projects are developed for 52Poké, most of them could be useful for similar websites or services, such as [MediaWiki](https://www.mediawiki.org/) wikis, [WordPress](https://wordpress.org/) blogs, or fan works related to Pokémon.
 
-Please use [issues](https://github.com/mudkipme/52poke/issues) and [wiki](https://github.com/mudkipme/52poke/wiki) in this repository or the following sub-projects track the progress.
+Please use [issues](https://github.com/52poke/52poke/issues) and [wiki](https://github.com/52poke/52poke/wiki) in this repository or the following sub-projects track the progress.
 
 ## Sub-projects
 
@@ -19,10 +19,6 @@ Please use [issues](https://github.com/mudkipme/52poke/issues) and [wiki](https:
 - [meltan](https://github.com/mudkipme/meltan): Dockerfiles to build containers for services and jobs on 52Poké.
 - [mediawiki](https://github.com/mudkipme/mediawiki): Core MediaWiki repository of 52Poké Wiki.
 - [klinklang](https://github.com/mudkipme/klinklang): A collection of utilities for 52Poké Wiki.
-- [nodebb-plugin-checkin](https://github.com/mudkipme/nodebb-plugin-checkin): A checking-in and award plugin for NodeBB.
-- [nodebb-plugin-wikilink](https://github.com/mudkipme/nodebb-plugin-wikilink): A NodeBB plugin to link `[[text]]` with the the appropriate wiki-system.
-- [nodebb-plugin-opencc](https://github.com/mudkipme/nodebb-plugin-opencc): A NodeBB plugin to translate between Traditional and Simplified Chinese.
-- [nodebb-plugin-sso-mediawiki](https://github.com/mudkipme/nodebb-plugin-sso-mediawiki): NodeBB Plugin that allows users to login/register via MediaWiki.
 - [ivcalc](https://github.com/mudkipme/ivcalc): Pokémon Individual Value & Stat Calculator in Chinese.
 - [makeawish](https://github.com/mudkipme/makeawish): Petition for In-game Chinese Support in Pokémon Video Games.
 
@@ -38,4 +34,4 @@ The source code of this projects is under [BSD-3-Clause](LICENSE).
 
 Neither the name of 52Poké nor the names of the contributors may be used to endorse any usage of codes under this project.
 
-Pokémon ©2020 Pokémon. ©1995-2020 Nintendo/Creatures Inc./GAME FREAK inc. 52Poké and this project is not affiliated with any Pokémon-related companies.
+Pokémon ©2024 Pokémon. ©1995-2024 Nintendo/Creatures Inc./GAME FREAK inc. 52Poké and this project is not affiliated with any Pokémon-related companies.
